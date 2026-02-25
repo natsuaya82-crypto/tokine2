@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刻音 -Tokine- | 時間を刻み、音を紡ぐ</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='80' font-family='serif'%3E刻%3C/text%3E%3C/svg%3E">
+    <link rel="alternate icon" type="image/png" href="favicon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600;700;800&family=Crimson+Pro:wght@300;400;500;600&family=Noto+Serif+JP:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="antialiased">
+    
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
+        <nav class="max-w-7xl mx-auto px-8 py-6">
+            <div class="flex items-center justify-between">
+                <a href="#top" class="text-2xl font-medium tracking-[0.2em] text-gray-900 hover:text-gray-600 transition-colors duration-300">
+                    刻音 <span class="text-base tracking-[0.25em] text-gray-500 font-light ml-2">TOKINE</span>
+                </a>
+                <ul class="flex items-center gap-12 en-text text-sm tracking-[0.15em] uppercase">
+                    <li><a href="#top" class="nav-link">Top</a></li>
+                    <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="top" class="min-h-screen flex items-center justify-center px-8 pt-32 pb-24 bg-gradient-to-br from-gray-50 via-white to-gray-100 grain">
+        <div class="max-w-6xl mx-auto text-center space-y-20 fade-in">
+            <div class="space-y-12">
+                <h1 class="text-9xl md:text-[12rem] font-light tracking-[0.25em] text-gray-900 leading-none">
+                    刻音
+                </h1>
+                <div class="flex items-center justify-center gap-8">
+                    <div class="w-24 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+                    <p class="en-text text-3xl md:text-4xl font-light tracking-[0.3em] text-gray-600">
+                        TOKINE
+                    </p>
+                    <div class="w-24 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
+                </div>
+            </div>
+            
+            <div class="space-y-8">
+                <p class="text-3xl md:text-4xl font-light tracking-[0.18em] text-gray-800 leading-relaxed">
+                    時間を刻み、音を紡ぐ。
+                </p>
+                <p class="text-lg md:text-xl font-light tracking-[0.15em] text-gray-600 leading-relaxed max-w-3xl mx-auto">
+                    会社という枠に縛られず、個人の直感で動く。<br/>
+                    「宿」と「デジタル」を横断し、止まっていた時間に息を吹き込む。
+                </p>
+            </div>
+
+            <div class="pt-12">
+                <a href="#philosophy" class="inline-block px-12 py-5 border-2 border-gray-900 text-gray-900 en-text text-sm tracking-[0.2em] uppercase hover:bg-gray-900 hover:text-white transition-all duration-500 shadow-lg hover:shadow-2xl">
+                    Explore
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophy Section -->
+    <section id="philosophy" class="min-h-screen flex items-center justify-center py-40 px-8 bg-white grain relative">
+        <div class="max-w-7xl mx-auto fade-in-scroll">
+            <div class="grid lg:grid-cols-12 gap-16 items-center">
+                
+                <!-- Left: Vertical Text Accent -->
+                <div class="lg:col-span-2 flex justify-center lg:justify-start">
+                    <div class="vertical-text text-6xl md:text-7xl font-light tracking-[0.3em] text-gray-300 leading-loose">
+                        刻音
+                    </div>
+                </div>
+
+                <!-- Center: Main Content -->
+                <div class="lg:col-span-8 space-y-20">
+                    <div class="text-center space-y-12">
+                        <h2 class="en-text text-2xl md:text-3xl font-light tracking-[0.35em] text-gray-400 uppercase">
+                            Philosophy
+                        </h2>
+                        <div class="w-32 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
+                    </div>
+
+                    <div class="max-w-4xl mx-auto">
+                        <p class="text-2xl md:text-3xl font-light tracking-[0.14em] text-gray-800 leading-loose text-center">
+                            コードを書き、空間を興し、言葉を紡ぐ。<br/>
+                            論理と情緒の境界を歩き続ける個人プロジェクト。<br/>
+                            <span class="text-gray-600">新宿御苑</span>の静寂を拠点に、<br/>
+                            時間を刻むための道具と、<br/>
+                            音を紡ぐための場を創造しています。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Right: Vertical Location -->
+                <div class="lg:col-span-2 flex justify-center lg:justify-end">
+                    <div class="vertical-text text-sm font-light tracking-[0.3em] text-gray-400 leading-loose en-text">
+                        Shinjuku Gyoen
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 px-8 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-24 fade-in-scroll">
+                <h2 class="text-5xl md:text-6xl font-light tracking-[0.2em] text-gray-900 mb-6">
+                    Projects
+                </h2>
+                <div class="w-32 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto"></div>
+                <p class="mt-8 text-lg tracking-[0.12em] text-gray-600 font-light">
+                    デジタルとリアルを紡ぐ、5つの事業
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-16">
+                
+                <!-- Planit -->
+                <article class="project-card group fade-in-scroll" data-color="#4A5568">
+                    <a href="https://planit.tokinets.com" target="_blank" rel="noopener noreferrer" class="block">
+                        <div class="bg-gradient-to-br from-gray-50 to-white p-12 border-2 transition-all duration-500 relative overflow-hidden project-card-inner" style="border-color: rgba(74, 85, 104, 0.2);">
+                            <div class="absolute top-0 right-0 text-[10rem] font-light leading-none pointer-events-none en-text" style="color: rgba(74, 85, 104, 0.08);">01</div>
+                            <div class="relative z-10 space-y-6">
+                                <div class="space-y-3">
+                                    <h3 class="text-4xl font-medium tracking-[0.15em] text-gray-900 group-hover:text-[#4A5568] transition-colors">
+                                        Planit
+                                    </h3>
+                                    <p class="en-text text-sm tracking-[0.2em] text-gray-500 uppercase">
+                                        Travel Partner
+                                    </p>
+                                </div>
+                                <p class="text-lg font-light tracking-[0.1em] text-gray-700 leading-relaxed">
+                                    旅を、思うがままに。AIと実ユーザーのフィードバックを統合し、あなたの「わがまま」を爆速で戦略的なしおりに変える。
+                                </p>
+                                <div class="inline-flex items-center gap-2 mt-6 px-6 py-3 border text-gray-900 en-text text-xs tracking-[0.2em] uppercase transition-all duration-300" style="border-color: rgba(74, 85, 104, 0.3);">
+                                    <span>View Project</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- シフカレ -->
+                <article class="project-card group fade-in-scroll" data-color="#2D3748">
+                    <a href="https://shifukale.tokinets.com" target="_blank" rel="noopener noreferrer" class="block">
+                        <div class="bg-gradient-to-br from-gray-50 to-white p-12 border-2 transition-all duration-500 relative overflow-hidden project-card-inner" style="border-color: rgba(45, 55, 72, 0.2);">
+                            <div class="absolute top-0 right-0 text-[10rem] font-light leading-none pointer-events-none en-text" style="color: rgba(45, 55, 72, 0.08);">02</div>
+                            <div class="relative z-10 space-y-6">
+                                <div class="space-y-3">
+                                    <h3 class="text-4xl font-medium tracking-[0.15em] text-gray-900 group-hover:text-[#2D3748] transition-colors">
+                                        シフカレ
+                                    </h3>
+                                    <p class="en-text text-sm tracking-[0.2em] text-gray-500 uppercase">
+                                        Labor Management
+                                    </p>
+                                </div>
+                                <p class="text-lg font-light tracking-[0.1em] text-gray-700 leading-relaxed">
+                                    労働管理を、相棒と。日常の報告から給与・扶養内収入をAIが自動計算。「今いくら稼いだか」を最速で突きつける。
+                                </p>
+                                <div class="inline-flex items-center gap-2 mt-6 px-6 py-3 border text-gray-900 en-text text-xs tracking-[0.2em] uppercase transition-all duration-300" style="border-color: rgba(45, 55, 72, 0.3);">
+                                    <span>View Project</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Lingua -->
+                <article class="project-card group fade-in-scroll" data-color="#2C5282">
+                    <a href="https://lingua.tokinets.com" target="_blank" rel="noopener noreferrer" class="block">
+                        <div class="bg-gradient-to-br from-gray-50 to-white p-12 border-2 transition-all duration-500 relative overflow-hidden project-card-inner" style="border-color: rgba(44, 82, 130, 0.2);">
+                            <div class="absolute top-0 right-0 text-[10rem] font-light leading-none pointer-events-none en-text" style="color: rgba(44, 82, 130, 0.08);">03</div>
+                            <div class="relative z-10 space-y-6">
+                                <div class="space-y-3">
+                                    <h3 class="text-4xl font-medium tracking-[0.15em] text-gray-900 group-hover:text-[#2C5282] transition-colors">
+                                        Lingua
+                                    </h3>
+                                    <p class="en-text text-sm tracking-[0.2em] text-gray-500 uppercase">
+                                        Constructed Language
+                                    </p>
+                                </div>
+                                <p class="text-lg font-light tracking-[0.1em] text-gray-700 leading-relaxed">
+                                    あなただけの言語を創造する。人工言語の構築・学習・共有を可能にするプラットフォーム。自分だけの言葉で世界を再定義する。
+                                </p>
+                                <div class="inline-flex items-center gap-2 mt-6 px-6 py-3 border text-gray-900 en-text text-xs tracking-[0.2em] uppercase transition-all duration-300" style="border-color: rgba(44, 82, 130, 0.3);">
+                                    <span>View Project</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+                <!-- Viola -->
+                <article class="project-card group fade-in-scroll" data-color="#44337A">
+                    <a href="https://viola.tokinets.com" target="_blank" rel="noopener noreferrer" class="block">
+                        <div class="bg-gradient-to-br from-gray-50 to-white p-12 border-2 transition-all duration-500 relative overflow-hidden project-card-inner" style="border-color: rgba(68, 51, 122, 0.2);">
+                            <div class="absolute top-0 right-0 text-[10rem] font-light leading-none pointer-events-none en-text" style="color: rgba(68, 51, 122, 0.08);">04</div>
+                            <div class="relative z-10 space-y-6">
+                                <div class="space-y-3">
+                                    <h3 class="text-4xl font-medium tracking-[0.15em] text-gray-900 group-hover:text-[#44337A] transition-colors">
+                                        Viola
+                                    </h3>
+                                    <p class="en-text text-sm tracking-[0.2em] text-gray-500 uppercase">
+                                        Language × AI SNS
+                                    </p>
+                                </div>
+                                <p class="text-lg font-light tracking-[0.1em] text-gray-700 leading-relaxed">
+                                    言語×AIの、SNSの極北。Linguaと連携した、人工言語でのコミュニケーションを拡張する最先端SNS。
+                                </p>
+                                <div class="inline-flex items-center gap-2 mt-6 px-6 py-3 border text-gray-900 en-text text-xs tracking-[0.2em] uppercase transition-all duration-300" style="border-color: rgba(68, 51, 122, 0.3);">
+                                    <span>View Project</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+
+            </div>
+
+            <!-- 紡ぎ宿 - Full Width -->
+            <article class="project-card group mt-16 fade-in-scroll" data-color="#744210">
+                <a href="https://tsumuyado.tokinets.com" target="_blank" rel="noopener noreferrer" class="block">
+                    <div class="bg-gradient-to-br from-gray-900 to-gray-800 p-16 border-2 transition-all duration-500 relative overflow-hidden" style="border-color: rgba(116, 66, 16, 0.4);">
+                        <div class="absolute top-0 right-0 text-[12rem] font-light text-gray-800 leading-none pointer-events-none en-text">05</div>
+                        <div class="relative z-10 grid md:grid-cols-2 gap-12 items-center">
+                            <div class="space-y-8">
+                                <div class="space-y-4">
+                                    <h3 class="text-5xl font-medium tracking-[0.15em] text-white group-hover:text-[#D4A574] transition-colors">
+                                        紡ぎ宿
+                                    </h3>
+                                    <p class="en-text text-sm tracking-[0.2em] text-gray-400 uppercase">
+                                        Tsumugi-yado
+                                    </p>
+                                </div>
+                                <p class="text-xl font-light tracking-[0.1em] text-gray-300 leading-relaxed">
+                                    止まっていた時間に息を吹き込み、物語を再開させる宿泊再生プロジェクト。デジタルとリアルの境界で「滞在」を再構築する。
+                                </p>
+                            </div>
+                            <div class="flex justify-end">
+                                <div class="inline-flex items-center gap-3 px-12 py-5 border-2 text-white en-text text-sm tracking-[0.2em] uppercase transition-all duration-300" style="border-color: rgba(116, 66, 16, 0.6);">
+                                    <span>View Project</span>
+                                    <span>→</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </article>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 px-8 bg-gray-900 text-white">
+        <div class="max-w-5xl mx-auto fade-in-scroll">
+            <div class="text-center mb-24">
+                <h2 class="text-5xl md:text-6xl font-light tracking-[0.2em] mb-6">
+                    Contact
+                </h2>
+                <div class="w-32 h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mx-auto"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-16 text-center">
+                <div class="space-y-6">
+                    <p class="en-text text-xs tracking-[0.3em] text-gray-500 uppercase">
+                        Official
+                    </p>
+                    <a href="mailto:official@tokinets.com" class="block text-2xl md:text-3xl tracking-[0.12em] font-light hover:text-gray-400 transition-colors duration-300 en-text">
+                        official@tokinets.com
+                    </a>
+                </div>
+                <div class="space-y-6">
+                    <p class="en-text text-xs tracking-[0.3em] text-gray-500 uppercase">
+                        Founder
+                    </p>
+                    <a href="mailto:T.Ihira@tokinets.com" class="block text-2xl md:text-3xl tracking-[0.12em] font-light hover:text-gray-400 transition-colors duration-300 en-text">
+                        T.Ihira@tokinets.com
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-16 px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-16">
+                <div class="space-y-6">
+                    <h3 class="text-white text-xl font-medium tracking-[0.15em]">刻音</h3>
+                    <p class="text-sm tracking-[0.1em] leading-relaxed font-light">
+                        時間を刻み、音を紡ぐ個人プロジェクト
+                    </p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="en-text text-white text-sm tracking-[0.2em] uppercase">Sitemap</h4>
+                    <ul class="space-y-3 text-sm en-text tracking-[0.1em]">
+                        <li><a href="#top" class="hover:text-white transition-colors">Top</a></li>
+                        <li><a href="#philosophy" class="hover:text-white transition-colors">Philosophy</a></li>
+                        <li><a href="#projects" class="hover:text-white transition-colors">Projects</a></li>
+                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="en-text text-white text-sm tracking-[0.2em] uppercase">Projects</h4>
+                    <ul class="space-y-3 text-sm tracking-[0.1em]">
+                        <li><a href="https://planit.tokinets.com" target="_blank" class="hover:text-white transition-colors">Planit</a></li>
+                        <li><a href="https://shifukale.tokinets.com" target="_blank" class="hover:text-white transition-colors">シフカレ</a></li>
+                        <li><a href="https://lingua.tokinets.com" target="_blank" class="hover:text-white transition-colors">Lingua</a></li>
+                        <li><a href="https://viola.tokinets.com" target="_blank" class="hover:text-white transition-colors">Viola</a></li>
+                        <li><a href="https://tsumuyado.tokinets.com" target="_blank" class="hover:text-white transition-colors">紡ぎ宿</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="en-text text-white text-sm tracking-[0.2em] uppercase">Connect</h4>
+                    <ul class="space-y-3 text-sm en-text tracking-[0.1em]">
+                        <li><a href="mailto:official@tokinets.com" class="hover:text-white transition-colors">Email</a></li>
+                        <li><a href="https://tokinets.com" class="hover:text-white transition-colors">Website</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-12 border-t border-gray-800 text-center space-y-4">
+                <div class="flex items-center justify-center gap-6 flex-wrap">
+                    <p class="en-text text-xs tracking-[0.2em] uppercase">
+                        &copy; 2025 Tokine. All rights reserved.
+                    </p>
+                    <span class="text-gray-700">•</span>
+                    <p class="en-text text-xs tracking-[0.15em]">
+                        tokinets.com
+                    </p>
+                    <span class="text-gray-700">•</span>
+                    <p class="en-text text-xs tracking-[0.12em] text-gray-600">
+                        35.6852° N, 139.7101° E
+                    </p>
+                </div>
+                <p class="text-xs tracking-[0.15em] text-gray-600 pt-2">
+                    Shinjuku Gyoen, Tokyo
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
