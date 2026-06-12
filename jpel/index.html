@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JPEL Manager | 日本初の駅伝GMシミュレーション</title>
+  <meta name="description" content="20球団のGMとして、スカウト・ドラフト・移籍・レース戦略を駆使してシーズン王者を目指す駅伝GMシミュレーション。">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a1729'/%3E%3Ctext y='72' x='50' font-size='58' font-family='serif' text-anchor='middle' fill='%23f5c842'%3EJ%3C/text%3E%3C/svg%3E">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Saira+Condensed:wght@300;400;600;700;900&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a1729;
+      --bg-deep: #050d1c;
+      --bg-card: #1a2c47;
+      --gold: #f5c842;
+      --gold-lo: rgba(245,200,66,0.12);
+      --cyan: #5ed4ff;
+      --text: #ffffff;
+      --text-sub: #c8d4e3;
+      --text-dim: #8c9aaf;
+      --border: #1a3252;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', system-ui, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 50% -10%, rgba(94,212,255,0.08) 0%, transparent 70%),
+        repeating-linear-gradient(135deg, transparent 0px, transparent 28px, rgba(94,212,255,0.018) 28px, rgba(94,212,255,0.018) 30px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(5,13,28,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .nav-back {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--gold); }
+
+    section { position: relative; z-index: 1; }
+
+    /* Hero */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+
+    .hero-league {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: clamp(64px, 16vw, 140px);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      line-height: 0.9;
+      margin-bottom: 12px;
+    }
+
+    .hero-title .hi { color: var(--gold); }
+
+    .hero-sub {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: clamp(16px, 4vw, 28px);
+      font-weight: 300;
+      letter-spacing: 0.2em;
+      color: var(--text-sub);
+      margin-bottom: 32px;
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 2;
+      color: var(--text-dim);
+      max-width: 480px;
+      margin: 0 auto 48px;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-coming {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border: 1.5px solid var(--gold);
+      border-radius: 8px;
+      background: var(--gold-lo);
+      color: var(--gold);
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 15px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .hero-stripe {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom right, transparent 49.5%, var(--bg-deep) 50%);
+      z-index: 1;
+    }
+
+    /* Features */
+    .features {
+      padding: 100px 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--gold);
+      margin: 16px auto 24px;
+    }
+
+    .section-title {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: clamp(36px, 7vw, 56px);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-dim);
+      line-height: 2;
+      letter-spacing: 0.05em;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+      margin-top: 56px;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px 28px;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: rgba(245,200,66,0.4);
+      transform: translateY(-4px);
+    }
+
+    .feature-num {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 48px;
+      font-weight: 900;
+      color: rgba(245,200,66,0.15);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .feature-name {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+
+    .feature-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.9;
+      letter-spacing: 0.03em;
+    }
+
+    /* League */
+    .league-section {
+      padding: 80px 24px;
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .league-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .league-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+
+    .league-stat {
+      background: var(--bg-card);
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .league-stat-num {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .league-stat-label {
+      font-size: 12px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+    }
+
+    @media (max-width: 480px) {
+      .league-stats { grid-template-columns: 1fr; }
+    }
+
+    /* Footer */
+    footer {
+      position: relative;
+      z-index: 1;
+      background: var(--bg-deep);
+      border-top: 1px solid var(--border);
+      padding: 40px 24px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-family: 'Saira Condensed', system-ui, sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #4a6080;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/jpel" class="nav-logo">JPEL Manager</a>
+    <a href="/" class="nav-back">← Tokine</a>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <p class="hero-league">Japan Pro Ekiden League</p>
+      <h1 class="hero-title">
+        <span class="hi">JPEL</span><br>Manager
+      </h1>
+      <p class="hero-sub">日本初の駅伝 GM シミュレーション</p>
+      <p class="hero-desc">
+        20球団のゼネラルマネージャーとして、<br>
+        スカウト、ドラフト、移籍市場、区間配置——<br>
+        あらゆる戦略を駆使してシーズン王者を目指せ。
+      </p>
+      <div class="badge-coming">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="opacity:0.8">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        App Store — Coming Soon
+      </div>
+    </div>
+    <div class="hero-stripe"></div>
+  </section>
+
+  <!-- Features -->
+  <section style="background: var(--bg-deep); padding-top: 0;">
+    <div class="features">
+      <div style="text-align:center;" class="reveal">
+        <p class="section-label">Features</p>
+        <div class="section-divider"></div>
+        <h2 class="section-title">GMの仕事、全部ある</h2>
+        <p class="section-desc">
+          勝利は一日にして成らず。<br>
+          長期的なチーム設計こそが、王座への最短経路。
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <div class="feature-num">01</div>
+          <div class="feature-name">スカウト & ドラフト</div>
+          <div class="feature-desc">大学駅伝4レースを観戦しながら逸材を発掘。NBA型ロッタリーで左右される指名順が戦略の起点になる。</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-num">02</div>
+          <div class="feature-name">区間配置</div>
+          <div class="feature-desc">山岳・平坦・スプリント——区間の地形と距離を読み、選手の適性を最大限に活かす配置が勝敗を分ける。</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-num">03</div>
+          <div class="feature-name">レースシミュレーション</div>
+          <div class="feature-desc">疲労・メンタル・距離適性まで計算する緻密なエンジンが、リアルな区間順位とドラマを生み出す。</div>
+        </div>
+        <div class="feature-card reveal">
+          <div class="feature-num">04</div>
+          <div class="feature-name">移籍 & FA 市場</div>
+          <div class="feature-desc">トレード交渉、FA選手の争奪戦、海外枠の活用。サラリーキャップを睨みながらロースターを最適化せよ。</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- League Stats -->
+  <section class="league-section">
+    <div class="league-inner reveal">
+      <p class="section-label">The League</p>
+      <div class="section-divider"></div>
+      <h2 class="section-title">JPEL の世界</h2>
+      <p class="section-desc">
+        2008年に誕生した日本初のプロ駅伝リーグ。<br>
+        全国20球団が年間12レースで頂点を争う。
+      </p>
+      <div class="league-stats">
+        <div class="league-stat">
+          <div class="league-stat-num">20</div>
+          <div class="league-stat-label">プロ球団</div>
+        </div>
+        <div class="league-stat">
+          <div class="league-stat-num">12</div>
+          <div class="league-stat-label">年間レース</div>
+        </div>
+        <div class="league-stat">
+          <div class="league-stat-num">360</div>
+          <div class="league-stat-label">プロ選手</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-links">
+      <a href="/privacy.html">プライバシーポリシー</a>
+      <a href="mailto:official@tokinets.com">Contact</a>
+      <a href="/">Tokine</a>
+    </div>
+    <p class="footer-copy">&copy; 2026 Tokine. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
