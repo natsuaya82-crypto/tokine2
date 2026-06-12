@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>JPEL Manager | 日本初の駅伝GMシミュレーション</title>
-  <meta name="description" content="20球団のGMとして、スカウト・ドラフト・移籍・レース戦略を駆使してシーズン王者を目指す駅伝GMシミュレーション。iOS向けインディーゲーム。">
+  <meta name="description" content="20チームのGMとして、スカウト・ドラフト・移籍・レース戦略を駆使してシーズン王者を目指す駅伝GMシミュレーション。iOS向けインディーゲーム。">
 
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a1729'/%3E%3Ctext y='72' x='50' font-size='58' font-family='serif' text-anchor='middle' fill='%23f5c842'%3EJ%3C/text%3E%3C/svg%3E">
 
@@ -393,6 +393,9 @@
     }
     .race-card:hover { border-color: var(--border2); }
     .race-card.cup { border-left: 3px solid var(--gold); }
+    .race-card.reserve { border-left: 3px solid var(--cyan); opacity: 0.75; }
+    .race-card.reserve .race-month { color: var(--cyan); }
+    .race-card.reserve .race-type { color: var(--cyan); }
 
     .race-month {
       font-family: 'Saira Condensed', system-ui, sans-serif;
@@ -597,7 +600,7 @@
       </h1>
       <p class="hero-sub">日本初の駅伝 GM シミュレーション</p>
       <p class="hero-desc">
-        20球団のゼネラルマネージャーとして、スカウト・ドラフト・<br>
+        20チームのゼネラルマネージャーとして、スカウト・ドラフト・<br>
         移籍市場・区間配置を駆使してシーズン王者を目指せ。
       </p>
       <div class="hero-badges">
@@ -704,7 +707,7 @@
           <div class="feature-num">01 — Scout</div>
           <div class="feature-name">スカウト & ドラフト</div>
           <div class="feature-desc">
-            スカウトリストに追加するほど情報が解放されていく段階的情報システム。NBA型ロッタリーで下位6球団が1位指名権を争う。
+            スカウトリストに追加するほど情報が解放されていく段階的情報システム。NBA型ロッタリーで下位6チームが1位指名権を争う。
           </div>
           <div class="feature-tags">
             <span class="feature-tag">2巡40指名</span>
@@ -734,7 +737,7 @@
           <div class="feature-tags">
             <span class="feature-tag">7能力値</span>
             <span class="feature-tag">区間賞</span>
-            <span class="feature-tag">20球団同時進行</span>
+            <span class="feature-tag">20チーム同時進行</span>
           </div>
         </div>
 
@@ -742,12 +745,11 @@
           <div class="feature-num">04 — Transfer</div>
           <div class="feature-name">移籍 & FA 市場</div>
           <div class="feature-desc">
-            プロ7年目でFA権取得。複数球団のオファーを選手が年俸・チーム力・地域で比較する。バードルール（原球団優遇）、海外選手3枠、指名権絡みのトレードまで完備。
+            プロ7年目でFA権取得。複数チームのオファーを選手が年俸・チーム力・地域で比較する。バードルール（元チーム優遇）、海外選手3枠、指名権絡みのトレードまで完備。
           </div>
           <div class="feature-tags">
             <span class="feature-tag">FAシステム</span>
             <span class="feature-tag">海外枠×3</span>
-            <span class="feature-tag">サラリーキャップ</span>
           </div>
         </div>
 
@@ -787,134 +789,40 @@
       <div class="reveal" style="text-align:center;">
         <p class="section-label">Race Calendar</p>
         <div class="section-divider"></div>
-        <h2 class="section-title">年間10レース</h2>
-        <p class="section-desc">リーグ戦8・カップ戦2。<br>それぞれ異なるコース・距離・地形が戦略を変える。</p>
+        <h2 class="section-title">2028シーズン 全17戦</h2>
+        <p class="section-desc">リーグ10戦・リザーブ7戦。<br>それぞれ異なるコース・距離・地形が戦略を変える。</p>
       </div>
 
       <div class="races-grid">
         <div class="race-card reveal">
           <div>
             <div class="race-month">3</div>
-            <div class="race-month-label">MON</div>
+            <div class="race-month-label">LG</div>
           </div>
           <div class="race-info">
-            <div class="race-type">League — Round 1</div>
+            <div class="race-type">League — 第1戦</div>
             <div class="race-name">出雲開幕戦</div>
             <div class="race-meta">
+              <span class="race-tag">出雲</span>
               <span class="race-tag">6区間</span>
-              <span class="race-tag">45km</span>
-              <span class="race-tag">スピード型</span>
+              <span class="race-tag">45.1km</span>
+              <span class="race-tag">スプリント</span>
             </div>
           </div>
         </div>
 
-        <div class="race-card reveal">
+        <div class="race-card reserve reveal">
           <div>
-            <div class="race-month">4</div>
-            <div class="race-month-label">MON</div>
+            <div class="race-month">3</div>
+            <div class="race-month-label">RSV</div>
           </div>
           <div class="race-info">
-            <div class="race-type">League — Round 2</div>
-            <div class="race-name">春の千葉国際</div>
+            <div class="race-type">Reserve — 第1戦</div>
+            <div class="race-name">北海道リザーブ秋冬戦</div>
             <div class="race-meta">
-              <span class="race-tag">4区間</span>
-              <span class="race-tag">84km</span>
-              <span class="race-tag">ロード強者</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="race-card reveal">
-          <div>
-            <div class="race-month">5</div>
-            <div class="race-month-label">MON</div>
-          </div>
-          <div class="race-info">
-            <div class="race-type">League — Round 3</div>
-            <div class="race-name">仙台青葉ステージ</div>
-            <div class="race-meta">
+              <span class="race-tag">旭川</span>
               <span class="race-tag">5区間</span>
-              <span class="race-tag">50km</span>
-              <span class="race-tag">バランス型</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="race-card reveal">
-          <div>
-            <div class="race-month">6</div>
-            <div class="race-month-label">MON</div>
-          </div>
-          <div class="race-info">
-            <div class="race-type">League — Round 4</div>
-            <div class="race-name">札幌北海道縦断</div>
-            <div class="race-meta">
-              <span class="race-tag">10区間</span>
-              <span class="race-tag">100km</span>
-              <span class="race-tag">超ロング</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="race-card cup reveal">
-          <div>
-            <div class="race-month">7</div>
-            <div class="race-month-label">CUP</div>
-          </div>
-          <div class="race-info">
-            <div class="race-type">Cup — 全日本実業団オープン</div>
-            <div class="race-name">全日本実業団オープン</div>
-            <div class="race-meta">
-              <span class="race-tag">8区間</span>
-              <span class="race-tag">76km</span>
-              <span class="race-tag">賞金大会</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="race-card reveal">
-          <div>
-            <div class="race-month">8</div>
-            <div class="race-month-label">MON</div>
-          </div>
-          <div class="race-info">
-            <div class="race-type">League — Round 5</div>
-            <div class="race-name">富士山岳駅伝</div>
-            <div class="race-meta">
-              <span class="race-tag">5区間</span>
-              <span class="race-tag">50km</span>
-              <span class="race-tag">山岳特化</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="race-card reveal">
-          <div>
-            <div class="race-month">9</div>
-            <div class="race-month-label">MON</div>
-          </div>
-          <div class="race-info">
-            <div class="race-type">League — Round 6</div>
-            <div class="race-name">大阪シティリレー</div>
-            <div class="race-meta">
-              <span class="race-tag">6区間</span>
-              <span class="race-tag">42km</span>
-              <span class="race-tag">都市型</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="race-card reveal">
-          <div>
-            <div class="race-month">11</div>
-            <div class="race-month-label">MON</div>
-          </div>
-          <div class="race-info">
-            <div class="race-type">League — Round 7</div>
-            <div class="race-name">福岡国際</div>
-            <div class="race-meta">
-              <span class="race-tag">4区間</span>
-              <span class="race-tag">42km</span>
+              <span class="race-tag">47.0km</span>
               <span class="race-tag">スプリント</span>
             </div>
           </div>
@@ -922,32 +830,255 @@
 
         <div class="race-card reveal">
           <div>
-            <div class="race-month">12</div>
-            <div class="race-month-label">MON</div>
+            <div class="race-month">4</div>
+            <div class="race-month-label">LG</div>
           </div>
           <div class="race-info">
-            <div class="race-type">League — Round 8</div>
-            <div class="race-name">全国都道府県対抗</div>
+            <div class="race-type">League — 第2戦</div>
+            <div class="race-name">東京スプリント駅伝</div>
             <div class="race-meta">
-              <span class="race-tag">9区間</span>
-              <span class="race-tag">75km</span>
-              <span class="race-tag">中距離</span>
+              <span class="race-tag">東京</span>
+              <span class="race-tag">8区間</span>
+              <span class="race-tag">69.0km</span>
+              <span class="race-tag">スプリント</span>
             </div>
           </div>
         </div>
 
-        <div class="race-card cup reveal" style="grid-column: span 1;">
+        <div class="race-card reserve reveal">
           <div>
-            <div class="race-month">1</div>
-            <div class="race-month-label">CUP</div>
+            <div class="race-month">4</div>
+            <div class="race-month-label">RSV</div>
           </div>
           <div class="race-info">
-            <div class="race-type">Cup — 年間最大の祭典</div>
-            <div class="race-name">箱根帝王戦</div>
+            <div class="race-type">Reserve — 第2戦</div>
+            <div class="race-name">中部リザーブ大会</div>
             <div class="race-meta">
+              <span class="race-tag">静岡</span>
+              <span class="race-tag">6区間</span>
+              <span class="race-tag">55.5km</span>
+              <span class="race-tag">スプリント</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reveal">
+          <div>
+            <div class="race-month">4</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第3戦</div>
+            <div class="race-name">富士山岳駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">富士山</span>
+              <span class="race-tag">6区間</span>
+              <span class="race-tag">60.0km</span>
+              <span class="race-tag">起伏</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reveal">
+          <div>
+            <div class="race-month">5</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第4戦</div>
+            <div class="race-name">東北桜駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">仙台</span>
+              <span class="race-tag">8区間</span>
+              <span class="race-tag">93.0km</span>
+              <span class="race-tag">バランス</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reserve reveal">
+          <div>
+            <div class="race-month">5</div>
+            <div class="race-month-label">RSV</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">Reserve — 第3戦</div>
+            <div class="race-name">北関東リザーブ交流戦</div>
+            <div class="race-meta">
+              <span class="race-tag">水戸</span>
+              <span class="race-tag">5区間</span>
+              <span class="race-tag">39.0km</span>
+              <span class="race-tag">スプリント</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reveal">
+          <div>
+            <div class="race-month">5</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第5戦</div>
+            <div class="race-name">関西スプリント駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">大阪</span>
+              <span class="race-tag">6区間</span>
+              <span class="race-tag">51.0km</span>
+              <span class="race-tag">スプリント</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reserve reveal">
+          <div>
+            <div class="race-month">5</div>
+            <div class="race-month-label">RSV</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">Reserve — 第4戦</div>
+            <div class="race-name">北東北リザーブ夏季大会</div>
+            <div class="race-meta">
+              <span class="race-tag">盛岡</span>
+              <span class="race-tag">5区間</span>
+              <span class="race-tag">48.0km</span>
+              <span class="race-tag">スプリント</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reveal">
+          <div>
+            <div class="race-month">6</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第6戦</div>
+            <div class="race-name">信州アルペン駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">長野</span>
+              <span class="race-tag">6区間</span>
+              <span class="race-tag">58.0km</span>
+              <span class="race-tag">起伏</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reveal">
+          <div>
+            <div class="race-month">6</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第7戦</div>
+            <div class="race-name">九州夏季駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">福岡</span>
+              <span class="race-tag">8区間</span>
+              <span class="race-tag">83.0km</span>
+              <span class="race-tag">バランス</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reserve reveal">
+          <div>
+            <div class="race-month">6</div>
+            <div class="race-month-label">RSV</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">Reserve — 第5戦</div>
+            <div class="race-name">東海リザーブ駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">浜松</span>
+              <span class="race-tag">6区間</span>
+              <span class="race-tag">58.5km</span>
+              <span class="race-tag">スプリント</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card cup reveal">
+          <div>
+            <div class="race-month">7</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第8戦</div>
+            <div class="race-name">全日本プロ駅伝</div>
+            <div class="race-meta">
+              <span class="race-tag">名古屋</span>
+              <span class="race-tag">8区間</span>
+              <span class="race-tag">120.9km</span>
+              <span class="race-tag">持久</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reserve reveal">
+          <div>
+            <div class="race-month">7</div>
+            <div class="race-month-label">RSV</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">Reserve — 第6戦</div>
+            <div class="race-name">四国リザーブサマーレース</div>
+            <div class="race-meta">
+              <span class="race-tag">高松</span>
+              <span class="race-tag">5区間</span>
+              <span class="race-tag">43.5km</span>
+              <span class="race-tag">起伏</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reserve reveal">
+          <div>
+            <div class="race-month">8</div>
+            <div class="race-month-label">RSV</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">Reserve — 第7戦</div>
+            <div class="race-name">スプリント型リザーブ戦</div>
+            <div class="race-meta">
+              <span class="race-tag">川崎</span>
+              <span class="race-tag">6区間</span>
+              <span class="race-tag">33.8km</span>
+              <span class="race-tag">スプリント</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card reveal">
+          <div>
+            <div class="race-month">9</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第9戦</div>
+            <div class="race-name">秋季グランプリ</div>
+            <div class="race-meta">
+              <span class="race-tag">横浜</span>
+              <span class="race-tag">8区間</span>
+              <span class="race-tag">95.0km</span>
+              <span class="race-tag">バランス</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="race-card cup reveal">
+          <div>
+            <div class="race-month">10</div>
+            <div class="race-month-label">LG</div>
+          </div>
+          <div class="race-info">
+            <div class="race-type">League — 第10戦 · Final</div>
+            <div class="race-name">JPELグランドファイナル</div>
+            <div class="race-meta">
+              <span class="race-tag">東京</span>
               <span class="race-tag">10区間</span>
-              <span class="race-tag">217km</span>
-              <span class="race-tag">最高難易度</span>
+              <span class="race-tag">130.0km</span>
+              <span class="race-tag">バランス</span>
             </div>
           </div>
         </div>
@@ -961,8 +1092,8 @@
       <div class="reveal" style="text-align:center;">
         <p class="section-label">20 Clubs</p>
         <div class="section-divider"></div>
-        <h2 class="section-title">全国20球団</h2>
-        <p class="section-desc">北海道から沖縄まで。それぞれの地域とカラーを背負った球団が頂点を争う。</p>
+        <h2 class="section-title">全国20チーム</h2>
+        <p class="section-desc">北海道から沖縄まで。それぞれの地域とカラーを背負ったチームが頂点を争う。</p>
       </div>
 
       <div class="teams-grid" id="teams-grid"></div>
@@ -978,36 +1109,35 @@
       <div class="stats-grid">
         <div class="stat-cell">
           <div class="stat-num">20</div>
-          <div class="stat-label">プロ球団</div>
+          <div class="stat-label">プロチーム</div>
         </div>
         <div class="stat-cell">
           <div class="stat-num">360</div>
           <div class="stat-label">プロ選手</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-num">12</div>
+          <div class="stat-num">10</div>
           <div class="stat-label">年間レース</div>
         </div>
         <div class="stat-cell">
-          <div class="stat-num">8億</div>
-          <div class="stat-label">サラリーキャップ</div>
+          <div class="stat-num">18</div>
+          <div class="stat-label">ロースター枠</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Notify ── -->
+  <!-- ── Contact ── -->
   <section class="notify-section reveal">
-    <p class="section-label">Stay Updated</p>
+    <p class="section-label">Contact</p>
     <div class="section-divider"></div>
-    <h2 class="section-title" style="font-size:36px;">リリース通知を受け取る</h2>
+    <h2 class="section-title" style="font-size:36px;">お問い合わせ</h2>
     <p class="section-desc" style="margin-top:12px;">
-      App Store リリース時にメールでお知らせします。<br>
-      件名に「JPEL Manager 通知希望」とご記入ください。
+      ご質問・フィードバックはメールで受け付けています。
     </p>
-    <a href="mailto:official@tokinets.com?subject=JPEL Manager 通知希望" class="notify-cta">
+    <a href="mailto:official@tokinets.com" class="notify-cta">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-      通知を受け取る
+      official@tokinets.com
     </a>
   </section>
 
