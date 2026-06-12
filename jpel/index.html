@@ -458,15 +458,10 @@
     .team-card:hover { transform: translateY(-2px); }
     .team-card.player-team { border-color: rgba(245,200,66,0.4); background: rgba(245,200,66,0.05); }
 
-    .team-color {
-      width: 36px; height: 36px; border-radius: 8px;
+    .team-logo {
+      width: 40px; height: 40px;
       flex-shrink: 0;
       display: flex; align-items: center; justify-content: center;
-    }
-
-    .team-initial {
-      font-family: 'Saira Condensed', system-ui, sans-serif;
-      font-weight: 900; font-size: 15px; color: rgba(255,255,255,0.9);
     }
 
     .team-info { flex: 1; min-width: 0; }
@@ -1033,35 +1028,7 @@
         <p class="section-desc">北海道から沖縄まで。それぞれの地域とカラーを背負った球団が頂点を争う。</p>
       </div>
 
-      <div class="teams-grid">
-        <div class="team-card reveal"><div class="team-color" style="background:#3B82F6;"><span class="team-initial">SA</span></div><div class="team-info"><div class="team-name">札幌アイスランナーズ</div><div class="team-region">北海道</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#10B981;"><span class="team-initial">IW</span></div><div class="team-info"><div class="team-name">盛岡岩手ウォリアーズ</div><div class="team-region">東北</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#EF4444;"><span class="team-initial">AN</span></div><div class="team-info"><div class="team-name">青森ねぶたランナーズ</div><div class="team-region">東北</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#06B6D4;"><span class="team-initial">SW</span></div><div class="team-info"><div class="team-name">仙台ウィンドゲイルズ</div><div class="team-region">東北</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#DC2626;"><span class="team-initial">TK</span></div><div class="team-info"><div class="team-name">東京ロードキングス</div><div class="team-region">関東</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#1D4ED8;"><span class="team-initial">YH</span></div><div class="team-info"><div class="team-name">横浜ハーバーランナーズ</div><div class="team-region">関東</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#0D9488;"><span class="team-initial">CO</span></div><div class="team-info"><div class="team-name">千葉オーシャンビート</div><div class="team-region">関東</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#EA580C;"><span class="team-initial">SR</span></div><div class="team-info"><div class="team-name">埼玉ライジングサン</div><div class="team-region">関東</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#64748B;"><span class="team-initial">NA</span></div><div class="team-info"><div class="team-name">長野アルピニスト</div><div class="team-region">中部</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#D97706;"><span class="team-initial">NK</span></div><div class="team-info"><div class="team-name">新潟コシヒカリRC</div><div class="team-region">中部</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#65A30D;"><span class="team-initial">ST</span></div><div class="team-info"><div class="team-name">静岡ティーフィールド</div><div class="team-region">中部</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#7C3AED;"><span class="team-initial">NM</span></div><div class="team-info"><div class="team-name">名古屋メテオラ</div><div class="team-region">中部</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#0F766E;"><span class="team-initial">KF</span></div><div class="team-info"><div class="team-name">京都フウジン</div><div class="team-region">関西</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#B45309;"><span class="team-initial">OT</span></div><div class="team-info"><div class="team-name">大阪オーシャンタイガース</div><div class="team-region">関西</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#1E40AF;"><span class="team-initial">KB</span></div><div class="team-info"><div class="team-name">神戸ベイランナーズ</div><div class="team-region">関西</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#991B1B;"><span class="team-initial">HF</span></div><div class="team-info"><div class="team-name">広島ヒロシマフレイムス</div><div class="team-region">中国</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#F97316;"><span class="team-initial">OP</span></div><div class="team-info"><div class="team-name">岡山ピーチランナーズ</div><div class="team-region">中国</div></div></div>
-        <div class="team-card player-team reveal">
-          <div class="team-color" style="background:#1D4ED8;"><span class="team-initial">FS</span></div>
-          <div class="team-info">
-            <div class="team-name">福岡サザンクロス</div>
-            <div class="team-region">九州</div>
-          </div>
-          <span class="player-badge">Your Team</span>
-        </div>
-        <div class="team-card reveal"><div class="team-color" style="background:#9A3412;"><span class="team-initial">KC</span></div><div class="team-info"><div class="team-name">鹿児島カルデラ</div><div class="team-region">九州</div></div></div>
-        <div class="team-card reveal"><div class="team-color" style="background:#DB2777;"><span class="team-initial">OT</span></div><div class="team-info"><div class="team-name">沖縄ティーダ</div><div class="team-region">沖縄</div></div></div>
-      </div>
+      <div class="teams-grid" id="teams-grid"></div>
     </div>
   </section>
 
@@ -1193,6 +1160,64 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -50px 0px' });
 
     document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => io.observe(el));
+
+    const TEAMS = [
+      { id: 'sapporo',   name: '札幌アイスランナーズ',     region: '北海道', p: '#1A6FBF', s: '#FFFFFF' },
+      { id: 'morioka',   name: '盛岡岩手ウォリアーズ',     region: '東北',   p: '#2D5016', s: '#D4A017' },
+      { id: 'aomori',    name: '青森ねぶたランナーズ',     region: '東北',   p: '#C41E3A', s: '#FFD700' },
+      { id: 'sendai',    name: '仙台ウィンドゲイルズ',     region: '東北',   p: '#4B0082', s: '#87CEEB' },
+      { id: 'tokyo',     name: '東京ロードキングス',       region: '関東',   p: '#1A1A2E', s: '#E8462A' },
+      { id: 'yokohama',  name: '横浜ハーバーランナーズ',   region: '関東',   p: '#005BAC', s: '#C8102E' },
+      { id: 'chiba',     name: '千葉オーシャンビート',     region: '関東',   p: '#006B3F', s: '#FFD700' },
+      { id: 'saitama',   name: '埼玉ライジングサン',       region: '関東',   p: '#E8462A', s: '#FFFFFF' },
+      { id: 'nagano',    name: '長野アルピニスト',         region: '中部',   p: '#2E7D32', s: '#FFFFFF' },
+      { id: 'niigata',   name: '新潟コシヒカリRC',         region: '中部',   p: '#FF8C00', s: '#008000' },
+      { id: 'shizuoka',  name: '静岡ティーフィールド',     region: '中部',   p: '#228B22', s: '#F5DEB3' },
+      { id: 'nagoya',    name: '名古屋メテオラ',           region: '中部',   p: '#9B111E', s: '#FFD700' },
+      { id: 'kyoto',     name: '京都フウジン',             region: '関西',   p: '#8B1A1A', s: '#C0A882' },
+      { id: 'osaka',     name: '大阪オーシャンタイガース', region: '関西',   p: '#FF6600', s: '#003366' },
+      { id: 'kobe',      name: '神戸ベイランナーズ',       region: '関西',   p: '#003087', s: '#FFFFFF' },
+      { id: 'hiroshima', name: '広島ヒロシマフレイムス',   region: '中国',   p: '#CC0000', s: '#FFFFFF' },
+      { id: 'okayama',   name: '岡山ピーチランナーズ',     region: '中国',   p: '#FF69B4', s: '#006400' },
+      { id: 'fukuoka',   name: '福岡サザンクロス',         region: '九州',   p: '#003087', s: '#C9A84C' },
+      { id: 'kagoshima', name: '鹿児島カルデラ',           region: '九州',   p: '#8B4513', s: '#FF4500' },
+      { id: 'okinawa',   name: '沖縄ティーダ',             region: '沖縄',   p: '#00CED1', s: '#FF8C00' },
+    ];
+
+    function teamLogo(id, p, s) {
+      const L = {
+        sapporo:   `<circle cx="24" cy="24" r="21" fill="${p}"/><line x1="24" y1="5" x2="24" y2="43" stroke="${s}" stroke-width="2.5" stroke-opacity=".6"/><line x1="5" y1="24" x2="43" y2="24" stroke="${s}" stroke-width="2.5" stroke-opacity=".6"/><line x1="9.4" y1="9.4" x2="38.6" y2="38.6" stroke="${s}" stroke-width="2.5" stroke-opacity=".6"/><line x1="38.6" y1="9.4" x2="9.4" y2="38.6" stroke="${s}" stroke-width="2.5" stroke-opacity=".6"/><line x1="20" y1="12" x2="28" y2="12" stroke="${s}" stroke-width="1.5" stroke-opacity=".45"/><line x1="20" y1="36" x2="28" y2="36" stroke="${s}" stroke-width="1.5" stroke-opacity=".45"/><line x1="12" y1="20" x2="12" y2="28" stroke="${s}" stroke-width="1.5" stroke-opacity=".45"/><line x1="36" y1="20" x2="36" y2="28" stroke="${s}" stroke-width="1.5" stroke-opacity=".45"/><circle cx="24" cy="24" r="3.5" fill="${s}" fill-opacity=".7"/>`,
+        morioka:   `<circle cx="24" cy="24" r="21" fill="${p}" fill-opacity=".22"/><path d="M24 4 L27.5 14.5 H38.5 L30 21 L33.5 32 L24 26 L14.5 32 L18 21 L9.5 14.5 H20.5 Z" fill="${p}"/><path d="M24 8.5 L27 16.5 H35.5 L29 21.5 L31.5 30 L24 25.5 L16.5 30 L19 21.5 L12.5 16.5 H21 Z" fill="${s}" fill-opacity=".28"/>`,
+        aomori:    `<path d="M24 45 C9 37 8 25 14 17 C13 23 18 28 21 26 C17 18 20 9 24 3 C28 9 31 18 27 26 C30 28 35 23 34 17 C40 25 39 37 24 45 Z" fill="${p}"/><path d="M24 40 C15 34 15 27 19 22 C19 26 22 28 24 27 C22 23 23 18 24 15 C25 18 26 23 24 27 C26 28 29 26 29 22 C33 27 32 34 24 40 Z" fill="${s}" fill-opacity=".35"/>`,
+        sendai:    `<path d="M32 6 A20 20 0 1 0 32 42 A13 13 0 1 1 32 6 Z" fill="${p}"/><circle cx="37" cy="13" r="4" fill="${s}" fill-opacity=".65"/>`,
+        tokyo:     `<path d="M24 4 L40 12 V27 Q40 39 24 45 Q8 39 8 27 V12 Z" fill="${p}"/><path d="M11 22 L11 13 L16 17 L24 11 L32 17 L37 13 L37 22 Z" fill="${s}" fill-opacity=".4"/><line x1="8" y1="22" x2="40" y2="22" stroke="${s}" stroke-width="1.2" stroke-opacity=".35"/><path d="M15 33 Q24 39 33 33" stroke="${s}" stroke-width="1.5" stroke-opacity=".45" fill="none"/>`,
+        yokohama:  `<circle cx="24" cy="16" r="11" fill="${p}"/><line x1="24" y1="27" x2="24" y2="44" stroke="${p}" stroke-width="5" stroke-linecap="round"/><line x1="13" y1="39" x2="24" y2="44" stroke="${p}" stroke-width="4" stroke-linecap="round"/><line x1="35" y1="39" x2="24" y2="44" stroke="${p}" stroke-width="4" stroke-linecap="round"/><line x1="15" y1="14" x2="33" y2="14" stroke="${s}" stroke-width="2" stroke-opacity=".55"/><circle cx="24" cy="16" r="5" fill="${s}" fill-opacity=".3"/>`,
+        chiba:     `<circle cx="24" cy="24" r="21" fill="${p}"/><path d="M3 24 Q10 14 17 20 Q24 26 31 18 Q38 10 45 17 L45 45 H3 Z" fill="${s}" fill-opacity=".25"/><path d="M3 24 Q10 14 17 20 Q24 26 31 18 Q38 10 45 17" stroke="${s}" stroke-width="2" stroke-opacity=".55" fill="none" stroke-linecap="round"/>`,
+        saitama:   `<circle cx="24" cy="30" r="12" fill="${p}"/><line x1="24" y1="17" x2="24" y2="5" stroke="${p}" stroke-width="4" stroke-linecap="round"/><line x1="14.5" y1="20" x2="6" y2="11" stroke="${p}" stroke-width="3.5" stroke-linecap="round"/><line x1="33.5" y1="20" x2="42" y2="11" stroke="${p}" stroke-width="3.5" stroke-linecap="round"/><line x1="9" y1="28" x2="3" y2="23" stroke="${p}" stroke-width="3" stroke-linecap="round"/><line x1="39" y1="28" x2="45" y2="23" stroke="${p}" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="30" r="7" fill="${s}" fill-opacity=".3"/>`,
+        nagano:    `<polygon points="24,4 44,43 4,43" fill="${p}"/><polygon points="24,4 29,18 19,18" fill="#FFFFFF" fill-opacity=".6"/><line x1="4" y1="43" x2="44" y2="43" stroke="${s}" stroke-width="2" stroke-opacity=".4"/>`,
+        niigata:   `<path d="M24 44 C8 38 6 26 8 14 C12 6 20 4 24 4 C28 4 36 6 40 14 C42 26 40 38 24 44 Z" fill="${p}"/><line x1="24" y1="44" x2="24" y2="7" stroke="${s}" stroke-width="1.5" stroke-opacity=".5"/><path d="M24 20 Q31 16 37 14" stroke="${s}" stroke-width="1.2" stroke-opacity=".45" fill="none" stroke-linecap="round"/><path d="M24 28 Q31 24 38 22" stroke="${s}" stroke-width="1.2" stroke-opacity=".45" fill="none" stroke-linecap="round"/><path d="M24 20 Q17 16 11 14" stroke="${s}" stroke-width="1.2" stroke-opacity=".45" fill="none" stroke-linecap="round"/><path d="M24 28 Q17 24 10 22" stroke="${s}" stroke-width="1.2" stroke-opacity=".45" fill="none" stroke-linecap="round"/>`,
+        shizuoka:  `<circle cx="24" cy="24" r="21" fill="${p}"/><path d="M5 36 L14 18 L19 24 L24 14 L29 24 L34 18 L43 36 Z" fill="${s}" fill-opacity=".35"/><path d="M19 24 L24 14 L29 24 Z" fill="#FFFFFF" fill-opacity=".6"/><line x1="5" y1="36" x2="43" y2="36" stroke="${s}" stroke-width="1.5" stroke-opacity=".3"/>`,
+        nagoya:    `<path d="M24 4 L44 24 L24 44 L4 24 Z" fill="${p}"/><path d="M24 11 L37 24 L24 37 L11 24 Z" fill="none" stroke="${s}" stroke-width="1.5" stroke-opacity=".4"/><line x1="6" y1="6" x2="20" y2="20" stroke="${s}" stroke-width="4" stroke-opacity=".35" stroke-linecap="round"/><line x1="3" y1="11" x2="14" y2="17" stroke="${s}" stroke-width="2.5" stroke-opacity=".2" stroke-linecap="round"/><circle cx="24" cy="24" r="4.5" fill="${s}" fill-opacity=".4"/>`,
+        kyoto:     `<path d="M24 40 L4 14 Q14 2 24 4 Q34 2 44 14 Z" fill="${p}"/><line x1="24" y1="40" x2="4" y2="14" stroke="${s}" stroke-width=".8" stroke-opacity=".3"/><line x1="24" y1="40" x2="14" y2="6" stroke="${s}" stroke-width=".8" stroke-opacity=".3"/><line x1="24" y1="40" x2="24" y2="4" stroke="${s}" stroke-width=".8" stroke-opacity=".3"/><line x1="24" y1="40" x2="34" y2="6" stroke="${s}" stroke-width=".8" stroke-opacity=".3"/><line x1="24" y1="40" x2="44" y2="14" stroke="${s}" stroke-width=".8" stroke-opacity=".3"/><path d="M6 16 Q15 4 24 5 Q33 4 42 16" stroke="${s}" stroke-width="2" stroke-opacity=".55" fill="none" stroke-linecap="round"/><circle cx="24" cy="40" r="2.5" fill="${s}" fill-opacity=".6"/>`,
+        osaka:     `<rect x="4" y="4" width="40" height="40" rx="8" fill="${p}"/><path d="M4 16 L16 4 H24 L4 24 Z" fill="${s}" fill-opacity=".26"/><path d="M4 32 L32 4 H38 L4 38 Z" fill="${s}" fill-opacity=".13"/><path d="M24 44 L44 24 V31 L31 44 Z" fill="${s}" fill-opacity=".26"/>`,
+        kobe:      `<polygon points="24,3 44,17.5 36.3,41 11.7,41 4,17.5" fill="${p}"/><polygon points="24,9 38.4,20 33.2,37.4 14.8,37.4 9.6,20" fill="none" stroke="${s}" stroke-width="1.5" stroke-opacity=".4"/><path d="M24 41 L24 28 M18 34 L30 34" stroke="${s}" stroke-width="2" stroke-opacity=".5"/><circle cx="24" cy="28" r="4" fill="none" stroke="${s}" stroke-width="1.5" stroke-opacity=".5"/>`,
+        hiroshima: `<path d="M24 27 C18 21 8 17 4 9 Q12 7 18 15 L24 21 L30 15 Q36 7 44 9 C40 17 30 21 24 27 Z" fill="${p}"/><path d="M24 27 C22 31 20 36 22 41 L24 45 L26 41 C28 36 26 31 24 27 Z" fill="${p}"/><path d="M24 27 C20 23 12 20 8 14 Q14 13 19 19 L24 23 L29 19 Q34 13 40 14 C36 20 28 23 24 27 Z" fill="${s}" fill-opacity=".3"/><circle cx="24" cy="21" r="3" fill="${s}" fill-opacity=".5"/>`,
+        okayama:   `<path d="M24 43 C8 40 4 28 8 17 C11 9 17 5 24 5 C31 5 37 9 40 17 C44 28 40 40 24 43 Z" fill="${p}"/><path d="M18 5 C20 1 28 1 30 5" stroke="${s}" stroke-width="3" stroke-opacity=".55" fill="none" stroke-linecap="round"/><path d="M24 28 Q28 22 33 20" stroke="${s}" stroke-width="1.2" stroke-opacity=".35" fill="none" stroke-linecap="round"/>`,
+        fukuoka:   `<circle cx="24" cy="24" r="21" fill="${p}"/><circle cx="24" cy="11" r="3.5" fill="${s}" fill-opacity=".85"/><circle cx="24" cy="37" r="3.5" fill="${s}" fill-opacity=".85"/><circle cx="13" cy="22" r="2.8" fill="${s}" fill-opacity=".75"/><circle cx="35" cy="22" r="2.8" fill="${s}" fill-opacity=".75"/><circle cx="32" cy="30" r="2" fill="${s}" fill-opacity=".65"/>`,
+        kagoshima: `<polygon points="24,6 44,43 4,43" fill="${p}"/><circle cx="18" cy="10" r="2.5" fill="${s}" fill-opacity=".65"/><circle cx="24" cy="7" r="3" fill="${s}" fill-opacity=".75"/><circle cx="30" cy="10" r="2" fill="${s}" fill-opacity=".6"/><path d="M20 16 Q22 11 24 9 Q26 11 28 16" stroke="${s}" stroke-width="1.5" stroke-opacity=".4" fill="none"/><line x1="4" y1="43" x2="44" y2="43" stroke="${s}" stroke-width="2" stroke-opacity=".35"/>`,
+        okinawa:   `<line x1="37" y1="24" x2="45" y2="24" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="32.8" y1="32.8" x2="38.5" y2="38.5" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="24" y1="37" x2="24" y2="45" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="15.2" y1="32.8" x2="9.5" y2="38.5" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="11" y1="24" x2="3" y2="24" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="15.2" y1="15.2" x2="9.5" y2="9.5" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="24" y1="11" x2="24" y2="3" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><line x1="32.8" y1="15.2" x2="38.5" y2="9.5" stroke="${p}" stroke-width="4.5" stroke-linecap="round"/><circle cx="24" cy="24" r="10" fill="${p}"/><circle cx="24" cy="24" r="6" fill="${s}" fill-opacity=".35"/>`,
+      };
+      return L[id] || `<path d="M24 3 L42 13.5 V34.5 L24 45 L6 34.5 V13.5 Z" fill="${p}"/>`;
+    }
+
+    const grid = document.getElementById('teams-grid');
+    TEAMS.forEach(t => {
+      const card = document.createElement('div');
+      card.className = 'team-card reveal';
+      card.innerHTML = `<div class="team-logo"><svg viewBox="0 0 48 48" width="40" height="40" fill="none">${teamLogo(t.id, t.p, t.s)}</svg></div><div class="team-info"><div class="team-name">${t.name}</div><div class="team-region">${t.region}</div></div>`;
+      grid.appendChild(card);
+      io.observe(card);
+    });
   </script>
 
 </body>
