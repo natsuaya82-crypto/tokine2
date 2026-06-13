@@ -1,352 +1,831 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>刻音 -Tokine- | 時間を刻み、音を紡ぐ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刻音 -Tokine- | 時間を刻み、音を紡ぐ</title>
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='80' font-family='serif'%3E刻%3C/text%3E%3C/svg%3E">
-    <link rel="alternate icon" type="image/png" href="favicon.png">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='75' font-size='80' font-family='serif'%3E刻%3C/text%3E%3C/svg%3E">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@200;300;400&display=swap" rel="stylesheet">
 
-    <style>
-        body {
-            font-family: 'Inter', 'Noto Sans JP', sans-serif;
-        }
-        .en-text {
-            font-family: 'Inter', sans-serif;
-        }
-        .grain {
-            position: relative;
-        }
-        .grain::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            opacity: 0.4;
-        }
-        .vertical-text {
-            writing-mode: vertical-rl;
-            text-orientation: upright;
-        }
-        .fade-in {
-            animation: fadeIn 1s ease-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .nav-link {
-            position: relative;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: #4b5563;
-        }
-        .project-card-inner {
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .project-card:hover .project-card-inner {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        .fade-in-scroll {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .fade-in-scroll.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0c0c0c;
+      --white: #ffffff;
+      --gray-50: #fafafa;
+      --gray-100: #f2f2f2;
+      --gray-200: #e0e0e0;
+      --gray-400: #9e9e9e;
+      --gray-600: #5a5a5a;
+      --gray-800: #222222;
+      --accent: #1a1a1a;
+      --gold: #b8952a;
+      --serif: 'Noto Serif JP', serif;
+      --sans: 'Noto Sans JP', 'Inter', sans-serif;
+      --en: 'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 64px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .nav-logo {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 20px;
+      letter-spacing: 0.25em;
+      color: var(--black);
+      text-decoration: none;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .nav-logo-sub {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.35em;
+      color: var(--gray-400);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 40px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray-600);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--black); }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      padding: 80px 40px 60px;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-bg-char {
+      font-family: var(--serif);
+      font-weight: 200;
+      font-size: clamp(300px, 45vw, 700px);
+      color: var(--gray-100);
+      line-height: 1;
+      letter-spacing: -0.05em;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .hero-title {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: clamp(72px, 12vw, 160px);
+      line-height: 1;
+      letter-spacing: 0.18em;
+      color: var(--black);
+    }
+
+    .hero-rule {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .hero-rule-line {
+      width: 80px;
+      height: 1px;
+      background: var(--gray-400);
+    }
+
+    .hero-rule-text {
+      font-family: var(--en);
+      font-weight: 300;
+      font-size: 13px;
+      letter-spacing: 0.5em;
+      color: var(--gray-600);
+    }
+
+    .hero-tagline {
+      margin-top: 40px;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: clamp(18px, 2.5vw, 28px);
+      letter-spacing: 0.22em;
+      color: var(--gray-800);
+    }
+
+    .hero-sub {
+      margin-top: 12px;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      color: var(--gray-400);
+    }
+
+    .hero-cta {
+      margin-top: 56px;
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 40px;
+      border: 1px solid var(--black);
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--black);
+      text-decoration: none;
+      transition: background 0.3s, color 0.3s;
+    }
+    .hero-cta:hover { background: var(--black); color: var(--white); }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-scroll-line {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, transparent, var(--gray-400));
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    .hero-scroll-label {
+      font-family: var(--en);
+      font-size: 9px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.2); transform-origin: top; }
+    }
+
+    /* ── Marquee ── */
+    .marquee-wrap {
+      overflow: hidden;
+      background: var(--black);
+      padding: 14px 0;
+      border-bottom: 1px solid #333;
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 24s linear infinite;
+    }
+
+    .marquee-item {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      padding: 0 40px;
+      white-space: nowrap;
+    }
+
+    .marquee-dot {
+      color: var(--gold);
+    }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── Sections common ── */
+    .section-num {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+      margin-bottom: 16px;
+    }
+
+    .section-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--gray-400);
+      margin: 20px 0;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── Philosophy ── */
+    .philosophy {
+      padding: 140px 40px;
+      border-bottom: 1px solid var(--gray-200);
+      position: relative;
+    }
+
+    .philosophy-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .philosophy-side {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .philosophy-vert {
+      writing-mode: vertical-rl;
+      text-orientation: upright;
+      font-family: var(--serif);
+      font-weight: 200;
+      font-size: 64px;
+      letter-spacing: 0.2em;
+      color: var(--gray-200);
+      line-height: 1;
+      user-select: none;
+    }
+
+    .philosophy-vert-en {
+      writing-mode: vertical-rl;
+      font-family: var(--en);
+      font-size: 11px;
+      letter-spacing: 0.3em;
+      color: var(--gray-400);
+      text-transform: uppercase;
+    }
+
+    .philosophy-center { text-align: center; }
+
+    .philosophy-heading {
+      font-family: var(--en);
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--gray-400);
+    }
+
+    .philosophy-text {
+      margin-top: 40px;
+      font-family: var(--sans);
+      font-weight: 300;
+      font-size: clamp(16px, 1.6vw, 20px);
+      line-height: 2.2;
+      letter-spacing: 0.1em;
+      color: var(--gray-800);
+    }
+
+    .philosophy-text strong {
+      font-weight: 500;
+      color: var(--black);
+    }
+
+    /* ── Projects ── */
+    .projects {
+      padding: 140px 40px;
+      border-bottom: 1px solid var(--gray-200);
+      background: var(--gray-50);
+    }
+
+    .projects-inner { max-width: 1100px; margin: 0 auto; }
+
+    .projects-header {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+
+    .projects-title {
+      font-family: var(--serif);
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      color: var(--black);
+    }
+
+    .projects-count {
+      font-family: var(--en);
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      color: var(--gray-400);
+    }
+
+    /* JPEL Card */
+    .jpel-card {
+      display: block;
+      text-decoration: none;
+      background: linear-gradient(135deg, #0f1d30 0%, #0a1420 100%);
+      border: 1px solid rgba(245,200,66,0.2);
+      padding: 60px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.4s, transform 0.4s;
+    }
+    .jpel-card:hover {
+      border-color: rgba(245,200,66,0.5);
+      transform: translateY(-4px);
+    }
+
+    .jpel-bg-num {
+      position: absolute;
+      right: -20px;
+      top: -20px;
+      font-family: var(--en);
+      font-size: 220px;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(245,200,66,0.04);
+      pointer-events: none;
+      user-select: none;
+      letter-spacing: -0.05em;
+    }
+
+    .jpel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border: 1px solid rgba(245,200,66,0.4);
+      border-radius: 2px;
+      font-family: var(--en);
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #f5c842;
+      background: rgba(245,200,66,0.06);
+      margin-bottom: 36px;
+    }
+
+    .jpel-badge-dot {
+      width: 5px;
+      height: 5px;
+      background: #f5c842;
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .jpel-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: end;
+    }
+
+    .jpel-eyebrow {
+      font-family: var(--en);
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #f5c842;
+      margin-bottom: 16px;
+    }
+
+    .jpel-title {
+      font-family: var(--en);
+      font-size: clamp(40px, 6vw, 72px);
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .jpel-subtitle {
+      font-family: var(--sans);
+      font-size: 13px;
+      letter-spacing: 0.15em;
+      color: rgba(200,212,227,0.45);
+      margin-bottom: 28px;
+    }
+
+    .jpel-desc {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 300;
+      line-height: 1.85;
+      letter-spacing: 0.06em;
+      color: rgba(200,212,227,0.8);
+      max-width: 500px;
+    }
+
+    .jpel-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      align-items: flex-end;
+      flex-shrink: 0;
+    }
+
+    .jpel-stat-num {
+      font-family: var(--en);
+      font-size: 42px;
+      font-weight: 300;
+      color: #f5c842;
+      line-height: 1;
+    }
+
+    .jpel-stat-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(200,212,227,0.4);
+      margin-top: 4px;
+      text-align: right;
+    }
+
+    .jpel-arrow {
+      margin-top: 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--en);
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(245,200,66,0.6);
+    }
+    .jpel-card:hover .jpel-arrow { color: #f5c842; }
+    .jpel-arrow-line {
+      width: 32px;
+      height: 1px;
+      background: currentColor;
+      transition: width 0.3s;
+    }
+    .jpel-card:hover .jpel-arrow-line { width: 56px; }
+
+    /* ── Contact ── */
+    .contact {
+      padding: 140px 40px;
+      background: var(--black);
+      color: var(--white);
+      border-bottom: 1px solid #222;
+    }
+
+    .contact-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .contact-left {}
+
+    .contact-heading {
+      font-family: var(--serif);
+      font-size: clamp(48px, 8vw, 100px);
+      font-weight: 200;
+      letter-spacing: 0.15em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: 40px;
+    }
+
+    .contact-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 16px;
+      font-family: var(--en);
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      transition: color 0.2s;
+      border-bottom: 1px solid #333;
+      padding-bottom: 16px;
+    }
+    .contact-link:hover { color: var(--white); border-color: #666; }
+
+    .contact-right {
+      font-family: var(--serif);
+      font-size: 120px;
+      font-weight: 200;
+      color: rgba(255,255,255,0.04);
+      line-height: 1;
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #050505;
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-logo {
+      font-family: var(--serif);
+      font-weight: 300;
+      font-size: 16px;
+      letter-spacing: 0.2em;
+      color: #444;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 32px;
+    }
+
+    .footer-links a {
+      font-family: var(--en);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #888; }
+
+    .footer-copy {
+      font-family: var(--en);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #333;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+      .hero { padding: 80px 24px 60px; }
+      .philosophy { padding: 80px 24px; }
+      .philosophy-inner { grid-template-columns: 1fr; }
+      .philosophy-side { display: none; }
+      .projects { padding: 80px 24px; }
+      .jpel-card { padding: 36px 28px; }
+      .jpel-inner { grid-template-columns: 1fr; gap: 40px; }
+      .jpel-stats { flex-direction: row; align-items: flex-start; }
+      .jpel-stat-label { text-align: left; }
+      .contact { padding: 80px 24px; }
+      .contact-inner { flex-direction: column; align-items: flex-start; }
+      .contact-right { display: none; }
+      footer { flex-direction: column; gap: 20px; text-align: center; padding: 24px; }
+      .footer-links { flex-direction: column; align-items: center; gap: 16px; }
+    }
+  </style>
 </head>
-<body class="antialiased bg-[#fafafa]">
+<body>
 
-    <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm">
-        <nav class="max-w-7xl mx-auto px-6 md:px-10 py-5 md:py-7">
-            <div class="flex items-center justify-between">
-                <a href="#top" class="text-xl md:text-2xl font-medium tracking-[0.2em] text-gray-900 hover:text-gray-600 transition-colors duration-300">
-                    刻音 <span class="text-sm md:text-base tracking-[0.25em] text-gray-500 font-light ml-2">TOKINE</span>
-                </a>
+  <nav>
+    <a href="#top" class="nav-logo">
+      刻音<span class="nav-logo-sub">TOKINE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#philosophy">Philosophy</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-                <ul class="hidden md:flex items-center gap-12 en-text text-sm tracking-[0.15em] uppercase">
-                    <li><a href="#top" class="nav-link">Top</a></li>
-                    <li><a href="#philosophy" class="nav-link">Philosophy</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
+  <!-- Hero -->
+  <section id="top" class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <span class="hero-bg-char">刻</span>
+    </div>
 
-                <button id="mobile-menu-btn" class="md:hidden p-2 text-gray-900 hover:text-gray-600 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                        <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                    </svg>
-                </button>
-            </div>
+    <div class="hero-content">
+      <h1 class="hero-title">刻音</h1>
+      <div class="hero-rule">
+        <div class="hero-rule-line"></div>
+        <span class="hero-rule-text">TOKINE</span>
+        <div class="hero-rule-line"></div>
+      </div>
+      <p class="hero-tagline">時間を刻み、音を紡ぐ</p>
+      <p class="hero-sub">ゲームをつくる、個人開発。</p>
+      <a href="#projects" class="hero-cta">
+        Explore
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 7h12M7 1l6 6-6 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
 
-            <div id="mobile-menu" class="hidden md:hidden mt-6 pb-4 border-t border-gray-200 pt-6">
-                <ul class="flex flex-col gap-4 en-text text-sm tracking-[0.15em] uppercase">
-                    <li><a href="#top" class="nav-link block py-2 hover:text-gray-600 transition-colors">Top</a></li>
-                    <li><a href="#philosophy" class="nav-link block py-2 hover:text-gray-600 transition-colors">Philosophy</a></li>
-                    <li><a href="#projects" class="nav-link block py-2 hover:text-gray-600 transition-colors">Projects</a></li>
-                    <li><a href="#contact" class="nav-link block py-2 hover:text-gray-600 transition-colors">Contact</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+    <div class="hero-scroll" aria-hidden="true">
+      <div class="hero-scroll-line"></div>
+      <span class="hero-scroll-label">Scroll</span>
+    </div>
+  </section>
 
-    <!-- Hero Section -->
-    <section id="top" class="min-h-screen flex items-center justify-center px-6 md:px-10 pt-32 md:pt-40 pb-20 md:pb-32 bg-gradient-to-br from-gray-50 via-white to-gray-100 grain">
-        <div class="max-w-6xl mx-auto text-center space-y-16 md:space-y-24 fade-in">
-            <div class="space-y-10 md:space-y-14">
-                <h1 class="text-6xl md:text-8xl lg:text-[10rem] font-light tracking-[0.25em] text-gray-900 leading-none">
-                    刻音
-                </h1>
-                <div class="flex items-center justify-center gap-6 md:gap-10">
-                    <div class="w-20 md:w-28 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
-                    <p class="en-text text-2xl md:text-4xl font-light tracking-[0.3em] text-gray-600">
-                        TOKINE
-                    </p>
-                    <div class="w-20 md:w-28 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent"></div>
-                </div>
-            </div>
+  <!-- Marquee -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-track">
+      <span class="marquee-item">刻音 TOKINE <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">JPEL Manager <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">駅伝GMシミュレーション <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">iOS Game <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">個人開発 <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Indie Game Developer <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">刻音 TOKINE <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">JPEL Manager <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">駅伝GMシミュレーション <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">iOS Game <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">個人開発 <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Indie Game Developer <span class="marquee-dot">·</span></span>
+    </div>
+  </div>
 
-            <div class="space-y-6 md:space-y-10">
-                <p class="text-2xl md:text-4xl font-light tracking-[0.18em] text-gray-800 leading-relaxed">
-                    時間を刻み、音を紡ぐ
-                </p>
-                <p class="text-base md:text-xl font-light tracking-[0.15em] text-gray-600 leading-relaxed max-w-3xl mx-auto px-4">
-                    ゲームをつくる、個人開発。
-                </p>
-            </div>
+  <!-- Philosophy -->
+  <section id="philosophy" class="philosophy">
+    <div class="philosophy-inner reveal">
+      <div class="philosophy-side">
+        <span class="philosophy-vert" aria-hidden="true">刻音</span>
+      </div>
 
-            <div class="pt-10 md:pt-14">
-                <a href="#projects" class="inline-block px-10 md:px-14 py-4 md:py-6 border-2 border-gray-900 text-gray-900 en-text text-xs md:text-sm tracking-[0.2em] uppercase hover:bg-gray-900 hover:text-white transition-all duration-500 shadow-lg hover:shadow-2xl">
-                    Explore
-                </a>
-            </div>
+      <div class="philosophy-center">
+        <p class="philosophy-heading">— Philosophy —</p>
+        <div class="section-divider" style="margin: 20px auto;"></div>
+        <p class="philosophy-text">
+          コードを書き、世界を興す。<br>
+          誰も作っていないものを、<strong>ひとりで作る。</strong><br><br>
+          新宿御苑の静寂を拠点に、<br>
+          遊んで熱くなれるものを創造しています。
+        </p>
+      </div>
+
+      <div class="philosophy-side">
+        <span class="philosophy-vert-en" aria-hidden="true">Shinjuku Gyoen</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="projects">
+    <div class="projects-inner">
+      <div class="projects-header reveal">
+        <h2 class="projects-title">Projects</h2>
+        <span class="projects-count">01 — Currently Active</span>
+      </div>
+
+      <a href="/jpel" class="jpel-card reveal">
+        <div class="jpel-bg-num" aria-hidden="true">01</div>
+
+        <div class="jpel-badge">
+          <div class="jpel-badge-dot"></div>
+          Coming Soon
         </div>
-    </section>
 
-    <!-- Philosophy Section -->
-    <section id="philosophy" class="min-h-screen flex items-center justify-center py-24 md:py-48 px-6 md:px-10 bg-white grain relative">
-        <div class="max-w-7xl mx-auto fade-in-scroll">
-            <div class="grid lg:grid-cols-12 gap-10 md:gap-20 items-center">
-
-                <div class="hidden lg:flex lg:col-span-2 justify-center lg:justify-start">
-                    <div class="vertical-text text-7xl font-light tracking-[0.3em] text-gray-300 leading-loose">
-                        刻音
-                    </div>
-                </div>
-
-                <div class="lg:col-span-8 space-y-16 md:space-y-24">
-                    <div class="text-center space-y-10 md:space-y-14">
-                        <h2 class="en-text text-2xl md:text-3xl font-light tracking-[0.35em] text-gray-400 uppercase">
-                            Philosophy
-                        </h2>
-                        <div class="w-28 md:w-36 h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent mx-auto"></div>
-                    </div>
-
-                    <div class="max-w-4xl mx-auto px-4">
-                        <p class="text-base md:text-xl font-light tracking-[0.1em] text-gray-800 leading-relaxed text-center">
-                            コードを書き、世界を興す。<br/>
-                            誰も作っていないものを、ひとりで作る。<br/>
-                            <span class="text-gray-600">新宿御苑</span>の静寂を拠点に、<br/>
-                            遊んで熱くなれるものを創造しています。
-                        </p>
-                    </div>
-                </div>
-
-                <div class="hidden lg:flex lg:col-span-2 justify-center lg:justify-end">
-                    <div class="vertical-text text-sm font-light tracking-[0.3em] text-gray-400 leading-loose en-text">
-                        Shinjuku Gyoen
-                    </div>
-                </div>
-
+        <div class="jpel-inner">
+          <div>
+            <p class="jpel-eyebrow">iOS Game — Japan Pro Ekiden League</p>
+            <h3 class="jpel-title">JPEL<br>Manager</h3>
+            <p class="jpel-subtitle">日本初の駅伝GMシミュレーション</p>
+            <p class="jpel-desc">
+              20チームのゼネラルマネージャーとして、<br>
+              スカウト・ドラフト・区間配置・移籍市場を駆使して<br>
+              シーズン王者を目指す。
+            </p>
+            <div class="jpel-arrow">
+              <div class="jpel-arrow-line"></div>
+              Learn More
             </div>
+          </div>
+
+          <div class="jpel-stats">
+            <div>
+              <div class="jpel-stat-num">20</div>
+              <div class="jpel-stat-label">チーム</div>
+            </div>
+            <div>
+              <div class="jpel-stat-num">17</div>
+              <div class="jpel-stat-label">年間レース</div>
+            </div>
+            <div>
+              <div class="jpel-stat-num">360</div>
+              <div class="jpel-stat-label">選手</div>
+            </div>
+          </div>
         </div>
-    </section>
+      </a>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 md:py-40 px-6 md:px-10 bg-gradient-to-b from-white to-gray-50">
-        <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20 md:mb-32 fade-in-scroll">
-                <h2 class="text-4xl md:text-6xl font-light tracking-[0.2em] text-gray-900 mb-8">
-                    Projects
-                </h2>
-                <div class="w-28 md:w-36 h-px bg-gradient-to-r from-transparent via-gray-400 to-transparent mx-auto"></div>
-                <p class="mt-8 md:mt-10 text-base md:text-lg tracking-[0.12em] text-gray-600 font-light">
-                    現在リリース中
-                </p>
-            </div>
+  <!-- Contact -->
+  <section id="contact" class="contact">
+    <div class="contact-inner reveal">
+      <div class="contact-left">
+        <h2 class="contact-heading">Contact</h2>
+        <a href="mailto:official@tokinets.com" class="contact-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+          official@tokinets.com
+        </a>
+      </div>
+      <div class="contact-right" aria-hidden="true">刻</div>
+    </div>
+  </section>
 
-            <!-- JPEL Manager -->
-            <article class="project-card group fade-in-scroll">
-                <a href="https://tokinets.com/jpel" target="_blank" rel="noopener noreferrer" class="block">
-                    <div class="bg-gradient-to-br from-[#1a2c47] to-[#0a1729] p-12 md:p-20 border-2 transition-all duration-500 relative overflow-hidden project-card-inner" style="border-color: rgba(245,200,66,0.3);">
-                        <div class="absolute top-0 right-0 text-[10rem] md:text-[14rem] font-light leading-none pointer-events-none en-text" style="color: rgba(245,200,66,0.07);">01</div>
+  <footer>
+    <span class="footer-logo">刻音</span>
+    <div class="footer-links">
+      <a href="/privacy.html">Privacy</a>
+      <a href="/jpel">JPEL Manager</a>
+    </div>
+    <span class="footer-copy">&copy; 2026 Tokine</span>
+  </footer>
 
-                        <div class="absolute top-8 right-8 md:top-12 md:right-12">
-                            <span class="en-text text-xs tracking-[0.25em] uppercase px-3 py-1.5 border rounded-full" style="border-color: rgba(245,200,66,0.5); color: #f5c842; background: rgba(245,200,66,0.08);">
-                                Coming Soon
-                            </span>
-                        </div>
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
 
-                        <div class="relative z-10 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
-                            <div class="space-y-8 md:space-y-10">
-                                <div class="space-y-4 md:space-y-5">
-                                    <p class="en-text text-xs tracking-[0.3em] uppercase" style="color: #f5c842;">
-                                        iOS Game
-                                    </p>
-                                    <h3 class="text-4xl md:text-6xl font-medium tracking-[0.1em]" style="color: #ffffff; font-family: 'Inter', sans-serif;">
-                                        JPEL<br/>Manager
-                                    </h3>
-                                    <p class="text-sm tracking-[0.15em]" style="color: rgba(200,212,227,0.6);">
-                                        Japan Pro Ekiden League
-                                    </p>
-                                </div>
-                                <p class="text-base md:text-lg font-light tracking-[0.08em] leading-relaxed" style="color: #c8d4e3;">
-                                    20球団のGMとして、スカウト・ドラフト・区間配置・移籍市場を駆使してシーズン王者を目指す、日本初の駅伝GMシミュレーション。
-                                </p>
-                            </div>
-                            <div class="flex justify-end">
-                                <div class="grid grid-cols-3 gap-6 text-center">
-                                    <div>
-                                        <div class="text-4xl font-light en-text" style="color: #f5c842;">20</div>
-                                        <div class="text-xs tracking-[0.1em] mt-2" style="color: rgba(200,212,227,0.5);">球団</div>
-                                    </div>
-                                    <div>
-                                        <div class="text-4xl font-light en-text" style="color: #f5c842;">12</div>
-                                        <div class="text-xs tracking-[0.1em] mt-2" style="color: rgba(200,212,227,0.5);">レース</div>
-                                    </div>
-                                    <div>
-                                        <div class="text-4xl font-light en-text" style="color: #f5c842;">360</div>
-                                        <div class="text-xs tracking-[0.1em] mt-2" style="color: rgba(200,212,227,0.5);">選手</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </article>
-
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 md:py-28 px-6 md:px-10 bg-gray-900 text-white">
-        <div class="max-w-4xl mx-auto fade-in-scroll">
-            <div class="text-center mb-12 md:mb-20">
-                <h2 class="text-4xl md:text-5xl font-light tracking-[0.2em] mb-6">
-                    Contact
-                </h2>
-                <div class="w-24 md:w-28 h-px bg-gradient-to-r from-transparent via-gray-600 to-transparent mx-auto"></div>
-            </div>
-
-            <div class="flex justify-center">
-                <div class="space-y-4 md:space-y-6 text-center">
-                    <p class="en-text text-xs tracking-[0.3em] text-gray-500 uppercase">
-                        Official
-                    </p>
-                    <a href="mailto:official@tokinets.com" class="block text-xl md:text-2xl tracking-[0.12em] font-light hover:text-gray-400 transition-colors duration-300 en-text">
-                        official@tokinets.com
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black text-gray-400 py-20 px-10">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid md:grid-cols-3 gap-12 md:gap-16 mb-20">
-                <div class="space-y-6 md:space-y-8">
-                    <h3 class="text-white text-xl font-medium tracking-[0.15em]">刻音</h3>
-                    <p class="text-sm tracking-[0.1em] leading-relaxed font-light">
-                        個人開発。誰も作っていないゲームを作る。
-                    </p>
-                </div>
-
-                <div class="space-y-4 md:space-y-5">
-                    <h4 class="en-text text-white text-sm tracking-[0.2em] uppercase">Sitemap</h4>
-                    <ul class="space-y-3 text-sm en-text tracking-[0.1em]">
-                        <li><a href="#top" class="hover:text-white transition-colors">Top</a></li>
-                        <li><a href="#philosophy" class="hover:text-white transition-colors">Philosophy</a></li>
-                        <li><a href="#projects" class="hover:text-white transition-colors">Projects</a></li>
-                        <li><a href="#contact" class="hover:text-white transition-colors">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="space-y-4 md:space-y-5">
-                    <h4 class="en-text text-white text-sm tracking-[0.2em] uppercase">Legal</h4>
-                    <ul class="space-y-3 text-sm tracking-[0.1em]">
-                        <li><a href="privacy.html" class="hover:text-white transition-colors">プライバシーポリシー</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="pt-12 border-t border-gray-800 text-center">
-                <p class="en-text text-xs tracking-[0.2em] uppercase">
-                    &copy; 2026 Tokine. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const menuIcon = document.getElementById('menu-icon');
-        const closeIcon = document.getElementById('close-icon');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            menuIcon.classList.toggle('hidden');
-            closeIcon.classList.toggle('hidden');
-        });
-
-        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-                menuIcon.classList.remove('hidden');
-                closeIcon.classList.add('hidden');
-            });
-        });
-
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
-
-        document.querySelectorAll('.fade-in-scroll').forEach(el => {
-            observer.observe(el);
-        });
-    </script>
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 
 </body>
 </html>
