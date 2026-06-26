@@ -539,6 +539,17 @@
     }
     .jpel-card:hover .jpel-arrow-line { width: 56px; }
 
+    /* LINGUA variant (紫系) */
+    .jpel-card.lingua { background: linear-gradient(135deg, #181228 0%, #100b1c 100%); border-color: rgba(167,139,250,0.22); }
+    .jpel-card.lingua:hover { border-color: rgba(167,139,250,0.5); }
+    .jpel-card.lingua .jpel-bg-num { color: rgba(167,139,250,0.05); }
+    .jpel-card.lingua .jpel-badge { border-color: rgba(167,139,250,0.4); color: #a78bfa; background: rgba(167,139,250,0.06); }
+    .jpel-card.lingua .jpel-badge-dot { background: #a78bfa; }
+    .jpel-card.lingua .jpel-eyebrow { color: #a78bfa; }
+    .jpel-card.lingua .jpel-stat-num { color: #a78bfa; }
+    .jpel-card.lingua .jpel-arrow { color: rgba(167,139,250,0.6); }
+    .jpel-card.lingua:hover .jpel-arrow { color: #a78bfa; }
+
     /* ── Contact ── */
     .contact {
       padding: 140px 40px;
@@ -704,15 +715,19 @@
       <span class="marquee-item">刻音 TOKINE <span class="marquee-dot">·</span></span>
       <span class="marquee-item">JPEL Manager <span class="marquee-dot">·</span></span>
       <span class="marquee-item">駅伝GMシミュレーション <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">iOS Game <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">LINGUA <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">コンラングビルダー <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">架空言語を設計しよう <span class="marquee-dot">·</span></span>
       <span class="marquee-item">個人開発 <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Indie Game Developer <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Indie Developer <span class="marquee-dot">·</span></span>
       <span class="marquee-item">刻音 TOKINE <span class="marquee-dot">·</span></span>
       <span class="marquee-item">JPEL Manager <span class="marquee-dot">·</span></span>
       <span class="marquee-item">駅伝GMシミュレーション <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">iOS Game <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">LINGUA <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">コンラングビルダー <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">架空言語を設計しよう <span class="marquee-dot">·</span></span>
       <span class="marquee-item">個人開発 <span class="marquee-dot">·</span></span>
-      <span class="marquee-item">Indie Game Developer <span class="marquee-dot">·</span></span>
+      <span class="marquee-item">Indie Developer <span class="marquee-dot">·</span></span>
     </div>
   </div>
 
@@ -743,7 +758,7 @@
     <div class="projects-inner">
       <div class="projects-header reveal">
         <h2 class="projects-title">Projects</h2>
-        <span class="projects-count">01 — Currently Active</span>
+        <span class="projects-count">02 — Currently Active</span>
       </div>
 
       <a href="/jpel" class="jpel-card reveal">
@@ -786,6 +801,47 @@
           </div>
         </div>
       </a>
+
+      <a href="https://lingua.tokinets.com" target="_blank" rel="noopener" class="jpel-card lingua reveal" style="margin-top: 32px;">
+        <div class="jpel-bg-num" aria-hidden="true">02</div>
+
+        <div class="jpel-badge">
+          <div class="jpel-badge-dot"></div>
+          Now Live
+        </div>
+
+        <div class="jpel-inner">
+          <div>
+            <p class="jpel-eyebrow">Tool — Conlang Builder</p>
+            <h3 class="jpel-title">LINGUA</h3>
+            <p class="jpel-subtitle">架空言語を、設計する。</p>
+            <p class="jpel-desc">
+              音韻・語彙・文法・文字体系までを一つの場所で。<br>
+              あなただけの架空言語（コンラング）を<br>
+              体系的に構築できるWebプラットフォーム。
+            </p>
+            <div class="jpel-arrow">
+              <div class="jpel-arrow-line"></div>
+              Open App
+            </div>
+          </div>
+
+          <div class="jpel-stats">
+            <div>
+              <div class="jpel-stat-num">6</div>
+              <div class="jpel-stat-label">構築システム</div>
+            </div>
+            <div>
+              <div class="jpel-stat-num">&infin;</div>
+              <div class="jpel-stat-label">語彙登録</div>
+            </div>
+            <div>
+              <div class="jpel-stat-num">Web</div>
+              <div class="jpel-stat-label">どこでも</div>
+            </div>
+          </div>
+        </div>
+      </a>
     </div>
   </section>
 
@@ -811,6 +867,7 @@
     <div class="footer-links">
       <a href="/privacy.html">Privacy</a>
       <a href="/jpel">JPEL Manager</a>
+      <a href="https://lingua.tokinets.com">LINGUA</a>
     </div>
     <span class="footer-copy">&copy; 2026 Tokine</span>
   </footer>
