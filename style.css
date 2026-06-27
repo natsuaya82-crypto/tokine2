@@ -114,10 +114,23 @@ nav {
     linear-gradient(180deg, #141418 0%, #0a0a0c 100%);
 }
 .page-header.has-img { background-size: cover; background-position: center; }
-/* 明るい画像の上に暗い文字を載せるライト版（Contact用） */
+/* 明るい画像の上に暗い文字を載せるライト版 */
 .page-header.light h1 { color: #0c0c0c; text-shadow: none; }
 .page-header.light .lead { color: #3a3a3a; }
 .page-header.light .eyebrow { color: #9c7b2e; }
+/* 明るい画像を色反転してダーク化（Contact用） */
+.page-header.inverted { position: relative; }
+.page-header.inverted::before {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background-image: url('/images/contact-hero.png');
+  background-size: cover; background-position: center;
+  filter: invert(1) hue-rotate(180deg) brightness(0.9);
+}
+.page-header.inverted::after {
+  content: ''; position: absolute; inset: 0; z-index: 0;
+  background: linear-gradient(rgba(10,10,12,0.32), rgba(10,10,12,0.55));
+}
+.page-header.inverted > * { position: relative; z-index: 1; }
 .page-header .eyebrow { font-family: var(--en); font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); position: relative; }
 .page-header h1 { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 7vw, 76px); letter-spacing: 0.12em; margin: 18px 0 0; color: #fff; position: relative; }
 .page-header .lead { margin: 22px auto 0; max-width: 620px; font-weight: 300; font-size: 15px; line-height: 2; letter-spacing: 0.08em; color: var(--text-dim); position: relative; }
