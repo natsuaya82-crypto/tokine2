@@ -287,6 +287,31 @@ footer { background: #050505; padding: 32px 40px; display: flex; align-items: ce
 .footer-links a:hover { color: #999; }
 .footer-copy { font-family: var(--en); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #3a3a3a; }
 
+/* ── Gateway (Homeから各ページへの入口) ── */
+.gateway { background: var(--bg-3); border-top: 1px solid var(--line-soft); }
+.gateway .eyebrow { text-align: center; font-family: var(--en); font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 48px; }
+.gate-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1100px; margin: 0 auto; }
+.gate-card {
+  position: relative; display: flex; flex-direction: column; justify-content: flex-end;
+  text-decoration: none; color: inherit; padding: 56px 48px; min-height: 300px;
+  border: 1px solid var(--line); overflow: hidden; background: var(--bg-2);
+  transition: border-color 0.4s, transform 0.4s, box-shadow 0.4s;
+}
+.gate-card:hover { transform: translateY(-4px); box-shadow: 0 24px 56px rgba(0,0,0,0.45); }
+.gate-bg-char { position: absolute; right: -10px; top: -40px; font-family: var(--serif); font-weight: 200; font-size: 220px; line-height: 1; pointer-events: none; user-select: none; opacity: 0.06; }
+.gate-en { font-family: var(--en); font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; margin-bottom: 14px; position: relative; }
+.gate-card h3 { font-family: var(--serif); font-weight: 300; font-size: clamp(28px, 4vw, 40px); letter-spacing: 0.1em; color: #fff; margin-bottom: 14px; position: relative; }
+.gate-card p { font-weight: 300; font-size: 14px; line-height: 1.9; color: var(--text-dim); max-width: 380px; position: relative; }
+.gate-arrow { margin-top: 28px; display: flex; align-items: center; gap: 12px; font-family: var(--en); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; position: relative; }
+.gate-arrow .line { width: 32px; height: 1px; background: currentColor; transition: width 0.3s; }
+.gate-card:hover .gate-arrow .line { width: 56px; }
+.gate-card.svc { background: radial-gradient(600px 300px at 80% 130%, rgba(216,180,106,0.13), transparent 70%), var(--bg-2); }
+.gate-card.svc:hover { border-color: rgba(216,180,106,0.5); }
+.gate-card.svc .gate-en, .gate-card.svc .gate-arrow, .gate-card.svc .gate-bg-char { color: var(--gold); }
+.gate-card.wrk { background: radial-gradient(600px 300px at 80% 130%, rgba(167,139,250,0.13), transparent 70%), var(--bg-2); }
+.gate-card.wrk:hover { border-color: rgba(167,139,250,0.5); }
+.gate-card.wrk .gate-en, .gate-card.wrk .gate-arrow, .gate-card.wrk .gate-bg-char { color: var(--purple); }
+
 /* ── Responsive ── */
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
@@ -298,6 +323,7 @@ footer { background: #050505; padding: 32px 40px; display: flex; align-items: ce
   .page-header { padding: 130px 24px 60px; }
   .about-pillars { grid-template-columns: 1fr; gap: 28px; }
   .svc-grid { grid-template-columns: 1fr; }
+  .gate-grid { grid-template-columns: 1fr; }
   .process-grid { grid-template-columns: 1fr 1fr; }
   .section-head { flex-direction: column; gap: 8px; align-items: flex-start; }
   .section-link { margin-left: 0; }
