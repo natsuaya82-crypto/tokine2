@@ -287,6 +287,26 @@ footer { background: #050505; padding: 32px 40px; display: flex; align-items: ce
 .footer-links a:hover { color: #999; }
 .footer-copy { font-family: var(--en); font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #3a3a3a; }
 
+/* ── Contact form ── */
+.form-section { background: var(--bg); }
+.contact-form { max-width: 640px; margin: 0 auto; display: flex; flex-direction: column; gap: 22px; text-align: left; }
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label { font-family: var(--en); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--text-dim); }
+.field label .req { color: var(--gold); margin-left: 6px; }
+.field input, .field select, .field textarea {
+  background: var(--bg-2); border: 1px solid var(--line); color: var(--text);
+  font-family: var(--sans); font-size: 15px; padding: 14px 16px; border-radius: 4px; outline: none;
+  transition: border-color 0.2s; width: 100%;
+}
+.field input:focus, .field select:focus, .field textarea:focus { border-color: var(--gold); }
+.field textarea { resize: vertical; min-height: 150px; }
+.contact-form .btn { align-self: flex-start; }
+.form-note { font-size: 12px; color: var(--text-mute); line-height: 1.9; }
+.form-note a { color: var(--gold); text-decoration: none; }
+.form-status { font-size: 14px; line-height: 1.8; padding: 14px 16px; border-radius: 4px; display: none; }
+.form-status.ok { display: block; background: rgba(45,212,191,0.1); border: 1px solid rgba(45,212,191,0.4); color: #aef3e8; }
+.form-status.err { display: block; background: rgba(255,99,99,0.1); border: 1px solid rgba(255,99,99,0.4); color: #ffb3b3; }
+
 /* ── Gateway (Homeから各ページへの入口) ── */
 .gateway { background: var(--bg-3); border-top: 1px solid var(--line-soft); }
 .gateway .eyebrow { text-align: center; font-family: var(--en); font-size: 11px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); margin-bottom: 48px; }
