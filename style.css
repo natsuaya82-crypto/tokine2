@@ -144,7 +144,7 @@ nav {
 @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
 /* ── Section commons ── */
-.section { padding: 130px 40px; }
+.section { padding: 100px 40px; }
 .section-inner { max-width: 1100px; margin: 0 auto; }
 .section-num { font-family: var(--en); font-size: 11px; font-weight: 400; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
 .section-head { display: flex; align-items: baseline; gap: 24px; margin-bottom: 56px; }
@@ -204,21 +204,21 @@ nav {
   display: block; text-decoration: none;
   background: linear-gradient(135deg, #0f1d30 0%, #0a1420 100%);
   border: 1px solid rgba(245,200,66,0.2);
-  padding: 60px; position: relative; overflow: hidden;
+  padding: 40px 44px; position: relative; overflow: hidden;
   transition: border-color 0.4s, transform 0.4s;
 }
 .jpel-card:hover { border-color: rgba(245,200,66,0.5); transform: translateY(-4px); }
-.jpel-card + .jpel-card { margin-top: 32px; }
+.jpel-card + .jpel-card { margin-top: 24px; }
 .jpel-bg-num { position: absolute; right: -20px; top: -20px; font-family: var(--en); font-size: 220px; font-weight: 700; line-height: 1; color: rgba(245,200,66,0.04); pointer-events: none; user-select: none; letter-spacing: -0.05em; }
-.jpel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border: 1px solid rgba(245,200,66,0.4); border-radius: 2px; font-family: var(--en); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-bright); background: rgba(245,200,66,0.06); margin-bottom: 36px; }
+.jpel-badge { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border: 1px solid rgba(245,200,66,0.4); border-radius: 2px; font-family: var(--en); font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-bright); background: rgba(245,200,66,0.06); margin-bottom: 20px; }
 .jpel-badge-dot { width: 5px; height: 5px; background: var(--gold-bright); border-radius: 50%; animation: blink 2s ease-in-out infinite; }
 @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
-.jpel-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 56px; align-items: center; }
-.jpel-eyebrow { font-family: var(--en); font-size: 11px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 16px; }
-.jpel-title { font-family: var(--en); font-size: clamp(40px, 6vw, 72px); font-weight: 600; letter-spacing: 0.06em; color: #fff; line-height: 1.1; margin-bottom: 8px; }
-.jpel-subtitle { font-family: var(--sans); font-size: 13px; letter-spacing: 0.15em; color: rgba(200,212,227,0.45); margin-bottom: 28px; }
-.jpel-desc { font-family: var(--sans); font-size: 15px; font-weight: 300; line-height: 1.85; letter-spacing: 0.06em; color: rgba(200,212,227,0.8); max-width: 500px; }
-.jpel-arrow { margin-top: 40px; display: flex; align-items: center; gap: 12px; font-family: var(--en); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(245,200,66,0.6); }
+.jpel-inner { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 40px; align-items: center; }
+.jpel-eyebrow { font-family: var(--en); font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold-bright); margin-bottom: 12px; }
+.jpel-title { font-family: var(--en); font-size: clamp(28px, 3.6vw, 44px); font-weight: 600; letter-spacing: 0.04em; color: #fff; line-height: 1.12; margin-bottom: 6px; }
+.jpel-subtitle { font-family: var(--sans); font-size: 13px; letter-spacing: 0.12em; color: rgba(200,212,227,0.5); margin-bottom: 18px; }
+.jpel-desc { font-family: var(--sans); font-size: 13.5px; font-weight: 300; line-height: 1.8; letter-spacing: 0.04em; color: rgba(200,212,227,0.8); max-width: 480px; }
+.jpel-arrow { margin-top: 26px; display: flex; align-items: center; gap: 12px; font-family: var(--en); font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(245,200,66,0.6); }
 .jpel-card:hover .jpel-arrow { color: var(--gold-bright); }
 .jpel-arrow-line { width: 32px; height: 1px; background: currentColor; transition: width 0.3s; }
 .jpel-card:hover .jpel-arrow-line { width: 56px; }
@@ -235,7 +235,7 @@ nav {
 .jpel-card.lingua .jpel-inner { grid-template-columns: 1fr; }
 .jpel-card.lingua .jpel-desc { font-size: 13px; max-width: 560px; }
 .jpel-card.lingua .proj-feat { font-size: 13px; }
-.jpel-card.lingua .jpel-title { font-size: clamp(34px, 5vw, 56px); }
+.jpel-card.lingua .jpel-title { font-size: clamp(26px, 3.4vw, 38px); }
 
 /* JPEL 駅伝コースライン */
 .jpel-course { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 150px; pointer-events: none; -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 95%); mask-image: linear-gradient(to top, #000 10%, transparent 95%); }
@@ -244,8 +244,8 @@ nav {
 @keyframes runnerPulse { 0%,100% { opacity: 0.35; } 50% { opacity: 0.9; } }
 
 /* プロジェクト共通 */
-.proj-feats { list-style: none; display: flex; flex-direction: column; gap: 13px; margin: 30px 0 0; }
-.proj-feat { display: flex; align-items: center; gap: 12px; font-family: var(--sans); font-size: 14px; font-weight: 300; letter-spacing: 0.04em; color: rgba(200,212,227,0.85); }
+.proj-feats { list-style: none; display: flex; flex-direction: column; gap: 9px; margin: 20px 0 0; }
+.proj-feat { display: flex; align-items: center; gap: 11px; font-family: var(--sans); font-size: 13px; font-weight: 300; letter-spacing: 0.03em; color: rgba(200,212,227,0.85); }
 .proj-feat svg { flex-shrink: 0; width: 18px; height: 18px; stroke: var(--gold-bright); }
 .jpel-card.lingua .proj-feat { color: rgba(222,216,242,0.85); }
 .jpel-card.lingua .proj-feat svg { stroke: var(--purple); }
@@ -268,7 +268,7 @@ nav {
 .jpel-card.chatbot .proj-feat { color: rgba(204,242,237,0.85); }
 .jpel-card.chatbot .proj-feat svg { stroke: var(--teal); }
 .jpel-card.chatbot .jpel-desc { max-width: 460px; }
-.jpel-card.chatbot .jpel-title { font-size: clamp(36px, 5.5vw, 60px); }
+.jpel-card.chatbot .jpel-title { font-size: clamp(28px, 3.8vw, 42px); }
 
 /* チャットプレビュー（モック） */
 .chat-preview { width: 100%; max-width: 320px; margin: 0 auto; background: #0f1115; border: 1px solid rgba(45,212,191,0.25); border-radius: 14px; overflow: hidden; box-shadow: 0 18px 44px rgba(0,0,0,0.5); }
