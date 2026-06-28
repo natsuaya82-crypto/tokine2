@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lueur モイストリペアセラム ｜ うるおい美容液｜初回限定50%OFF</title>
-<meta name="description" content="乾燥・くすみ・ハリ不足に。高保湿美容液「Lueur モイストリペアセラム」。今だけ初回限定50%OFF・送料無料・30日間返金保証。">
+<title>AURA NOURISH プレシャス グロウ セラム ｜ ツヤ美容液｜初回限定50%OFF</title>
+<meta name="description" content="乾燥・くすみ・ハリ不足に。高保湿のツヤ美容液「AURA NOURISH プレシャス グロウ セラム」。今だけ初回限定50%OFF・送料無料・30日間返金保証。">
 <meta name="robots" content="noindex">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23b97c6d'/%3E%3Cpath d='M16 6c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z' fill='%23fff'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,8 +13,8 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
   :root{
-    --bg:#faf3ee; --paper:#fffaf6; --blush:#f0dcd4; --rose:#c0796b; --rose-d:#a8634f;
-    --gold:#bd9a5f; --ink:#3d332e; --ink2:#7a6b62; --line:#ecddd3; --deep:#4a352e;
+    --bg:#fdf1ea; --paper:#fffaf6; --blush:#f6c9ba; --rose:#df5f49; --rose-d:#c4402b;
+    --gold:#c89a37; --ink:#3a2c26; --ink2:#7c685e; --line:#f3d9cc; --deep:#5b2330;
     --serif:'Noto Serif JP',serif; --cor:'Cormorant Garamond',serif; --gothic:'Zen Kaku Gothic New',sans-serif;
   }
   html{scroll-behavior:smooth}
@@ -32,8 +32,8 @@
 
   /* 購入ボタン */
   .buy{display:inline-flex;flex-direction:column;align-items:center;gap:2px;font-family:var(--gothic);font-weight:900;font-size:21px;letter-spacing:.04em;color:#fff;
-    background:linear-gradient(180deg,#cf8475,var(--rose));padding:18px 46px;border-radius:48px;border:none;cursor:pointer;box-shadow:0 12px 26px rgba(192,121,107,.4);transition:.2s;text-align:center}
-  .buy:hover{transform:translateY(-2px);box-shadow:0 16px 32px rgba(192,121,107,.5)}
+    background:linear-gradient(180deg,#f06e54,var(--rose));padding:18px 46px;border-radius:48px;border:none;cursor:pointer;box-shadow:0 12px 26px rgba(223,95,73,.45);transition:.2s;text-align:center}
+  .buy:hover{transform:translateY(-2px);box-shadow:0 16px 34px rgba(223,95,73,.55)}
   .buy small{font-size:12px;font-weight:500;letter-spacing:.06em;opacity:.95}
 
   /* PROMO bar */
@@ -41,7 +41,7 @@
   .promo b{color:#f0c9b0;font-weight:700}
 
   header{position:sticky;top:0;z-index:50;background:rgba(255,250,246,.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:13px 24px}
-  .brand{font-family:var(--cor);font-weight:600;font-size:27px;letter-spacing:.18em;color:var(--deep)}
+  .brand{font-family:var(--cor);font-weight:600;font-size:21px;letter-spacing:.16em;color:var(--deep);white-space:nowrap}
   .head-buy{font-size:13px;font-weight:700;color:#fff;background:var(--rose);padding:11px 22px;border-radius:30px}
   .head-buy:hover{background:var(--rose-d)}
 
@@ -50,7 +50,8 @@
   .hero-in{display:grid;grid-template-columns:1.02fr .98fr;gap:30px;align-items:center;padding:30px 0 36px}
   .hero .trust{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--rose-d);background:#fff;border:1px solid var(--line);padding:7px 15px;border-radius:30px;box-shadow:0 4px 14px rgba(120,80,60,.08)}
   .hero .trust .st{color:var(--gold);letter-spacing:1px}
-  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.4;color:var(--deep);margin:18px 0 0;letter-spacing:.01em}
+  .prod-name{font-family:var(--cor);font-size:15px;letter-spacing:.14em;color:var(--gold);margin-top:14px;font-weight:600}
+  .hero h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,4.6vw,52px);line-height:1.4;color:var(--deep);margin:10px 0 0;letter-spacing:.01em}
   .hero h1 .mk{background:linear-gradient(transparent 62%,#f3d3c5 62%);padding:0 .05em}
   .hero .lead{margin-top:16px;color:var(--ink2);font-size:15px;max-width:24em}
   .hero .pricetag{margin-top:22px;display:flex;align-items:baseline;gap:12px}
@@ -63,7 +64,7 @@
   .hero .free{margin-top:12px;font-size:13px;color:var(--ink2)}
   .hero .free b{color:var(--rose-d)}
   .hero-r{position:relative}
-  .hero-ph{aspect-ratio:4/5;border-radius:14px}
+  .hero-ph{aspect-ratio:4/5;border-radius:14px;object-fit:cover;width:100%;box-shadow:0 22px 50px rgba(120,60,40,.18)}
   .hero-seal{position:absolute;top:-6px;left:-6px;width:104px;height:104px;border-radius:50%;background:var(--gold);color:#fff;display:flex;align-items:center;justify-content:center;text-align:center;font-family:var(--serif);font-weight:700;font-size:14px;line-height:1.35;box-shadow:0 8px 20px rgba(0,0,0,.16);transform:rotate(-8deg)}
   .hero-seal b{font-family:var(--cor);font-size:30px;display:block}
 
@@ -104,7 +105,7 @@
   /* 実感（before/after風） */
   .feel{background:var(--paper)}
   .feel-in{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
-  .feel-ph{aspect-ratio:5/6;border-radius:14px}
+  .feel-ph{aspect-ratio:5/6;border-radius:14px;object-fit:cover;width:100%;box-shadow:0 18px 44px rgba(120,60,40,.16)}
   .feel h2{font-family:var(--serif);font-weight:600;font-size:clamp(22px,3vw,32px);color:var(--deep);line-height:1.5;margin:8px 0 16px}
   .feel h2 em{font-style:normal;color:var(--rose-d)}
   .feel p{color:var(--ink2);font-size:14.5px;margin-bottom:20px}
@@ -191,7 +192,7 @@
 <div class="promo">【公式サイト限定】初回 <b>50%OFF</b> ＋ 送料無料 ／ 30日間返金保証つき</div>
 
 <header>
-  <span class="brand">Lueur</span>
+  <span class="brand">AURA NOURISH</span>
   <a href="#offer" class="head-buy">初回50%OFFで試す</a>
 </header>
 
@@ -200,8 +201,9 @@
   <div class="wrap hero-in">
     <div class="hero-l">
       <span class="trust"><span class="st">★★★★★</span> 満足度98%／販売累計32万本</span>
-      <h1>うるおいを、<br><span class="mk">満たすほどに</span>、<br>透明感へ。</h1>
-      <p class="lead">乾燥・くすみ・ハリ不足に。とろけるテクスチャーで角質層のすみずみまで届く、高保湿美容液。</p>
+      <p class="prod-name">AURA NOURISH ｜ Precious Glow Serum</p>
+      <h1>うるおいを満たして、<br><span class="mk">輝くようなツヤ肌</span>へ。</h1>
+      <p class="lead">乾燥・くすみ・ハリ不足に。とろけるテクスチャーで角質層のすみずみまで届く、高保湿のツヤ美容液。</p>
       <div class="pricetag">
         <span class="old">¥7,800</span>
         <span class="off">初回50%OFF</span>
@@ -214,7 +216,7 @@
     </div>
     <div class="hero-r">
       <div class="hero-seal"><span><b>50%</b>OFF<br>初回限定</span></div>
-      <div class="ph hero-ph"><svg class="ico" viewBox="0 0 24 24"><path d="M4 7h3l2-2h6l2 2h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="pl">商品写真（ヒーロー）</span></div>
+      <img class="hero-ph" src="/images/samples/cosme-hero.jpg" alt="AURA NOURISH プレシャス グロウ セラム">
     </div>
   </div>
 </section>
@@ -236,7 +238,7 @@
 <!-- 特徴 -->
 <section class="reasons">
   <div class="wrap">
-    <div class="sh fade"><span class="label">Why Lueur</span><h2>選ばれ続ける、<em>3つの理由</em></h2></div>
+    <div class="sh fade"><span class="label">Why Chosen</span><h2>選ばれ続ける、<em>3つの理由</em></h2></div>
     <div class="rgrid">
       <div class="rcard fade"><div class="no">POINT 01</div>
         <div class="ic"><svg class="ico" viewBox="0 0 24 24"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/></svg></div>
@@ -266,7 +268,7 @@
 <!-- 実感 -->
 <section class="feel">
   <div class="wrap feel-in">
-    <div class="ph feel-ph fade"><svg class="ico" viewBox="0 0 24 24"><path d="M4 7h3l2-2h6l2 2h3v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span class="pl">使用イメージ写真</span></div>
+    <img class="feel-ph fade" src="/images/samples/cosme-model.jpg" alt="美容液を使用する女性">
     <div class="fade">
       <span class="label">Real Voice</span>
       <h2>使った方の<em>96%</em>が、<br>うるおいを実感。</h2>
@@ -348,7 +350,7 @@
 </section>
 
 <footer>
-  <span class="brand" style="color:#e3c9bd">Lueur</span>
+  <span class="brand" style="color:#e3c9bd">AURA NOURISH</span>
   <div class="credit">これは <a href="https://tokinets.com" target="_blank" rel="noopener">刻音 -Tokine-</a> が制作したLP制作サンプルです（架空の商品・写真はAI生成のイメージ）。</div>
 </footer>
 
