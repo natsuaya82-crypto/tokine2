@@ -68,11 +68,11 @@
   .mcat{display:flex;align-items:center;gap:12px;margin:34px 0 16px;font-family:var(--jost);font-size:13px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
   .mcat .ico{width:18px;height:18px;stroke:var(--gold)}
   .mcat::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.18)}
-  .mrow{display:flex;align-items:baseline;gap:14px;padding:9px 0}
+  .mrow{display:flex;align-items:baseline;flex-wrap:wrap;gap:0 14px;padding:9px 0}
   .mrow .nm{font-family:var(--mincho);font-size:16px}
   .mrow .dot{flex:1;border-bottom:1px dotted rgba(255,255,255,.3);transform:translateY(-4px)}
-  .mrow .pr{font-family:var(--jost);color:#e9d3ad}
-  .mrow .ds{display:block;font-size:12px;color:rgba(255,255,255,.5);font-weight:300}
+  .mrow .pr{font-family:var(--jost);color:#e9d3ad;min-width:64px;text-align:right}
+  .mrow .ds{flex-basis:100%;font-size:12px;color:rgba(255,255,255,.5);font-weight:300}
 
   /* full-bleed pull quote */
   .quoteband{padding:120px 80px;background:linear-gradient(rgba(30,20,12,.55),rgba(30,20,12,.55)),url('/images/samples/cafe-concept.jpg') center/cover;color:#fff;text-align:center}
@@ -119,6 +119,12 @@
   .ok{display:none;text-align:center;background:#edf2e0;border:1px solid #c8d6a6;color:#5a6b2e;padding:14px;border-radius:2px}
   .ok.show{display:block}
 
+  .sample-note{background:var(--paper);border-top:1px solid var(--line);padding:66px 24px;text-align:center}
+  .sample-note .k{font-family:var(--jost);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--terra)}
+  .sample-note h3{font-family:var(--mincho);font-weight:700;font-size:clamp(20px,2.6vw,28px);margin:12px 0 14px}
+  .sample-note p{color:var(--ink2);font-weight:300;max-width:38em;margin:0 auto 6px;font-size:14px}
+  .sample-note .cta{display:inline-block;margin-top:24px;font-family:var(--jost);letter-spacing:.16em;text-transform:uppercase;font-size:13px;border:1px solid var(--ink);padding:14px 30px;border-radius:2px;transition:.25s}
+  .sample-note .cta:hover{background:var(--ink);color:var(--cream)}
   footer{background:var(--ink);color:#bca795;text-align:center;padding:46px 24px}
   .footer-brand{font-family:var(--mincho);font-weight:700;letter-spacing:.16em;color:#f3e9da;font-size:18px}
   .credit{margin-top:16px;font-size:11px;color:#8c7b6c}
@@ -257,9 +263,17 @@
   </form>
 </section>
 
+<section class="sample-note">
+  <span class="k">About this sample</span>
+  <h3>これは「刻音」の制作サンプルです</h3>
+  <p>掲載の写真はイメージ（AI生成）です。実際の制作では、お客様のお店の写真・情報に差し替えてお作りします。</p>
+  <p>「こんなLPが欲しい」——あなたのお店のページも、同じクオリティで制作できます。</p>
+  <a class="cta" href="https://tokinets.com/services" target="_blank" rel="noopener">制作のご相談はこちら →</a>
+</section>
+
 <footer>
   <div class="footer-brand">こもれび珈琲</div>
-  <div class="credit">これは <a href="https://tokinets.com" target="_blank" rel="noopener">刻音 -Tokine-</a> が制作したLP制作サンプルです（架空の店舗）。</div>
+  <div class="credit">これは <a href="https://tokinets.com" target="_blank" rel="noopener">刻音 -Tokine-</a> が制作したLP制作サンプルです（架空の店舗・写真はAI生成のイメージ）。</div>
 </footer>
 
 <script>
