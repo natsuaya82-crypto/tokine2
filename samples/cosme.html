@@ -49,22 +49,23 @@
   .brand{font-family:var(--cor);font-weight:700;font-size:20px;letter-spacing:.14em;color:var(--deep);white-space:nowrap}
   .head-cta{background:var(--pink);color:#fff;font-weight:800;font-size:12.5px;padding:9px 16px;border-radius:30px;box-shadow:0 3px 0 var(--pink-d)}
 
-  /* HERO */
-  .hero{background:radial-gradient(120% 70% at 50% 0,#fff,var(--pinkbg) 95%);padding:22px 0 8px;text-align:center;position:relative}
-  .hero .eyebrow{display:inline-block;font-weight:900;font-size:15px;color:var(--pink-d)}
-  .hero .eyebrow span{color:var(--gold)}
-  .hero h1{font-family:var(--serif);font-weight:900;font-size:34px;line-height:1.36;color:var(--deep);margin:8px 0 0}
-  .hero h1 .big{display:block;font-size:50px;color:var(--pink-d);margin-top:2px}
-  .badges{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:16px 0 6px}
-  .bdg{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:800;color:#fff;background:var(--pink);padding:6px 12px;border-radius:30px;box-shadow:0 3px 8px rgba(216,58,102,.3)}
+  /* HERO（写真全面＋大見出し） */
+  .hero{position:relative;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;background:#3a2730}
+  .hero-bg{position:absolute;inset:0;background:url('/images/samples/cosme-model.jpg') center 15%/cover}
+  .hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(58,39,48,.28),rgba(58,39,48,0) 32%,rgba(58,39,48,.5) 70%,rgba(58,39,48,.85))}
+  .hero-in{position:relative;z-index:3;padding:0 22px 30px;text-align:center;color:#fff}
+  .hero .eyebrow{display:inline-block;font-weight:900;font-size:17px;color:#ffd24d;text-shadow:0 2px 8px rgba(0,0,0,.55)}
+  .hero h1{font-family:var(--serif);font-weight:900;font-size:42px;line-height:1.32;color:#fff;margin:10px 0 0;text-shadow:0 3px 18px rgba(0,0,0,.6)}
+  .hero h1 .big{display:block;font-size:66px;margin-top:4px}
+  .hero h1 .big .g{color:#ffd24d}
+  .badges{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin:18px 0 0}
+  .bdg{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:800;color:#fff;background:var(--pink);padding:7px 13px;border-radius:30px;box-shadow:0 3px 10px rgba(0,0,0,.35)}
   .bdg.g{background:linear-gradient(180deg,var(--gold-l),var(--gold));color:#5a3d10}
-  .bdg.n{background:var(--deep)}
-  .hero-visual{position:relative;margin-top:6px}
-  .hero-visual img{width:100%;height:430px;object-fit:cover;object-position:center 18%}
-  .hero-seal{position:absolute;top:10px;right:14px;width:108px;height:108px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ff8470,var(--coral));color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:13px;line-height:1.2;box-shadow:0 6px 16px rgba(0,0,0,.28);border:3px solid #fff;transform:rotate(-8deg);z-index:3}
-  .hero-seal b{font-family:var(--cor);font-size:36px;line-height:.9}
-  .hero-count{position:absolute;left:14px;bottom:14px;background:rgba(74,34,48,.88);color:#fff;font-weight:800;font-size:13px;padding:8px 14px;border-radius:10px;z-index:3}
-  .hero-count b{color:#ffd24d;font-size:17px}
+  .bdg.n{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.5)}
+  .hero-seal{position:absolute;top:16px;right:16px;width:112px;height:112px;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ff8470,var(--coral));color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;font-weight:900;font-size:13px;line-height:1.2;box-shadow:0 6px 18px rgba(0,0,0,.35);border:3px solid #fff;transform:rotate(-8deg);z-index:4}
+  .hero-seal b{font-family:var(--cor);font-size:38px;line-height:.9}
+  .hero-count{position:absolute;left:16px;top:16px;background:rgba(74,34,48,.9);color:#fff;font-weight:800;font-size:12.5px;padding:8px 13px;border-radius:10px;z-index:4}
+  .hero-count b{color:#ffd24d;font-size:16px}
 
   /* 受賞ストリップ */
   .awards{background:var(--deep);padding:16px 14px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
@@ -98,13 +99,13 @@
   section{padding:40px 0}
   .sh{text-align:center;margin-bottom:22px}
   .sh .en{font-family:var(--cor);font-size:14px;letter-spacing:.2em;color:var(--gold);font-weight:700}
-  .sh h2{font-family:var(--serif);font-weight:900;font-size:27px;color:var(--deep);line-height:1.4;margin-top:2px}
+  .sh h2{font-family:var(--serif);font-weight:900;font-size:31px;color:var(--deep);line-height:1.4;margin-top:2px}
   .sh h2 .rd{color:var(--pink-d)}
   .sh .deco-line{display:inline-flex;align-items:center;gap:8px;justify-content:center;color:var(--pink);font-weight:900;font-size:22px}
 
   /* 悩み */
   .worry{background:#fff}
-  .worry .lead-q{text-align:center;font-family:var(--serif);font-weight:900;font-size:23px;color:var(--deep);margin-bottom:22px;line-height:1.5}
+  .worry .lead-q{text-align:center;font-family:var(--serif);font-weight:900;font-size:27px;color:var(--deep);margin-bottom:22px;line-height:1.5}
   .worry .lead-q .u{border-bottom:5px solid #ffe24d}
   .wl{display:grid;gap:11px;max-width:480px;margin:0 auto}
   .wi{display:flex;align-items:center;gap:12px;background:var(--pinkbg);border-radius:12px;padding:14px 18px;font-weight:700;font-size:15.5px;color:var(--deep)}
@@ -239,19 +240,17 @@
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="pad">
-    <span class="eyebrow">＼ 乾燥・くすみ・ハリ不足に <span>★</span> ／</span>
-    <h1>うるおいチャージで、<span class="big"><span class="mk">輝くツヤ肌</span>へ。</span></h1>
+  <div class="hero-bg"></div>
+  <div class="hero-seal"><span>初回</span><b>50%</b><span>OFF</span></div>
+  <div class="hero-count">販売累計 <b>32万本</b> 突破！</div>
+  <div class="hero-in">
+    <span class="eyebrow">＼ 乾燥・くすみ・ハリ不足に ★ ／</span>
+    <h1>うるおいチャージで、<span class="big">輝く<span class="g">ツヤ肌</span>へ。</span></h1>
     <div class="badges">
       <span class="bdg g">★ 満足度 98%</span>
       <span class="bdg">楽天ランキング1位</span>
       <span class="bdg n">7つの無添加</span>
     </div>
-  </div>
-  <div class="hero-visual">
-    <img src="/images/samples/cosme-model.jpg" alt="うるおうツヤ肌">
-    <div class="hero-seal"><span>初回</span><b>50%</b><span>OFF</span></div>
-    <div class="hero-count">販売累計 <b>32万本</b> 突破！</div>
   </div>
 </section>
 
