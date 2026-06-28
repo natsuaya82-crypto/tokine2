@@ -26,7 +26,7 @@
 	--base-color: #fff;					/*テンプレートの土台となる色（主に背景カラー）*/
 	--base-inverse-color: #323232;		/*上のbase-colorの対となる色（主にテキストカラー）*/
 
-	--primary-color: #FEEC37;			/*テンプレートのメインまたはアクセントカラー*/
+	--primary-color: #d8b46a;			/*テンプレートのメインまたはアクセントカラー（刻音ゴールド）*/
 	--primary-inverse-color: #323232;	/*上のprimary-colorの対となる色*/
 
 	--space-large: 8vw;			/*主に余白の一括管理用。画面幅100%＝100vwです。*/
