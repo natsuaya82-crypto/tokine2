@@ -216,6 +216,31 @@ nav {
 .svc-btn.fill { background: var(--gold); color: #0a0a0c; border-color: var(--gold); box-shadow: 0 8px 24px rgba(216,180,106,0.18); }
 .svc-btn.fill:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
 
+/* ── サービス一覧（行レイアウト・料金と相談ボタンを明確に） ── */
+.svc-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.svc-row { display: grid; grid-template-columns: 1fr 320px; gap: 48px; padding: 48px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.svc-row-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 14px; }
+.svc-no { font-family: var(--en); font-size: 14px; font-weight: 500; color: var(--gold); }
+.svc-row h3 { font-family: var(--serif); font-weight: 400; font-size: clamp(22px, 2.6vw, 30px); color: #fff; letter-spacing: 0.04em; }
+.svc-row > .svc-row-main p { color: var(--text-dim); font-weight: 300; max-width: 40em; }
+.svc-feats { list-style: none; margin-top: 18px; display: flex; flex-direction: column; gap: 9px; }
+.svc-feats li { position: relative; padding-left: 28px; font-size: 14px; color: var(--text); }
+.svc-feats li::before { content: ''; position: absolute; left: 2px; top: 7px; width: 13px; height: 8px; border-left: 2px solid var(--gold); border-bottom: 2px solid var(--gold); transform: rotate(-45deg); }
+.svc-row-side { background: var(--bg-2); border: 1px solid var(--line); border-radius: 10px; padding: 26px 24px; display: flex; flex-direction: column; gap: 11px; }
+.price-label { font-family: var(--en); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--text-mute); display: block; }
+.price-main { font-family: var(--serif); font-weight: 400; font-size: 30px; color: #fff; display: block; margin: 5px 0 2px; }
+.price-main small { font-size: 16px; color: var(--text-dim); }
+.price-sub { font-size: 12.5px; color: var(--text-dim); line-height: 1.7; margin-bottom: 6px; }
+.svc-cta { display: flex; align-items: center; justify-content: center; gap: 9px; padding: 14px; border-radius: 6px; font-family: var(--sans); font-size: 14.5px; font-weight: 500; border: 1.5px solid var(--gold); color: var(--gold); transition: background 0.2s, color 0.2s, border-color 0.2s; }
+.svc-cta svg { width: 17px; height: 17px; }
+.svc-cta:hover { background: var(--gold); color: #0a0a0c; }
+.svc-cta.primary { background: var(--gold); color: #0a0a0c; box-shadow: 0 8px 24px rgba(216,180,106,0.18); }
+.svc-cta.primary:hover { background: var(--gold-bright); border-color: var(--gold-bright); }
+.svc-cta.consult { border-style: dashed; }
+@media (max-width: 768px) {
+  .svc-row { grid-template-columns: 1fr; gap: 24px; padding: 38px 0; }
+}
+
 /* ── Project big card (Works用・既存デザイン継承) ── */
 .projects { background: var(--bg-3); }
 .jpel-card {
