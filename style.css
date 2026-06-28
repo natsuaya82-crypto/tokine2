@@ -197,6 +197,9 @@ nav {
 .svc-card p { font-weight: 300; font-size: 13.5px; line-height: 1.9; color: var(--text-dim); flex: 1; }
 .svc-price { margin-top: 20px; font-family: var(--en); font-size: 13px; letter-spacing: 0.05em; color: var(--gold); }
 .svc-price span { font-size: 11px; color: var(--text-mute); }
+.svc-samplelink { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--en); font-size: 12px; letter-spacing: 0.03em; }
+.svc-samplelink a { color: var(--gold); border-bottom: 1px solid rgba(216,180,106,0.45); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s; }
+.svc-samplelink a:hover { color: #fff; border-color: #fff; }
 
 /* ── Project big card (Works用・既存デザイン継承) ── */
 .projects { background: var(--bg-3); }
