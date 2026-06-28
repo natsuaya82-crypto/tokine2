@@ -41,7 +41,10 @@
   .hamb{display:none}
 
   .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;
-    background:linear-gradient(115deg,#0c0d0f 0%,#0c0d0f 46%,#14171b 100%)}
+    background:
+      linear-gradient(100deg, rgba(12,13,15,.92) 0%, rgba(12,13,15,.78) 44%, rgba(12,13,15,.45) 100%),
+      url('/images/samples/gym-hero.jpg') center/cover,
+      linear-gradient(115deg,#0c0d0f 0%,#0c0d0f 46%,#14171b 100%)}
   .hero::before{content:'';position:absolute;right:-8%;top:50%;transform:translateY(-50%);width:54vw;height:54vw;max-width:680px;max-height:680px;
     background:radial-gradient(circle,rgba(198,251,74,.16),transparent 62%)}
   .hero::after{content:'RISE';position:absolute;right:-2%;bottom:-6%;font-family:var(--osw);font-weight:700;font-size:34vw;line-height:.8;color:rgba(255,255,255,.025);pointer-events:none}
@@ -215,7 +218,7 @@
 <!-- TRAINER -->
 <section class="panel">
   <div class="wrap trainer-grid">
-    <div class="ph fade" data-label="PHOTO ─ トレーナー"></div>
+    <div class="ph fade" style="background:url('/images/samples/gym-trainer.jpg') center/cover"></div>
     <div class="fade">
       <p class="eyebrow">Trainer</p>
       <h2 class="sec-title">あなたの3ヶ月に、<br><em>本気で伴走する。</em></h2>
