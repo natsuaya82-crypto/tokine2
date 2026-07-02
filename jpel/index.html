@@ -1207,7 +1207,7 @@
     TEAMS.forEach(t => {
       const card = document.createElement('div');
       card.className = 'team-card reveal';
-      card.innerHTML = `<div class="team-logo"><img src="logos/${t.id}.png" alt="${t.name}" loading="lazy"></div><div class="team-info"><div class="team-name">${t.name}</div><div class="team-region">${t.region}</div></div>`;
+      card.innerHTML = `<div class="team-logo"><img src="/jpel/logos/${t.id}.png" alt="${t.name}" loading="lazy"></div><div class="team-info"><div class="team-name">${t.name}</div><div class="team-region">${t.region}</div></div>`;
       grid.appendChild(card);
       io.observe(card);
     });
