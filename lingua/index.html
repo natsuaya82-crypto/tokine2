@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lingua — build a language, draw its letters</title>
-<meta name="description" content="Lingua is a conlang builder: design a language's sounds and grammar, draw your own alphabet by hand, and type it anywhere on iOS with a real system keyboard.">
+<title>Lingua — give a language its own alphabet</title>
+<meta name="description" content="Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw your own alphabet by hand, then type it with a real iOS keyboard built for it.">
 
 <link rel="icon" type="image/png" href="/images/lingua/icon.png">
 <link rel="apple-touch-icon" href="/images/lingua/icon.png">
-<meta property="og:title" content="Lingua — build a language, draw its letters">
-<meta property="og:description" content="A conlang builder: sounds, grammar, dictionary — and an alphabet you draw yourself, typeable anywhere on iOS.">
+<meta property="og:title" content="Lingua — give a language its own alphabet">
+<meta property="og:description" content="Derive the IPA, the readings, and the writing system from the words you invent. Draw your own alphabet by hand, then type it with a real iOS keyboard.">
 <meta property="og:image" content="https://tokinets.com/images/lingua/icon.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://tokinets.com/lingua">
@@ -21,11 +21,11 @@
 
 <style>
   :root{
-    --bg:#0a0a0e; --bg2:#131318; --bg3:#0e0e12;
-    --ink:#ece9e3; --ink-dim:#a9a6b3; --ink-mute:#6f6c7a;
-    --gold:#c9a86a; --gold-bright:#e8c98a;
-    --purple:#8c7eff;
-    --line:rgba(255,255,255,0.09); --line-soft:rgba(255,255,255,0.05);
+    --bg:#0a0a0e; --bg2:#0e0e14;
+    --tx:#ece9e3; --txs:#a9a6b3; --txm:#6f6c7a;
+    --pur:#a78bfa; --pursf:rgba(167,139,250,0.10); --purln:rgba(167,139,250,0.36);
+    --gold:#c9a86a;
+    --line:rgba(255,255,255,0.09); --line2:rgba(255,255,255,0.05);
     --serif:'Cinzel', Georgia, serif;
     --ital:'Cormorant Garamond', Georgia, serif;
     --en:'Inter', system-ui, sans-serif;
@@ -34,258 +34,265 @@
   *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
   body{
-    background:var(--bg); color:var(--ink);
-    font-family:var(--en);
+    background:var(--bg); color:var(--tx);
+    font-family:var(--en); font-weight:300;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
   html[data-lang="ja"] body{ font-family:var(--jp); }
   a{ color:inherit; }
-  [data-i18n]{ display:none; }
-  html[data-lang="en"] [data-i18n="en"],
-  html[data-lang="ja"] [data-i18n="ja"]{ display:inherit; }
+  html[data-lang="en"] [data-i18n="en"], html[data-lang="ja"] [data-i18n="ja"]{ display:inherit; }
   span[data-i18n], em[data-i18n]{ display:none; }
   html[data-lang="en"] span[data-i18n="en"], html[data-lang="en"] em[data-i18n="en"],
   html[data-lang="ja"] span[data-i18n="ja"], html[data-lang="ja"] em[data-i18n="ja"]{ display:inline; }
+  p[data-i18n], h1[data-i18n], h2[data-i18n], h3[data-i18n]{ display:none; }
+  html[data-lang="en"] p[data-i18n="en"], html[data-lang="en"] h1[data-i18n="en"], html[data-lang="en"] h2[data-i18n="en"], html[data-lang="en"] h3[data-i18n="en"],
+  html[data-lang="ja"] p[data-i18n="ja"], html[data-lang="ja"] h1[data-i18n="ja"], html[data-lang="ja"] h2[data-i18n="ja"], html[data-lang="ja"] h3[data-i18n="ja"]{ display:block; }
 
-  /* ── background wash ── */
+  /* manuscript-grid texture, echoing the app's own glyph-drawing canvas.
+     No glow, no blur — a flat sheet of graph paper, nothing more. */
   body::before{
     content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
     background-image:
-      radial-gradient(ellipse 70% 50% at 50% -10%, rgba(140,126,255,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 60% 40% at 90% 30%, rgba(201,168,106,0.05) 0%, transparent 60%);
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 42px 42px, 42px 42px;
   }
+
+  .cz{ font-family:var(--serif); }
+  .cor{ font-family:var(--ital); font-style:italic; }
+  section{ position:relative; z-index:1; }
 
   /* ── nav ── */
   nav{
-    position:fixed; top:0; left:0; right:0; z-index:200;
+    position:relative; z-index:2;
     display:flex; align-items:center; justify-content:space-between;
-    padding:0 32px; height:64px;
-    background:rgba(10,10,14,0.75); backdrop-filter:blur(14px);
-    border-bottom:1px solid var(--line-soft);
+    padding:30px 56px;
   }
-  .nav-brand{ display:flex; align-items:center; gap:10px; text-decoration:none; }
-  .nav-brand svg{ width:18px; height:18px; }
-  .nav-brand span{ font-family:var(--serif); font-size:15px; letter-spacing:0.22em; color:var(--ink); }
+  .wordmark{ font-family:var(--serif); font-size:18px; letter-spacing:0.4em; font-weight:600; }
+  .wordmark .g{ color:var(--pur); }
   .nav-right{ display:flex; align-items:center; gap:26px; }
-  .nav-tokine{ font-family:var(--en); font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--ink-mute); text-decoration:none; transition:color 0.2s; }
-  .nav-tokine:hover{ color:var(--ink-dim); }
-  .lang-switch{ display:flex; gap:2px; border:1px solid var(--line); border-radius:20px; padding:3px; }
-  .lang-switch button{
-    font-family:var(--en); font-size:10px; letter-spacing:0.1em; font-weight:500;
-    padding:5px 12px; border-radius:16px; border:none; background:none; color:var(--ink-mute);
-    cursor:pointer; transition:background 0.2s, color 0.2s;
-  }
-  .lang-switch button.on{ background:var(--ink); color:var(--bg); }
-
-  section, header{ position:relative; z-index:1; }
+  .langsw{ display:flex; align-items:center; gap:9px; font-family:var(--en); font-size:11px; letter-spacing:0.1em; }
+  .langsw button{ padding:0; color:var(--txm); cursor:pointer; border:none; background:none; font-family:inherit; font-size:inherit; letter-spacing:inherit; border-bottom:1px solid transparent; transition:color 0.2s, border-color 0.2s; }
+  .langsw button:hover{ color:var(--txs); }
+  .langsw button.on{ color:var(--tx); border-color:var(--purln); }
+  .langsw .sep{ color:var(--line); font-size:10px; }
+  .textlink{ font-family:var(--en); font-size:12px; letter-spacing:0.1em; text-decoration:none; color:var(--tx); border-bottom:1px solid var(--purln); padding-bottom:3px; transition:border-color 0.2s, color 0.2s; }
+  .textlink:hover{ color:var(--pur); border-color:var(--pur); }
+  @media (max-width:600px){ .nav-right .textlink{ display:none; } }
 
   /* ── hero ── */
   .hero{
-    min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    text-align:center; padding:120px 24px 80px; overflow:hidden;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:44px;
+    padding:56px 56px 100px; min-height:82vh; align-items:center;
   }
-  .hero-star{ position:absolute; top:50%; left:50%; transform:translate(-50%,-52%); width:min(80vw,720px); height:min(80vw,720px); opacity:0.05; pointer-events:none; }
-  .hero-eyebrow{ font-family:var(--en); font-size:11px; font-weight:500; letter-spacing:0.5em; text-transform:uppercase; color:var(--purple); margin-bottom:26px; }
-  .hero-title{ font-family:var(--serif); font-weight:600; font-size:clamp(52px,11vw,108px); letter-spacing:0.12em; color:#fff; line-height:1; }
-  .hero-tag{ font-family:var(--ital); font-style:italic; font-weight:500; font-size:clamp(19px,2.6vw,26px); color:var(--ink-dim); max-width:640px; margin:30px auto 0; line-height:1.6; }
-  .hero-cta-row{ display:flex; gap:14px; flex-wrap:wrap; justify-content:center; margin-top:46px; }
-  .btn{
-    display:inline-flex; align-items:center; gap:10px; padding:15px 32px;
-    font-family:var(--en); font-size:12px; font-weight:500; letter-spacing:0.14em; text-transform:uppercase;
-    text-decoration:none; cursor:pointer; border-radius:3px; transition:background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s;
-  }
-  .btn-fill{ background:var(--gold); color:#141014; border:1px solid var(--gold); }
-  .btn-fill:hover{ background:var(--gold-bright); border-color:var(--gold-bright); transform:translateY(-1px); }
-  .btn-line{ border:1px solid rgba(255,255,255,0.28); color:var(--ink); }
-  .btn-line:hover{ border-color:var(--ink); background:rgba(255,255,255,0.04); }
-  .hero-note{ margin-top:26px; font-family:var(--en); font-size:11px; letter-spacing:0.1em; color:var(--ink-mute); }
-  .hero-note .dot{ display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--purple); margin-right:8px; vertical-align:1px; }
+  .kicker{ font-family:var(--en); font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:var(--pur); margin-bottom:24px; }
+  .kicker::before{ content:'—— '; color:var(--purln); }
+  h1.htitle{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,5vw,68px); line-height:1.12; letter-spacing:0.005em; max-width:13ch; color:#fff; }
+  h1.htitle em{ font-family:var(--ital); font-style:italic; font-weight:500; color:var(--pur); }
+  .lead{ margin-top:28px; max-width:46ch; font-size:16px; line-height:1.9; color:var(--txs); font-weight:300; }
+  html[data-lang="ja"] .lead{ font-family:var(--jp); }
+  .ctarow{ margin-top:42px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
+  .cta{ font-family:var(--serif); font-size:13px; letter-spacing:0.16em; color:var(--tx); text-decoration:none; padding-bottom:8px; border-bottom:1px solid var(--tx); transition:color 0.2s, border-color 0.2s; }
+  .cta:hover{ color:var(--pur); border-color:var(--pur); }
+  .cta .arrow{ margin-left:9px; color:var(--pur); }
+  .fineprint{ font-size:12px; color:var(--txm); letter-spacing:0.02em; }
+  html[data-lang="ja"] .fineprint{ font-family:var(--jp); }
 
-  /* ── pitch ── */
-  .pitch{ padding:110px 24px; text-align:center; border-top:1px solid var(--line-soft); border-bottom:1px solid var(--line-soft); background:var(--bg3); }
-  .pitch-inner{ max-width:680px; margin:0 auto; }
-  .eyebrow{ font-family:var(--en); font-size:11px; font-weight:500; letter-spacing:0.4em; text-transform:uppercase; color:var(--gold); }
-  .pitch-title{ font-family:var(--serif); font-weight:600; font-size:clamp(28px,4vw,42px); letter-spacing:0.04em; color:#fff; margin:20px 0 26px; }
-  .pitch-body{ font-family:var(--en); font-weight:300; font-size:16px; line-height:1.95; color:var(--ink-dim); }
+  .panel{ position:relative; height:520px; }
+  .glyphgrid{ position:absolute; inset:0; border:1px solid var(--line); background:var(--bg2); overflow:hidden; }
+  .ipa-scatter span{ position:absolute; font-family:var(--ital); font-style:italic; color:rgba(236,233,227,0.09); pointer-events:none; }
+  .kbshot{ position:absolute; left:50%; top:44%; transform:translate(-50%,-50%) rotate(2deg); width:76%; overflow:hidden; border:1px solid rgba(255,255,255,0.16); }
+  .kbshot img{ display:block; width:100%; }
+  .wordcard{
+    position:absolute; left:-28px; bottom:-26px; width:216px;
+    background:#101017; border:1px solid rgba(255,255,255,0.16); padding:20px 22px;
+    transform:rotate(-2.4deg);
+  }
+  .wordcard .cw{ font-family:var(--serif); font-size:20px; letter-spacing:0.02em; }
+  .wordcard .cipa{ margin-top:6px; font-family:var(--ital); font-style:italic; color:var(--pur); font-size:15px; }
+  .wordcard .cdiv{ height:1px; background:var(--line); margin:13px 0; }
+  .wordcard .cmn{ font-family:var(--ital); font-style:italic; font-size:13.5px; color:var(--txs); }
+
+  /* ── pitch (pull quote) — left-aligned like the hero, not centered ── */
+  .pitch{ padding:120px 56px; border-top:1px solid var(--line2); border-bottom:1px solid var(--line2); }
+  .pitch-inner{ max-width:640px; }
+  .pitch-title{ font-family:var(--serif); font-weight:500; font-size:clamp(26px,3.6vw,40px); line-height:1.4; color:#fff; letter-spacing:0.01em; }
+  .pitch-title em{ font-family:var(--ital); font-style:italic; color:var(--pur); }
+  .pitch-body{ margin-top:26px; font-size:15px; line-height:1.95; color:var(--txs); max-width:56ch; }
   html[data-lang="ja"] .pitch-body{ font-family:var(--jp); }
 
-  /* ── feature rows ── */
-  .features{ padding:20px 24px; }
+  /* ── feature spreads — three different shapes, not one template repeated ── */
   .feat{
-    max-width:1120px; margin:0 auto; padding:100px 0;
-    display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center;
-    border-bottom:1px solid var(--line-soft);
+    max-width:1180px; margin:0 auto; padding:110px 56px;
+    display:grid; grid-template-columns:0.95fr 1.05fr; gap:70px; align-items:center;
+    border-bottom:1px solid var(--line2);
   }
-  .features .feat:last-child{ border-bottom:none; }
   .feat.rev .feat-media{ order:2; }
   .feat.rev .feat-text{ order:1; }
-  .feat-badge{ display:inline-flex; align-items:center; gap:7px; padding:5px 13px; border-radius:2px; font-family:var(--en); font-size:10px; font-weight:500; letter-spacing:0.22em; text-transform:uppercase; margin-bottom:22px; }
-  .feat-badge .dot{ width:5px; height:5px; border-radius:50%; }
-  .feat-badge.live{ border:1px solid rgba(201,168,106,0.4); color:var(--gold); background:rgba(201,168,106,0.06); }
-  .feat-badge.live .dot{ background:var(--gold); }
-  .feat-badge.real{ border:1px solid rgba(140,126,255,0.4); color:var(--purple); background:rgba(140,126,255,0.07); }
-  .feat-badge.real .dot{ background:var(--purple); }
-  .feat-badge.soon{ border:1px solid rgba(255,255,255,0.22); color:var(--ink-dim); background:rgba(255,255,255,0.03); }
-  .feat-badge.soon .dot{ background:var(--ink-mute); animation:blink 2s ease-in-out infinite; }
-  @keyframes blink{ 0%,100%{opacity:1;} 50%{opacity:0.25;} }
-  .feat-eyebrow{ font-family:var(--en); font-size:10.5px; font-weight:500; letter-spacing:0.32em; text-transform:uppercase; color:var(--ink-mute); margin-bottom:14px; }
-  .feat-title{ font-family:var(--serif); font-weight:600; font-size:clamp(24px,3vw,34px); letter-spacing:0.02em; color:#fff; line-height:1.28; margin-bottom:20px; }
-  .feat-body{ font-family:var(--en); font-weight:300; font-size:15px; line-height:1.9; color:var(--ink-dim); max-width:440px; }
+  .feat.f3{ grid-template-columns:1.15fr 0.85fr; }
+  .feat-title{ font-family:var(--serif); font-weight:500; font-size:clamp(26px,3.2vw,38px); letter-spacing:0.01em; color:#fff; line-height:1.25; margin-bottom:22px; }
+  .feat-title em{ font-family:var(--ital); font-style:italic; color:var(--pur); }
+  .feat-body{ font-size:15px; line-height:1.9; color:var(--txs); max-width:42ch; }
   html[data-lang="ja"] .feat-body{ font-family:var(--jp); }
 
-  .feat-media{ position:relative; display:flex; justify-content:center; }
+  .feat-media{ position:relative; }
+  .shot{ overflow:hidden; border:1px solid rgba(255,255,255,0.16); background:#000; }
+  .shot img{ display:block; width:100%; height:auto; }
+  .feat.f1 .shot{ transform:rotate(-1.4deg); max-width:360px; margin:0 auto; }
+  .feat.f3 .shot{ transform:rotate(-1.1deg); max-width:520px; margin:0 auto; }
 
-  /* real screenshots, cropped to the part that matters — a flat inset
-     card rather than a phone bezel, since none of these are full-device
-     captures once cropped */
-  .shot-card{
-    width:min(100%,420px); border-radius:12px; overflow:hidden;
-    border:1px solid var(--line);
-    box-shadow:0 24px 56px rgba(0,0,0,0.5);
-    background:#000;
-  }
-  .shot-card img{ display:block; width:100%; height:auto; }
-  .shot-card.kb{ width:min(100%,460px); }
-  .feat.f1 .shot-card{ transform:rotate(-1.2deg); }
-  .feat.f2 .shot-card{ transform:rotate(1.4deg); }
-  .feat.f3 .shot-card{ transform:rotate(1deg); }
+  /* f2 (the keyboard) breaks the two-column pattern entirely — full-width,
+     text above, one large image, no side-by-side split */
+  .feat-break{ max-width:1180px; margin:0 auto; padding:110px 56px; border-bottom:1px solid var(--line2); }
+  .feat-break .feat-text{ max-width:52ch; margin-bottom:52px; }
+  .feat-break .shot{ max-width:760px; margin:0 auto; transform:none; }
 
-  /* ── final cta ── */
-  .final{ padding:140px 24px; text-align:center; border-top:1px solid var(--line-soft); background:var(--bg3); }
-  .final-title{ font-family:var(--serif); font-weight:600; font-size:clamp(34px,6vw,58px); letter-spacing:0.06em; color:#fff; }
-  .final-body{ font-family:var(--ital); font-style:italic; font-size:18px; color:var(--ink-dim); max-width:480px; margin:22px auto 0; line-height:1.7; }
-  .final .hero-cta-row{ margin-top:40px; }
+  /* ── final — a huge left-aligned statement that bleeds toward the edge,
+     not a safe centered CTA box ── */
+  .final{ padding:130px 24px 130px 56px; border-bottom:1px solid var(--line2); overflow:hidden; }
+  .final-title{ font-family:var(--serif); font-weight:500; font-size:clamp(36px,7.5vw,96px); letter-spacing:0.005em; color:#fff; line-height:1.08; }
+  .final-title em{ display:block; font-family:var(--ital); font-style:italic; font-weight:500; color:var(--pur); margin-top:8px; }
+  .final .ctarow{ justify-content:flex-start; margin-top:48px; }
 
-  footer{
-    padding:32px; display:flex; align-items:center; justify-content:space-between;
-    border-top:1px solid var(--line-soft); background:#050506;
-  }
+  footer{ padding:34px 56px; display:flex; align-items:center; justify-content:space-between; }
   .footer-logo{ font-family:var(--serif); font-size:14px; letter-spacing:0.2em; color:#555; }
-  .footer-links{ display:flex; gap:28px; }
-  .footer-links a{ font-family:var(--en); font-size:11px; letter-spacing:0.16em; text-transform:uppercase; color:#555; text-decoration:none; transition:color 0.2s; }
+  .footer-links{ display:flex; gap:26px; }
+  .footer-links a{ font-family:var(--en); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#555; text-decoration:none; transition:color 0.2s; }
   .footer-links a:hover{ color:#999; }
-  .footer-copy{ font-family:var(--en); font-size:10px; letter-spacing:0.15em; color:#3a3a3a; }
+  .footer-copy{ font-family:var(--en); font-size:10px; letter-spacing:0.14em; color:#3a3a3a; }
 
-  .reveal{ opacity:0; transform:translateY(24px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
   .reveal.visible{ opacity:1; transform:none; }
 
-  @media (max-width:840px){
-    .feat{ grid-template-columns:1fr; gap:40px; padding:70px 0; text-align:center; }
+  @media (max-width:880px){
+    .hero{ grid-template-columns:1fr; padding:44px 24px 70px; min-height:auto; }
+    .panel{ height:420px; margin-top:20px; }
+    .feat, .feat.f3{ grid-template-columns:1fr; gap:44px; padding:80px 24px; text-align:center; }
     .feat.rev .feat-media, .feat.rev .feat-text{ order:initial; }
     .feat-body{ margin:0 auto; }
-    .feat-badge{ margin-left:auto; margin-right:auto; }
+    .feat-break{ padding:80px 24px; text-align:center; }
+    .feat-break .feat-body{ margin:0 auto; }
+    h1.htitle{ max-width:none; }
+    .lead{ max-width:none; }
   }
   @media (max-width:600px){
-    nav{ padding:0 18px; }
-    .nav-tokine{ display:none; }
-    footer{ flex-direction:column; gap:16px; text-align:center; }
+    nav{ padding:22px 20px; }
+    .pitch{ padding:80px 24px; }
+    .final{ padding:100px 24px; }
+    footer{ flex-direction:column; gap:16px; text-align:center; padding:28px 20px; }
   }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="/" class="nav-brand">
-    <svg viewBox="0 0 100 100" fill="var(--gold)"><path d="M50 6 L58 42 L94 50 L58 58 L50 94 L42 58 L6 50 L42 42 Z"/></svg>
-    <span>LINGUA</span>
-  </a>
+  <a href="/" class="wordmark">LIN<span class="g">GU</span>A</a>
   <div class="nav-right">
-    <a href="/works" class="nav-tokine">by 刻音 / Tokine</a>
-    <div class="lang-switch">
+    <div class="langsw">
       <button data-set-lang="en" class="on">EN</button>
+      <span class="sep">/</span>
       <button data-set-lang="ja">日本語</button>
     </div>
-  </div>
-</nav>
-
-<header class="hero">
-  <svg class="hero-star" viewBox="0 0 100 100" fill="var(--purple)"><path d="M50 2 L59 41 L98 50 L59 59 L50 98 L41 59 L2 50 L41 41 Z"/></svg>
-  <p class="hero-eyebrow" data-i18n="en">Build a language</p>
-  <p class="hero-eyebrow" data-i18n="ja">言語を、つくる</p>
-  <h1 class="hero-title">LINGUA</h1>
-  <p class="hero-tag" data-i18n="en">Design a language from its sounds up — then draw the letters that write it, and carry them in your pocket.</p>
-  <p class="hero-tag" data-i18n="ja">音の設計から文字体系まで。自分だけの言語を組み立て、自分の手で描いた文字をそのままポケットに。</p>
-  <div class="hero-cta-row">
-    <a href="https://x.com/Lingua_tokine" target="_blank" rel="noopener" class="btn btn-fill">
+    <a href="https://x.com/Lingua_con" target="_blank" rel="noopener" class="textlink">
       <span data-i18n="en">Follow the build</span><span data-i18n="ja">開発をフォロー</span>
     </a>
   </div>
-  <p class="hero-note">
-    <span class="dot"></span>
-    <span data-i18n="en">Building for iOS — in TestFlight now, launching this fall</span>
-    <span data-i18n="ja">iOS向けに開発中 — 現在TestFlightでテスト中、今秋ローンチ予定</span>
-  </p>
-</header>
+</nav>
+
+<section class="hero">
+  <div>
+    <p class="kicker" data-i18n="en">A language-building tool</p>
+    <p class="kicker" data-i18n="ja">言語をつくるツール</p>
+    <h1 class="htitle cz" data-i18n="en">Give a language its own sounds, its own <em>alphabet</em>.</h1>
+    <h1 class="htitle cz" data-i18n="ja">言語に、その言語だけの音を。その言語だけの<em>文字</em>を。</h1>
+    <p class="lead" data-i18n="en">Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw every letter yourself — then type it with a real keyboard built for your own alphabet.</p>
+    <p class="lead" data-i18n="ja">Linguaは、あなたが作った単語からIPA・読み・文字体系を導き出します。文字はすべて自分の手で描き、その自作アルファベット専用の本物のキーボードで入力できます。</p>
+    <div class="ctarow">
+      <a class="cta" href="https://x.com/Lingua_con" target="_blank" rel="noopener">
+        <span data-i18n="en">FOLLOW</span><span data-i18n="ja">フォロー</span><span class="arrow">→</span>
+      </a>
+      <p class="fineprint">
+        <span data-i18n="en">Building for iOS · in TestFlight now · launching this fall</span>
+        <span data-i18n="ja">iOS向けに開発中・TestFlightでテスト中・今秋ローンチ</span>
+      </p>
+    </div>
+  </div>
+
+  <div class="panel reveal">
+    <div class="glyphgrid">
+      <div class="ipa-scatter">
+        <span style="left:8%; top:8%; font-size:50px;">ʃ</span>
+        <span style="left:74%; top:5%; font-size:32px;">θ</span>
+        <span style="left:10%; top:80%; font-size:36px;">ŋ</span>
+        <span style="left:80%; top:78%; font-size:44px;">ɸ</span>
+      </div>
+      <div class="kbshot"><img src="/images/lingua/shot-keyboard.png" alt="The real Lingua iOS keyboard extension, every key a hand-drawn letter"></div>
+    </div>
+    <div class="wordcard">
+      <div class="cw cz">hejo</div>
+      <div class="cipa">/hejo/</div>
+      <div class="cdiv"></div>
+      <div class="cmn">hello</div>
+    </div>
+  </div>
+</section>
 
 <section class="pitch reveal">
   <div class="pitch-inner">
-    <p class="eyebrow" data-i18n="en">What it is</p>
-    <p class="eyebrow" data-i18n="ja">これは何か</p>
-    <h2 class="pitch-title" data-i18n="en">A conlang, built properly.</h2>
-    <h2 class="pitch-title" data-i18n="ja">きちんと作る、架空言語。</h2>
+    <h2 class="pitch-title cz" data-i18n="en">A conlang, built <em>properly</em>.</h2>
+    <h2 class="pitch-title cz" data-i18n="ja">きちんと作る、<em>架空言語</em>。</h2>
     <p class="pitch-body" data-i18n="en">Phonology, a growing dictionary, grammar you define rule by rule. Lingua is a place to design a language the way a linguist would — not a random name generator.</p>
     <p class="pitch-body" data-i18n="ja">音韻、育っていく辞書、ひとつずつ定義する文法。Linguaは、言語をきちんと体系立てて作る場所です。ランダムな名前生成ツールとは違います。</p>
   </div>
 </section>
 
-<section class="features">
-
-  <div class="feat f1 reveal">
-    <div class="feat-text">
-      <div class="feat-badge live"><span class="dot"></span><span data-i18n="en">The free plan</span><span data-i18n="ja">無料プラン</span></div>
-      <p class="feat-eyebrow" data-i18n="en">Your own alphabet</p>
-      <p class="feat-eyebrow" data-i18n="ja">自分だけの文字</p>
-      <h3 class="feat-title" data-i18n="en">Not a font.<br>Your handwriting.</h3>
-      <h3 class="feat-title" data-i18n="ja">フォントじゃない。<br>自分の手で描いた文字。</h3>
-      <p class="feat-body" data-i18n="en">Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.</p>
-      <p class="feat-body" data-i18n="ja">無料アカウントには a〜z と ！？ の28文字。そのすべてを自分の手でストロークから描きます。最後の1文字を保存した瞬間、あなたの辞書はラテン文字ではなく、あなたの手が刻んだ文字で表示されます。</p>
-    </div>
-    <div class="feat-media">
-      <div class="shot-card"><img src="/images/lingua/shot-lexicon.jpg" alt="A dictionary entry in Lingua, spelled with a hand-drawn alphabet, with its IPA reading and meaning"></div>
-    </div>
+<div class="feat f1 reveal">
+  <div class="feat-text">
+    <p class="kicker" data-i18n="en">Your own alphabet</p>
+    <p class="kicker" data-i18n="ja">自分だけの文字</p>
+    <h3 class="feat-title cz" data-i18n="en">Not a font.<br>Your <em>handwriting</em>.</h3>
+    <h3 class="feat-title cz" data-i18n="ja">フォントじゃない。<br>自分の手で描いた<em>文字</em>。</h3>
+    <p class="feat-body" data-i18n="en">Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.</p>
+    <p class="feat-body" data-i18n="ja">無料アカウントには a〜z と ！？ の28文字。そのすべてを自分の手でストロークから描きます。最後の1文字を保存した瞬間、あなたの辞書はラテン文字ではなく、あなたの手が刻んだ文字で表示されます。</p>
   </div>
-
-  <div class="feat f2 rev reveal">
-    <div class="feat-text">
-      <div class="feat-badge real"><span class="dot"></span><span data-i18n="en">Real, on your phone</span><span data-i18n="ja">実機で動く実物</span></div>
-      <p class="feat-eyebrow" data-i18n="en">Type it anywhere</p>
-      <p class="feat-eyebrow" data-i18n="ja">どこでも入力できる</p>
-      <h3 class="feat-title" data-i18n="en">A real system keyboard.</h3>
-      <h3 class="feat-title" data-i18n="ja">本物のシステムキーボード。</h3>
-      <p class="feat-body" data-i18n="en">Not a mockup, not a screen inside the app — an actual iOS keyboard extension. Switch to it from any app, and every key is a letter you drew.</p>
-      <p class="feat-body" data-i18n="ja">モックアップでもアプリ内の疑似キーボードでもなく、正真正銘のiOSキーボード拡張です。どのアプリからでも切り替えられ、すべてのキーがあなたの描いた文字になります。</p>
-    </div>
-    <div class="feat-media">
-      <div class="shot-card kb"><img src="/images/lingua/shot-keyboard.png" alt="The real Lingua iOS system keyboard, every key replaced with a hand-drawn letter"></div>
-    </div>
+  <div class="feat-media">
+    <div class="shot"><img src="/images/lingua/shot-lexicon.jpg" alt="A dictionary entry in Lingua, spelled with a hand-drawn alphabet, with its IPA reading and meaning"></div>
   </div>
+</div>
 
-  <div class="feat f3 reveal">
-    <div class="feat-text">
-      <div class="feat-badge soon"><span class="dot"></span><span data-i18n="en">Coming this fall</span><span data-i18n="ja">今秋公開予定</span></div>
-      <p class="feat-eyebrow" data-i18n="en">SNS</p>
-      <p class="feat-eyebrow" data-i18n="ja">SNS</p>
-      <h3 class="feat-title" data-i18n="en">Post in your own script.</h3>
-      <h3 class="feat-title" data-i18n="ja">自分の文字で、発信する。</h3>
-      <p class="feat-body" data-i18n="en">A timeline where every post appears exactly as its writer drew it — even to a reader who has never seen that alphabet. It isn't live yet; it's what we're finishing before launch.</p>
-      <p class="feat-body" data-i18n="ja">投稿はすべて、書いた人が描いた文字そのままの形でタイムラインに並びます。その文字を見たことがない読者にも。まだ公開前の機能で、今はローンチに向けて仕上げている最中です。</p>
-    </div>
-    <div class="feat-media">
-      <div class="shot-card"><img src="/images/lingua/shot-compose.jpg" alt="Composing a post in Lingua using a hand-drawn alphabet"></div>
-    </div>
+<div class="feat-break reveal">
+  <div class="feat-text">
+    <p class="kicker" data-i18n="en">A keyboard of your own</p>
+    <p class="kicker" data-i18n="ja">自分だけのキーボード</p>
+    <h3 class="feat-title cz" data-i18n="en">A real <em>keyboard</em>, not a mockup.</h3>
+    <h3 class="feat-title cz" data-i18n="ja">本物の<em>キーボード</em>。モックアップじゃない。</h3>
+    <p class="feat-body" data-i18n="en">An actual iOS keyboard extension, laid out with the letters you drew. It's how you write your language, fast, right inside Lingua.</p>
+    <p class="feat-body" data-i18n="ja">正真正銘のiOSキーボード拡張で、レイアウトはあなたが描いた文字そのもの。Lingua内で自分の言語を素早く書くための道具です。</p>
   </div>
+  <div class="shot"><img src="/images/lingua/shot-keyboard.png" alt="The real Lingua iOS system keyboard, every key a hand-drawn letter"></div>
+</div>
 
-</section>
+<div class="feat f3 reveal">
+  <div class="feat-text">
+    <p class="kicker" data-i18n="en">Read by anyone</p>
+    <p class="kicker" data-i18n="ja">誰でも読める形で</p>
+    <h3 class="feat-title cz" data-i18n="en">Where your letters<br>get <em>seen</em>.</h3>
+    <h3 class="feat-title cz" data-i18n="ja">自分の文字が、<br><em>読まれる</em>場所。</h3>
+    <p class="feat-body" data-i18n="en">Your keyboard writes your letters for you, inside Lingua. The timeline is how anyone else reads them — every post carries the writer's own inked letters, even without that font or alphabet.</p>
+    <p class="feat-body" data-i18n="ja">キーボードはLingua内であなたの文字を書くための道具。タイムラインは、それを他の人が読むための場所です。投稿にはその人が描いた文字の形そのものが刻まれていて、フォントもアルファベットも持っていない読者にも届きます。</p>
+  </div>
+  <div class="feat-media">
+    <div class="shot"><img src="/images/lingua/shot-compose.jpg" alt="Composing a post in Lingua using a hand-drawn alphabet"></div>
+  </div>
+</div>
 
 <section class="final reveal">
-  <h2 class="final-title" data-i18n="en">Coming this fall.</h2>
-  <h2 class="final-title" data-i18n="ja">今秋、登場。</h2>
-  <p class="final-body" data-i18n="en">Follow along for TestFlight news and the App Store launch.</p>
-  <p class="final-body" data-i18n="ja">TestFlightの最新情報とApp Storeでのローンチは、フォローしてお待ちください。</p>
-  <div class="hero-cta-row">
-    <a href="https://x.com/Lingua_tokine" target="_blank" rel="noopener" class="btn btn-fill">
-      <span data-i18n="en">Follow the build</span><span data-i18n="ja">開発をフォロー</span>
+  <h2 class="final-title cz" data-i18n="en">A language is being built. <em>Watch it happen.</em></h2>
+  <h2 class="final-title cz" data-i18n="ja">言語が、いま作られている。<em>その過程を見に来て。</em></h2>
+  <div class="ctarow">
+    <a class="cta" href="https://x.com/Lingua_con" target="_blank" rel="noopener">
+      <span data-i18n="en">FOLLOW</span><span data-i18n="ja">フォロー</span><span class="arrow">→</span>
     </a>
   </div>
 </section>
@@ -295,7 +302,7 @@
   <div class="footer-links">
     <a href="/">Home</a>
     <a href="/works">Works</a>
-    <a href="https://x.com/Lingua_tokine" target="_blank" rel="noopener">X</a>
+    <a href="https://x.com/Lingua_con" target="_blank" rel="noopener">X</a>
   </div>
   <span class="footer-copy">&copy; 2026 Tokine</span>
 </footer>
@@ -308,7 +315,7 @@
 
   function setLang(l){
     document.getElementById('html-root').setAttribute('data-lang', l);
-    document.querySelectorAll('.lang-switch button').forEach(function(b){
+    document.querySelectorAll('.langsw button').forEach(function(b){
       b.classList.toggle('on', b.getAttribute('data-set-lang') === l);
     });
     try { localStorage.setItem('lingua-lp-lang', l); } catch(e){}
