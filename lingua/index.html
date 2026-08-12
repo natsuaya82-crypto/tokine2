@@ -17,7 +17,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@500;600&family=Noto+Serif:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -26,28 +26,27 @@
     --pur:#a78bfa; --pursf:rgba(167,139,250,0.10); --purln:rgba(167,139,250,0.36);
     --gold:#c9a86a;
     --line:rgba(255,255,255,0.09); --line2:rgba(255,255,255,0.05);
+    --body:'Inter', system-ui, sans-serif;
     --serif:'Cinzel', Georgia, serif;
     --ital:'Cormorant Garamond', Georgia, serif;
-    --en:'Inter', system-ui, sans-serif;
-    --jp:'Noto Sans JP', sans-serif;
+    --em-style: italic;
   }
+  /* Fonts swap per language so a headline never falls back to a generic
+     system serif — Cinzel/Cormorant have no CJK or Cyrillic glyphs. */
+  html[data-lang="ja"]{ --body:'Noto Sans JP', sans-serif; --serif:'Noto Serif JP', serif; --ital:'Noto Serif JP', serif; --em-style:normal; }
+  html[data-lang="zh"]{ --body:'Noto Sans SC', sans-serif; --serif:'Noto Serif SC', serif; --ital:'Noto Serif SC', serif; --em-style:normal; }
+  html[data-lang="ko"]{ --body:'Noto Sans KR', sans-serif; --serif:'Noto Serif KR', serif; --ital:'Noto Serif KR', serif; --em-style:normal; }
+  html[data-lang="ru"]{ --serif:'Noto Serif', serif; --ital:'Noto Serif', serif; }
+
   *,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
   html{ scroll-behavior:smooth; }
   body{
     background:var(--bg); color:var(--tx);
-    font-family:var(--en); font-weight:300;
+    font-family:var(--body); font-weight:300;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
   }
-  html[data-lang="ja"] body{ font-family:var(--jp); }
   a{ color:inherit; }
-  html[data-lang="en"] [data-i18n="en"], html[data-lang="ja"] [data-i18n="ja"]{ display:inherit; }
-  span[data-i18n], em[data-i18n]{ display:none; }
-  html[data-lang="en"] span[data-i18n="en"], html[data-lang="en"] em[data-i18n="en"],
-  html[data-lang="ja"] span[data-i18n="ja"], html[data-lang="ja"] em[data-i18n="ja"]{ display:inline; }
-  p[data-i18n], h1[data-i18n], h2[data-i18n], h3[data-i18n]{ display:none; }
-  html[data-lang="en"] p[data-i18n="en"], html[data-lang="en"] h1[data-i18n="en"], html[data-lang="en"] h2[data-i18n="en"], html[data-lang="en"] h3[data-i18n="en"],
-  html[data-lang="ja"] p[data-i18n="ja"], html[data-lang="ja"] h1[data-i18n="ja"], html[data-lang="ja"] h2[data-i18n="ja"], html[data-lang="ja"] h3[data-i18n="ja"]{ display:block; }
 
   /* manuscript-grid texture, echoing the app's own glyph-drawing canvas.
      No glow, no blur — a flat sheet of graph paper, nothing more. */
@@ -59,8 +58,6 @@
     background-size: 42px 42px, 42px 42px;
   }
 
-  .cz{ font-family:var(--serif); }
-  .cor{ font-family:var(--ital); font-style:italic; }
   section{ position:relative; z-index:1; }
 
   /* ── nav ── */
@@ -69,15 +66,17 @@
     display:flex; align-items:center; justify-content:space-between;
     padding:30px 56px;
   }
-  .wordmark{ font-family:var(--serif); font-size:18px; letter-spacing:0.4em; font-weight:600; }
+  /* the wordmark is never translated, so it never swaps font with --serif */
+  .wordmark{ font-family:'Cinzel',Georgia,serif; font-size:18px; letter-spacing:0.4em; font-weight:600; }
   .wordmark .g{ color:var(--pur); }
-  .nav-right{ display:flex; align-items:center; gap:26px; }
-  .langsw{ display:flex; align-items:center; gap:9px; font-family:var(--en); font-size:11px; letter-spacing:0.1em; }
-  .langsw button{ padding:0; color:var(--txm); cursor:pointer; border:none; background:none; font-family:inherit; font-size:inherit; letter-spacing:inherit; border-bottom:1px solid transparent; transition:color 0.2s, border-color 0.2s; }
-  .langsw button:hover{ color:var(--txs); }
-  .langsw button.on{ color:var(--tx); border-color:var(--purln); }
-  .langsw .sep{ color:var(--line); font-size:10px; }
-  .textlink{ font-family:var(--en); font-size:12px; letter-spacing:0.1em; text-decoration:none; color:var(--tx); border-bottom:1px solid var(--purln); padding-bottom:3px; transition:border-color 0.2s, color 0.2s; }
+  .nav-right{ display:flex; align-items:center; gap:24px; }
+  .langsel{
+    appearance:auto; background:none; border:none; border-bottom:1px solid var(--purln);
+    color:var(--tx); font-family:var(--body); font-size:11px; letter-spacing:0.06em;
+    padding:0 2px 3px; cursor:pointer;
+  }
+  .langsel:hover{ border-color:var(--pur); }
+  .textlink{ font-family:var(--body); font-size:12px; letter-spacing:0.1em; text-decoration:none; color:var(--tx); border-bottom:1px solid var(--purln); padding-bottom:3px; transition:border-color 0.2s, color 0.2s; white-space:nowrap; }
   .textlink:hover{ color:var(--pur); border-color:var(--pur); }
   @media (max-width:600px){ .nav-right .textlink{ display:none; } }
 
@@ -86,22 +85,22 @@
     display:grid; grid-template-columns:1.15fr 0.85fr; gap:44px;
     padding:56px 56px 100px; min-height:82vh; align-items:center;
   }
-  .kicker{ font-family:var(--en); font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:var(--pur); margin-bottom:24px; }
+  .kicker{ font-family:var(--body); font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:var(--pur); margin-bottom:24px; }
   .kicker::before{ content:'—— '; color:var(--purln); }
-  h1.htitle{ font-family:var(--serif); font-weight:500; font-size:clamp(38px,5vw,68px); line-height:1.12; letter-spacing:0.005em; max-width:13ch; color:#fff; }
-  h1.htitle em{ font-family:var(--ital); font-style:italic; font-weight:500; color:var(--pur); }
-  .lead{ margin-top:28px; max-width:46ch; font-size:16px; line-height:1.9; color:var(--txs); font-weight:300; }
-  html[data-lang="ja"] .lead{ font-family:var(--jp); }
+  h1.htitle{ font-family:var(--serif); font-weight:500; font-size:clamp(34px,5vw,68px); line-height:1.15; letter-spacing:0.005em; max-width:15ch; color:#fff; }
+  .htitle em, .feat-title em, .pitch-title em{ font-family:var(--ital); font-style:var(--em-style); font-weight:500; color:var(--pur); }
+  .lead{ margin-top:28px; max-width:48ch; font-size:16px; line-height:1.9; color:var(--txs); font-weight:300; font-family:var(--body); }
   .ctarow{ margin-top:42px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
   .cta{ font-family:var(--serif); font-size:13px; letter-spacing:0.16em; color:var(--tx); text-decoration:none; padding-bottom:8px; border-bottom:1px solid var(--tx); transition:color 0.2s, border-color 0.2s; }
   .cta:hover{ color:var(--pur); border-color:var(--pur); }
   .cta .arrow{ margin-left:9px; color:var(--pur); }
-  .fineprint{ font-size:12px; color:var(--txm); letter-spacing:0.02em; }
-  html[data-lang="ja"] .fineprint{ font-family:var(--jp); }
+  .fineprint{ font-family:var(--body); font-size:12px; color:var(--txm); letter-spacing:0.02em; }
+  .storenote{ display:flex; align-items:center; gap:8px; margin-top:14px; font-family:var(--body); font-size:12px; color:var(--txm); letter-spacing:0.02em; }
+  .storenote svg{ width:12px; height:14px; fill:var(--txm); flex-shrink:0; }
 
   .panel{ position:relative; height:520px; }
   .glyphgrid{ position:absolute; inset:0; border:1px solid var(--line); background:var(--bg2); overflow:hidden; }
-  .ipa-scatter span{ position:absolute; font-family:var(--ital); font-style:italic; color:rgba(236,233,227,0.09); pointer-events:none; }
+  .ipa-scatter span{ position:absolute; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:rgba(236,233,227,0.09); pointer-events:none; }
   .kbshot{ position:absolute; left:50%; top:44%; transform:translate(-50%,-50%) rotate(2deg); width:76%; overflow:hidden; border:1px solid rgba(255,255,255,0.16); }
   .kbshot img{ display:block; width:100%; }
   .wordcard{
@@ -109,18 +108,16 @@
     background:#101017; border:1px solid rgba(255,255,255,0.16); padding:20px 22px;
     transform:rotate(-2.4deg);
   }
-  .wordcard .cw{ font-family:var(--serif); font-size:20px; letter-spacing:0.02em; }
-  .wordcard .cipa{ margin-top:6px; font-family:var(--ital); font-style:italic; color:var(--pur); font-size:15px; }
+  .wordcard .cw{ font-family:'Cinzel',Georgia,serif; font-size:20px; letter-spacing:0.02em; }
+  .wordcard .cipa{ margin-top:6px; font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; color:var(--pur); font-size:15px; }
   .wordcard .cdiv{ height:1px; background:var(--line); margin:13px 0; }
-  .wordcard .cmn{ font-family:var(--ital); font-style:italic; font-size:13.5px; color:var(--txs); }
+  .wordcard .cmn{ font-family:'Cormorant Garamond',Georgia,serif; font-style:italic; font-size:13.5px; color:var(--txs); }
 
   /* ── pitch (pull quote) — left-aligned like the hero, not centered ── */
   .pitch{ padding:120px 56px; border-top:1px solid var(--line2); border-bottom:1px solid var(--line2); }
   .pitch-inner{ max-width:640px; }
   .pitch-title{ font-family:var(--serif); font-weight:500; font-size:clamp(26px,3.6vw,40px); line-height:1.4; color:#fff; letter-spacing:0.01em; }
-  .pitch-title em{ font-family:var(--ital); font-style:italic; color:var(--pur); }
-  .pitch-body{ margin-top:26px; font-size:15px; line-height:1.95; color:var(--txs); max-width:56ch; }
-  html[data-lang="ja"] .pitch-body{ font-family:var(--jp); }
+  .pitch-body{ margin-top:26px; font-family:var(--body); font-size:15px; line-height:1.95; color:var(--txs); max-width:56ch; }
 
   /* ── feature spreads — three different shapes, not one template repeated ── */
   .feat{
@@ -132,9 +129,7 @@
   .feat.rev .feat-text{ order:1; }
   .feat.f3{ grid-template-columns:1.15fr 0.85fr; }
   .feat-title{ font-family:var(--serif); font-weight:500; font-size:clamp(26px,3.2vw,38px); letter-spacing:0.01em; color:#fff; line-height:1.25; margin-bottom:22px; }
-  .feat-title em{ font-family:var(--ital); font-style:italic; color:var(--pur); }
-  .feat-body{ font-size:15px; line-height:1.9; color:var(--txs); max-width:42ch; }
-  html[data-lang="ja"] .feat-body{ font-family:var(--jp); }
+  .feat-body{ font-family:var(--body); font-size:15px; line-height:1.9; color:var(--txs); max-width:42ch; }
 
   .feat-media{ position:relative; }
   .shot{ overflow:hidden; border:1px solid rgba(255,255,255,0.16); background:#000; }
@@ -152,15 +147,18 @@
      not a safe centered CTA box ── */
   .final{ padding:130px 24px 130px 56px; border-bottom:1px solid var(--line2); overflow:hidden; }
   .final-title{ font-family:var(--serif); font-weight:500; font-size:clamp(36px,7.5vw,96px); letter-spacing:0.005em; color:#fff; line-height:1.08; }
-  .final-title em{ display:block; font-family:var(--ital); font-style:italic; font-weight:500; color:var(--pur); margin-top:8px; }
+  .final-title em{ display:block; font-family:var(--ital); font-style:var(--em-style); font-weight:500; color:var(--pur); margin-top:8px; }
   .final .ctarow{ justify-content:flex-start; margin-top:48px; }
+  .final .storenote{ margin-top:16px; }
 
   footer{ padding:34px 56px; display:flex; align-items:center; justify-content:space-between; }
-  .footer-logo{ font-family:var(--serif); font-size:14px; letter-spacing:0.2em; color:#555; }
-  .footer-links{ display:flex; gap:26px; }
-  .footer-links a{ font-family:var(--en); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#555; text-decoration:none; transition:color 0.2s; }
+  .footer-logo{ font-family:'Cinzel',Georgia,serif; font-size:14px; letter-spacing:0.2em; color:#555; }
+  .footer-links{ display:flex; align-items:center; gap:26px; }
+  .footer-links a{ font-family:var(--body); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color:#555; text-decoration:none; transition:color 0.2s; }
   .footer-links a:hover{ color:#999; }
-  .footer-copy{ font-family:var(--en); font-size:10px; letter-spacing:0.14em; color:#3a3a3a; }
+  .footer-links .xicon{ width:14px; height:14px; fill:#555; transition:fill 0.2s; }
+  .footer-links a:hover .xicon{ fill:#999; }
+  .footer-copy{ font-family:var(--body); font-size:10px; letter-spacing:0.14em; color:#3a3a3a; }
 
   .reveal{ opacity:0; transform:translateY(22px); transition:opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1); }
   .reveal.visible{ opacity:1; transform:none; }
@@ -175,11 +173,12 @@
     .feat-break .feat-body{ margin:0 auto; }
     h1.htitle{ max-width:none; }
     .lead{ max-width:none; }
+    .storenote{ justify-content:center; }
   }
   @media (max-width:600px){
-    nav{ padding:22px 20px; }
+    nav{ padding:22px 20px; flex-wrap:wrap; gap:14px; }
     .pitch{ padding:80px 24px; }
-    .final{ padding:100px 24px; }
+    .final{ padding:100px 20px; }
     footer{ flex-direction:column; gap:16px; text-align:center; padding:28px 20px; }
   }
 </style>
@@ -189,33 +188,36 @@
 <nav>
   <a href="/" class="wordmark">LIN<span class="g">GU</span>A</a>
   <div class="nav-right">
-    <div class="langsw">
-      <button data-set-lang="en" class="on">EN</button>
-      <span class="sep">/</span>
-      <button data-set-lang="ja">日本語</button>
-    </div>
-    <a href="https://x.com/Lingua_con" target="_blank" rel="noopener" class="textlink">
-      <span data-i18n="en">Follow the build</span><span data-i18n="ja">開発をフォロー</span>
-    </a>
+    <select id="langsel" class="langsel">
+      <option value="en">English</option>
+      <option value="ja">日本語</option>
+      <option value="es">Español</option>
+      <option value="pt">Português</option>
+      <option value="fr">Français</option>
+      <option value="de">Deutsch</option>
+      <option value="it">Italiano</option>
+      <option value="ru">Русский</option>
+      <option value="zh">中文</option>
+      <option value="ko">한국어</option>
+    </select>
+    <a href="https://x.com/Lingua_con" target="_blank" rel="noopener" class="textlink" data-key="nav_follow">Follow the build</a>
   </div>
 </nav>
 
 <section class="hero">
   <div>
-    <p class="kicker" data-i18n="en">A language-building tool</p>
-    <p class="kicker" data-i18n="ja">言語をつくるツール</p>
-    <h1 class="htitle cz" data-i18n="en">Give a language its own sounds, its own <em>alphabet</em>.</h1>
-    <h1 class="htitle cz" data-i18n="ja">言語に、その言語だけの音を。その言語だけの<em>文字</em>を。</h1>
-    <p class="lead" data-i18n="en">Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw every letter yourself — then type it with a real keyboard built for your own alphabet.</p>
-    <p class="lead" data-i18n="ja">Linguaは、あなたが作った単語からIPA・読み・文字体系を導き出します。文字はすべて自分の手で描き、その自作アルファベット専用の本物のキーボードで入力できます。</p>
+    <p class="kicker" data-key="hero_kicker">A language-building tool</p>
+    <h1 class="htitle" data-key="hero_title">Give a language its own sounds, its own <em>alphabet</em>.</h1>
+    <p class="lead" data-key="hero_lead">Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw every letter yourself — then type it with a real keyboard built for your own alphabet.</p>
     <div class="ctarow">
       <a class="cta" href="https://x.com/Lingua_con" target="_blank" rel="noopener">
-        <span data-i18n="en">FOLLOW</span><span data-i18n="ja">フォロー</span><span class="arrow">→</span>
+        <span data-key="hero_cta">FOLLOW</span><span class="arrow">→</span>
       </a>
-      <p class="fineprint">
-        <span data-i18n="en">Building for iOS · in TestFlight now · launching this fall</span>
-        <span data-i18n="ja">iOS向けに開発中・TestFlightでテスト中・今秋ローンチ</span>
-      </p>
+      <p class="fineprint" data-key="hero_fine">Building for iOS · in TestFlight now · launching this fall</p>
+    </div>
+    <div class="storenote">
+      <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M11.6 8.5c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.7-.7-1.4 0-2.6.8-3.3 2-1.4 2.5-.4 6.1 1 8.2.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.3zM9.5 2.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg>
+      <span data-key="hero_appstore">App Store — coming soon</span>
     </div>
   </div>
 
@@ -230,7 +232,7 @@
       <div class="kbshot"><img src="/images/lingua/shot-keyboard.png" alt="The real Lingua iOS keyboard extension, every key a hand-drawn letter"></div>
     </div>
     <div class="wordcard">
-      <div class="cw cz">hejo</div>
+      <div class="cw">hejo</div>
       <div class="cipa">/hejo/</div>
       <div class="cdiv"></div>
       <div class="cmn">hello</div>
@@ -240,21 +242,16 @@
 
 <section class="pitch reveal">
   <div class="pitch-inner">
-    <h2 class="pitch-title cz" data-i18n="en">A conlang, built <em>properly</em>.</h2>
-    <h2 class="pitch-title cz" data-i18n="ja">きちんと作る、<em>架空言語</em>。</h2>
-    <p class="pitch-body" data-i18n="en">Phonology, a growing dictionary, grammar you define rule by rule. Lingua is a place to design a language the way a linguist would — not a random name generator.</p>
-    <p class="pitch-body" data-i18n="ja">音韻、育っていく辞書、ひとつずつ定義する文法。Linguaは、言語をきちんと体系立てて作る場所です。ランダムな名前生成ツールとは違います。</p>
+    <h2 class="pitch-title" data-key="pitch_title">A conlang, built <em>properly</em>.</h2>
+    <p class="pitch-body" data-key="pitch_body">Phonology, a growing dictionary, grammar you define rule by rule. Lingua is a place to design a language the way a linguist would — not a random name generator.</p>
   </div>
 </section>
 
 <div class="feat f1 reveal">
   <div class="feat-text">
-    <p class="kicker" data-i18n="en">Your own alphabet</p>
-    <p class="kicker" data-i18n="ja">自分だけの文字</p>
-    <h3 class="feat-title cz" data-i18n="en">Not a font.<br>Your <em>handwriting</em>.</h3>
-    <h3 class="feat-title cz" data-i18n="ja">フォントじゃない。<br>自分の手で描いた<em>文字</em>。</h3>
-    <p class="feat-body" data-i18n="en">Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.</p>
-    <p class="feat-body" data-i18n="ja">無料アカウントには a〜z と ！？ の28文字。そのすべてを自分の手でストロークから描きます。最後の1文字を保存した瞬間、あなたの辞書はラテン文字ではなく、あなたの手が刻んだ文字で表示されます。</p>
+    <p class="kicker" data-key="f1_kicker">Your own alphabet</p>
+    <h3 class="feat-title" data-key="f1_title">Not a font.<br>Your <em>handwriting</em>.</h3>
+    <p class="feat-body" data-key="f1_body">Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.</p>
   </div>
   <div class="feat-media">
     <div class="shot"><img src="/images/lingua/shot-lexicon.jpg" alt="A dictionary entry in Lingua, spelled with a hand-drawn alphabet, with its IPA reading and meaning"></div>
@@ -263,24 +260,18 @@
 
 <div class="feat-break reveal">
   <div class="feat-text">
-    <p class="kicker" data-i18n="en">A keyboard of your own</p>
-    <p class="kicker" data-i18n="ja">自分だけのキーボード</p>
-    <h3 class="feat-title cz" data-i18n="en">A real <em>keyboard</em>, not a mockup.</h3>
-    <h3 class="feat-title cz" data-i18n="ja">本物の<em>キーボード</em>。モックアップじゃない。</h3>
-    <p class="feat-body" data-i18n="en">An actual iOS keyboard extension, laid out with the letters you drew. It's how you write your language, fast, right inside Lingua.</p>
-    <p class="feat-body" data-i18n="ja">正真正銘のiOSキーボード拡張で、レイアウトはあなたが描いた文字そのもの。Lingua内で自分の言語を素早く書くための道具です。</p>
+    <p class="kicker" data-key="f2_kicker">A keyboard of your own</p>
+    <h3 class="feat-title" data-key="f2_title">A real <em>keyboard</em>, not a mockup.</h3>
+    <p class="feat-body" data-key="f2_body">An actual iOS keyboard extension, laid out with the letters you drew. It's how you write your language, fast, right inside Lingua.</p>
   </div>
   <div class="shot"><img src="/images/lingua/shot-keyboard.png" alt="The real Lingua iOS system keyboard, every key a hand-drawn letter"></div>
 </div>
 
 <div class="feat f3 reveal">
   <div class="feat-text">
-    <p class="kicker" data-i18n="en">Read by anyone</p>
-    <p class="kicker" data-i18n="ja">誰でも読める形で</p>
-    <h3 class="feat-title cz" data-i18n="en">Where your letters<br>get <em>seen</em>.</h3>
-    <h3 class="feat-title cz" data-i18n="ja">自分の文字が、<br><em>読まれる</em>場所。</h3>
-    <p class="feat-body" data-i18n="en">Your keyboard writes your letters for you, inside Lingua. The timeline is how anyone else reads them — every post carries the writer's own inked letters, even without that font or alphabet.</p>
-    <p class="feat-body" data-i18n="ja">キーボードはLingua内であなたの文字を書くための道具。タイムラインは、それを他の人が読むための場所です。投稿にはその人が描いた文字の形そのものが刻まれていて、フォントもアルファベットも持っていない読者にも届きます。</p>
+    <p class="kicker" data-key="f3_kicker">Read by anyone</p>
+    <h3 class="feat-title" data-key="f3_title">Where your letters<br>get <em>seen</em>.</h3>
+    <p class="feat-body" data-key="f3_body">Your keyboard writes your letters for you, inside Lingua. The timeline is how anyone else reads them — every post carries the writer's own inked letters, even without that font or alphabet.</p>
   </div>
   <div class="feat-media">
     <div class="shot"><img src="/images/lingua/shot-compose.jpg" alt="Composing a post in Lingua using a hand-drawn alphabet"></div>
@@ -288,21 +279,26 @@
 </div>
 
 <section class="final reveal">
-  <h2 class="final-title cz" data-i18n="en">A language is being built. <em>Watch it happen.</em></h2>
-  <h2 class="final-title cz" data-i18n="ja">言語が、いま作られている。<em>その過程を見に来て。</em></h2>
+  <h2 class="final-title" data-key="final_title">A language is being built.<em>Watch it happen.</em></h2>
   <div class="ctarow">
     <a class="cta" href="https://x.com/Lingua_con" target="_blank" rel="noopener">
-      <span data-i18n="en">FOLLOW</span><span data-i18n="ja">フォロー</span><span class="arrow">→</span>
+      <span data-key="final_cta">FOLLOW</span><span class="arrow">→</span>
     </a>
+  </div>
+  <div class="storenote">
+    <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M11.6 8.5c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.7-.7-1.4 0-2.6.8-3.3 2-1.4 2.5-.4 6.1 1 8.2.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.3zM9.5 2.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg>
+    <span data-key="final_appstore">App Store — coming soon</span>
   </div>
 </section>
 
 <footer>
   <span class="footer-logo">刻音</span>
   <div class="footer-links">
-    <a href="/">Home</a>
-    <a href="/works">Works</a>
-    <a href="https://x.com/Lingua_con" target="_blank" rel="noopener">X</a>
+    <a href="/" data-key="footer_home">Home</a>
+    <a href="/works" data-key="footer_works">Works</a>
+    <a href="https://x.com/Lingua_con" target="_blank" rel="noopener" aria-label="X">
+      <svg class="xicon" viewBox="0 0 24 24"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.9L4.4 22H1.3l8.1-9.3L1 2h7.1l4.9 6.3L18.9 2zm-1.2 18h1.9L7.4 4H5.3l12.4 16z"/></svg>
+    </a>
   </div>
   <span class="footer-copy">&copy; 2026 Tokine</span>
 </footer>
@@ -313,22 +309,278 @@
   }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
 
-  function setLang(l){
-    document.getElementById('html-root').setAttribute('data-lang', l);
-    document.querySelectorAll('.langsw button').forEach(function(b){
-      b.classList.toggle('on', b.getAttribute('data-set-lang') === l);
+  var L = {
+    en: {
+      nav_follow: "Follow the build",
+      hero_kicker: "A language-building tool",
+      hero_title: "Give a language its own sounds, its own <em>alphabet</em>.",
+      hero_lead: "Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw every letter yourself — then type it with a real keyboard built for your own alphabet.",
+      hero_cta: "FOLLOW",
+      hero_fine: "Building for iOS · in TestFlight now · launching this fall",
+      hero_appstore: "App Store — coming soon",
+      pitch_title: "A conlang, built <em>properly</em>.",
+      pitch_body: "Phonology, a growing dictionary, grammar you define rule by rule. Lingua is a place to design a language the way a linguist would — not a random name generator.",
+      f1_kicker: "Your own alphabet",
+      f1_title: "Not a font.<br>Your <em>handwriting</em>.",
+      f1_body: "Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.",
+      f2_kicker: "A keyboard of your own",
+      f2_title: "A real <em>keyboard</em>, not a mockup.",
+      f2_body: "An actual iOS keyboard extension, laid out with the letters you drew. It's how you write your language, fast, right inside Lingua.",
+      f3_kicker: "Read by anyone",
+      f3_title: "Where your letters<br>get <em>seen</em>.",
+      f3_body: "Your keyboard writes your letters for you, inside Lingua. The timeline is how anyone else reads them — every post carries the writer's own inked letters, even without that font or alphabet.",
+      final_title: "A language is being built.<em>Watch it happen.</em>",
+      final_cta: "FOLLOW",
+      final_appstore: "App Store — coming soon",
+      footer_home: "Home",
+      footer_works: "Works"
+    },
+    ja: {
+      nav_follow: "開発をフォロー",
+      hero_kicker: "言語をつくるツール",
+      hero_title: "言語に、その言語だけの音を。その言語だけの<em>文字</em>を。",
+      hero_lead: "Linguaは、あなたが作った単語からIPA・読み・文字体系を導き出します。文字はすべて自分の手で描き、その自作アルファベット専用の本物のキーボードで入力できます。",
+      hero_cta: "フォロー",
+      hero_fine: "iOS向けに開発中・TestFlightでテスト中・今秋ローンチ",
+      hero_appstore: "App Store — 準備中",
+      pitch_title: "きちんと作る、<em>架空言語</em>。",
+      pitch_body: "音韻、育っていく辞書、ひとつずつ定義する文法。Linguaは、言語をきちんと体系立てて作る場所です。ランダムな名前生成ツールとは違います。",
+      f1_kicker: "自分だけの文字",
+      f1_title: "フォントじゃない。<br>自分の手で描いた<em>文字</em>。",
+      f1_body: "無料アカウントには a〜z と ！？ の28文字。そのすべてを自分の手でストロークから描きます。最後の1文字を保存した瞬間、あなたの辞書はラテン文字ではなく、あなたの手が刻んだ文字で表示されます。",
+      f2_kicker: "自分だけのキーボード",
+      f2_title: "本物の<em>キーボード</em>。モックアップじゃない。",
+      f2_body: "正真正銘のiOSキーボード拡張で、レイアウトはあなたが描いた文字そのもの。Lingua内で自分の言語を素早く書くための道具です。",
+      f3_kicker: "誰でも読める形で",
+      f3_title: "自分の文字が、<br><em>読まれる</em>場所。",
+      f3_body: "キーボードはLingua内であなたの文字を書くための道具。タイムラインは、それを他の人が読むための場所です。投稿にはその人が描いた文字の形そのものが刻まれていて、フォントもアルファベットも持っていない読者にも届きます。",
+      final_title: "言語が、いま作られている。<em>その過程を見に来て。</em>",
+      final_cta: "フォロー",
+      final_appstore: "App Store — 準備中",
+      footer_home: "ホーム",
+      footer_works: "作品"
+    },
+    es: {
+      nav_follow: "Seguir el desarrollo",
+      hero_kicker: "Una herramienta para crear idiomas",
+      hero_title: "Dale a un idioma sus propios sonidos, su propio <em>alfabeto</em>.",
+      hero_lead: "Lingua deriva el AFI, las lecturas y el sistema de escritura a partir de las palabras que inventas. Dibuja cada letra tú mismo y luego escríbela con un teclado real hecho para tu propio alfabeto.",
+      hero_cta: "SEGUIR",
+      hero_fine: "En desarrollo para iOS · ahora en TestFlight · lanzamiento este otoño",
+      hero_appstore: "App Store — próximamente",
+      pitch_title: "Un idioma inventado, hecho <em>como es debido</em>.",
+      pitch_body: "Fonología, un diccionario que crece, gramática que defines regla por regla. Lingua es un lugar para diseñar un idioma como lo haría un lingüista, no un generador aleatorio de nombres.",
+      f1_kicker: "Tu propio alfabeto",
+      f1_title: "No es una fuente.<br>Es tu <em>letra</em>.",
+      f1_body: "Toda cuenta gratuita recibe 28 letras — de la a a la z, más ! y ? — y las dibujas tú mismo, trazo a trazo. En cuanto guardas la última letra, tu diccionario se lee con tu propia mano, no en latín.",
+      f2_kicker: "Un teclado propio",
+      f2_title: "Un <em>teclado</em> real, no una simulación.",
+      f2_body: "Una extensión de teclado real para iOS, con las letras que dibujaste. Así escribes tu idioma, rápido, dentro de Lingua.",
+      f3_kicker: "Leído por cualquiera",
+      f3_title: "Donde tus letras<br>se <em>ven</em>.",
+      f3_body: "Tu teclado escribe tus letras dentro de Lingua. La línea de tiempo es donde cualquiera más las lee — cada publicación lleva las letras tal como las dibujó su autor, incluso sin esa fuente o alfabeto.",
+      final_title: "Se está construyendo un idioma.<em>Ven a verlo.</em>",
+      final_cta: "SEGUIR",
+      final_appstore: "App Store — próximamente",
+      footer_home: "Inicio",
+      footer_works: "Proyectos"
+    },
+    pt: {
+      nav_follow: "Seguir o desenvolvimento",
+      hero_kicker: "Uma ferramenta para criar idiomas",
+      hero_title: "Dê a um idioma os seus próprios sons, o seu próprio <em>alfabeto</em>.",
+      hero_lead: "O Lingua deriva o AFI, as leituras e o sistema de escrita a partir das palavras que você inventa. Desenhe cada letra você mesmo — depois digite com um teclado real feito para o seu próprio alfabeto.",
+      hero_cta: "SEGUIR",
+      hero_fine: "Em desenvolvimento para iOS · agora no TestFlight · lançamento neste outono",
+      hero_appstore: "App Store — em breve",
+      pitch_title: "Uma língua construída <em>como deve ser</em>.",
+      pitch_body: "Fonologia, um dicionário que cresce, gramática que você define regra por regra. O Lingua é um lugar para projetar um idioma como um linguista faria — não um gerador aleatório de nomes.",
+      f1_kicker: "O seu próprio alfabeto",
+      f1_title: "Não é uma fonte.<br>É a sua <em>caligrafia</em>.",
+      f1_body: "Toda conta gratuita recebe 28 letras — de a a z, mais ! e ? — e você desenha cada uma delas, traço a traço. No momento em que salva a última letra, o seu dicionário passa a ser lido na sua própria mão, não em latim.",
+      f2_kicker: "Um teclado só seu",
+      f2_title: "Um <em>teclado</em> real, não uma simulação.",
+      f2_body: "Uma extensão de teclado real para iOS, com o layout das letras que você desenhou. É assim que você escreve o seu idioma, rápido, dentro do Lingua.",
+      f3_kicker: "Lido por qualquer pessoa",
+      f3_title: "Onde as suas letras<br>são <em>vistas</em>.",
+      f3_body: "O seu teclado escreve as suas letras dentro do Lingua. A linha do tempo é onde qualquer outra pessoa as lê — cada publicação carrega as letras exatamente como o autor as desenhou, mesmo sem essa fonte ou alfabeto.",
+      final_title: "Um idioma está sendo construído.<em>Venha ver.</em>",
+      final_cta: "SEGUIR",
+      final_appstore: "App Store — em breve",
+      footer_home: "Início",
+      footer_works: "Projetos"
+    },
+    fr: {
+      nav_follow: "Suivre le développement",
+      hero_kicker: "Un outil pour construire une langue",
+      hero_title: "Donnez à une langue ses propres sons, son propre <em>alphabet</em>.",
+      hero_lead: "Lingua déduit l'API, les lectures et le système d'écriture à partir des mots que vous inventez. Dessinez chaque lettre vous-même, puis tapez-la avec un vrai clavier conçu pour votre alphabet.",
+      hero_cta: "SUIVRE",
+      hero_fine: "En développement pour iOS · sur TestFlight actuellement · lancement cet automne",
+      hero_appstore: "App Store — bientôt disponible",
+      pitch_title: "Une langue construite <em>comme il faut</em>.",
+      pitch_body: "Phonologie, un dictionnaire qui grandit, une grammaire que vous définissez règle par règle. Lingua est un endroit pour concevoir une langue comme le ferait un linguiste — pas un générateur de noms aléatoires.",
+      f1_kicker: "Votre propre alphabet",
+      f1_title: "Pas une police.<br>Votre <em>écriture</em>.",
+      f1_body: "Chaque compte gratuit reçoit 28 lettres — de a à z, plus ! et ? — et vous les dessinez vous-même, trait par trait. Dès que vous enregistrez la dernière lettre, votre dictionnaire se lit dans votre propre main, pas en latin.",
+      f2_kicker: "Un clavier bien à vous",
+      f2_title: "Un vrai <em>clavier</em>, pas une maquette.",
+      f2_body: "Une véritable extension clavier iOS, avec les lettres que vous avez dessinées. C'est comme ça que vous écrivez votre langue, vite, directement dans Lingua.",
+      f3_kicker: "Lu par n'importe qui",
+      f3_title: "Là où vos lettres<br>sont <em>vues</em>.",
+      f3_body: "Votre clavier écrit vos lettres pour vous, dans Lingua. Le fil d'actualité, c'est ce qui permet à n'importe qui d'autre de les lire — chaque publication porte les lettres telles que son auteur les a dessinées, même sans cette police ni cet alphabet.",
+      final_title: "Une langue est en train de naître.<em>Venez voir.</em>",
+      final_cta: "SUIVRE",
+      final_appstore: "App Store — bientôt disponible",
+      footer_home: "Accueil",
+      footer_works: "Projets"
+    },
+    de: {
+      nav_follow: "Entwicklung folgen",
+      hero_kicker: "Ein Werkzeug, um eine Sprache zu erschaffen",
+      hero_title: "Geben Sie einer Sprache ihre eigenen Laute, ihr eigenes <em>Alphabet</em>.",
+      hero_lead: "Lingua leitet die Lautschrift, die Lesungen und das Schriftsystem aus den Wörtern ab, die Sie erfinden. Zeichnen Sie jeden Buchstaben selbst — und tippen Sie ihn dann mit einer echten Tastatur, die für Ihr eigenes Alphabet gebaut ist.",
+      hero_cta: "FOLGEN",
+      hero_fine: "In Entwicklung für iOS · derzeit in TestFlight · Start in diesem Herbst",
+      hero_appstore: "App Store — demnächst",
+      pitch_title: "Eine Plansprache, <em>richtig</em> gebaut.",
+      pitch_body: "Phonologie, ein wachsendes Wörterbuch, eine Grammatik, die Sie Regel für Regel festlegen. Lingua ist ein Ort, um eine Sprache so zu entwerfen, wie es ein Linguist tun würde — kein zufälliger Namensgenerator.",
+      f1_kicker: "Ihr eigenes Alphabet",
+      f1_title: "Keine Schriftart.<br>Ihre <em>Handschrift</em>.",
+      f1_body: "Jedes kostenlose Konto erhält 28 Buchstaben — a bis z, plus ! und ? — und Sie zeichnen jeden einzelnen selbst, Strich für Strich. Sobald Sie den letzten Buchstaben speichern, liest sich Ihr Wörterbuch in Ihrer eigenen Handschrift, nicht in lateinischer Schrift.",
+      f2_kicker: "Eine eigene Tastatur",
+      f2_title: "Eine echte <em>Tastatur</em>, kein Mockup.",
+      f2_body: "Eine echte iOS-Tastaturerweiterung, angeordnet mit den Buchstaben, die Sie gezeichnet haben. So schreiben Sie Ihre Sprache — schnell, direkt in Lingua.",
+      f3_kicker: "Von jedem lesbar",
+      f3_title: "Wo Ihre Buchstaben<br><em>gesehen</em> werden.",
+      f3_body: "Ihre Tastatur schreibt Ihre Buchstaben für Sie, innerhalb von Lingua. Die Zeitleiste ist der Ort, an dem sie jeder andere lesen kann — jeder Beitrag trägt die Buchstaben genau so, wie sie der Autor gezeichnet hat, auch ohne diese Schriftart oder dieses Alphabet.",
+      final_title: "Eine Sprache entsteht gerade.<em>Sehen Sie zu.</em>",
+      final_cta: "FOLGEN",
+      final_appstore: "App Store — demnächst",
+      footer_home: "Start",
+      footer_works: "Projekte"
+    },
+    it: {
+      nav_follow: "Segui lo sviluppo",
+      hero_kicker: "Uno strumento per costruire una lingua",
+      hero_title: "Dai a una lingua i suoi suoni, il suo <em>alfabeto</em>.",
+      hero_lead: "Lingua ricava l'IPA, le letture e il sistema di scrittura dalle parole che inventi. Disegna ogni lettera con le tue mani — poi scrivila con una tastiera vera, costruita per il tuo alfabeto.",
+      hero_cta: "SEGUI",
+      hero_fine: "In sviluppo per iOS · ora su TestFlight · lancio in autunno",
+      hero_appstore: "App Store — in arrivo",
+      pitch_title: "Una lingua inventata, costruita <em>a regola d'arte</em>.",
+      pitch_body: "Fonologia, un dizionario in crescita, una grammatica che definisci regola per regola. Lingua è un posto per progettare una lingua come farebbe un linguista — non un generatore casuale di nomi.",
+      f1_kicker: "Il tuo alfabeto",
+      f1_title: "Non un font.<br>La tua <em>scrittura</em>.",
+      f1_body: "Ogni account gratuito riceve 28 lettere — dalla a alla z, più ! e ? — e le disegni tu stesso, tratto dopo tratto. Nel momento in cui salvi l'ultima lettera, il tuo dizionario si legge con la tua mano, non in latino.",
+      f2_kicker: "Una tastiera tutta tua",
+      f2_title: "Una <em>tastiera</em> vera, non un mockup.",
+      f2_body: "Un'estensione tastiera reale per iOS, con le lettere che hai disegnato. È così che scrivi la tua lingua, veloce, dentro Lingua.",
+      f3_kicker: "Letto da chiunque",
+      f3_title: "Dove le tue lettere<br>vengono <em>viste</em>.",
+      f3_body: "La tua tastiera scrive le tue lettere per te, dentro Lingua. La timeline è il posto dove chiunque altro le legge — ogni post porta le lettere disegnate proprio come le ha fatte chi scrive, anche senza quel font o quell'alfabeto.",
+      final_title: "Una lingua si sta costruendo.<em>Vieni a vederla.</em>",
+      final_cta: "SEGUI",
+      final_appstore: "App Store — in arrivo",
+      footer_home: "Home",
+      footer_works: "Progetti"
+    },
+    ru: {
+      nav_follow: "Следить за разработкой",
+      hero_kicker: "Инструмент для создания языка",
+      hero_title: "Дайте языку собственные звуки и собственный <em>алфавит</em>.",
+      hero_lead: "Lingua выводит МФА, чтения и систему письма из придуманных вами слов. Нарисуйте каждую букву сами — а затем печатайте её на настоящей клавиатуре, созданной для вашего алфавита.",
+      hero_cta: "ПОДПИСАТЬСЯ",
+      hero_fine: "В разработке для iOS · сейчас в TestFlight · запуск этой осенью",
+      hero_appstore: "App Store — скоро",
+      pitch_title: "Придуманный язык, сделанный <em>как надо</em>.",
+      pitch_body: "Фонология, растущий словарь, грамматика, которую вы задаёте правило за правилом. Lingua — это место, чтобы проектировать язык так, как это сделал бы лингвист, а не генератор случайных имён.",
+      f1_kicker: "Ваш собственный алфавит",
+      f1_title: "Это не шрифт.<br>Это ваш <em>почерк</em>.",
+      f1_body: "Каждый бесплатный аккаунт получает 28 букв — от a до z, плюс ! и ? — и вы рисуете каждую из них сами, штрих за штрихом. В момент сохранения последней буквы ваш словарь начинает читаться вашей рукой, а не латиницей.",
+      f2_kicker: "Собственная клавиатура",
+      f2_title: "Настоящая <em>клавиатура</em>, а не макет.",
+      f2_body: "Настоящее расширение клавиатуры для iOS с буквами, которые вы нарисовали. Так вы быстро пишете на своём языке прямо внутри Lingua.",
+      f3_kicker: "Читаемо кем угодно",
+      f3_title: "Там, где ваши буквы<br><em>видят</em>.",
+      f3_body: "Ваша клавиатура пишет ваши буквы для вас внутри Lingua. Лента — это то место, где их читают все остальные: каждый пост несёт буквы именно такими, какими их нарисовал автор, даже без этого шрифта или алфавита.",
+      final_title: "Язык создаётся прямо сейчас.<em>Приходите посмотреть.</em>",
+      final_cta: "ПОДПИСАТЬСЯ",
+      final_appstore: "App Store — скоро",
+      footer_home: "Главная",
+      footer_works: "Проекты"
+    },
+    zh: {
+      nav_follow: "关注开发进展",
+      hero_kicker: "一个用来构建语言的工具",
+      hero_title: "让一门语言拥有自己的读音，自己的<em>文字</em>。",
+      hero_lead: "Lingua 会从你创造的词语中推导出国际音标、读音和文字系统。每一个字母都由你亲手描绘——然后用专为你自己的文字打造的真实键盘输入它。",
+      hero_cta: "关注",
+      hero_fine: "iOS 开发中 · 目前在 TestFlight 测试 · 今年秋季发布",
+      hero_appstore: "App Store — 即将上线",
+      pitch_title: "认真打造的<em>人造语言</em>。",
+      pitch_body: "音系、不断增长的词典、由你逐条定义的语法。Lingua 是一个像语言学家那样系统地构建语言的地方——而不是一个随机取名工具。",
+      f1_kicker: "属于你自己的文字",
+      f1_title: "不是字体。<br>是你的<em>笔迹</em>。",
+      f1_body: "每个免费账户都有 28 个字母——a 到 z，加上 ! 和 ?——全部由你亲手一笔一划描绘。保存最后一个字母的那一刻，你的词典就会以你自己的字迹呈现，而不是拉丁字母。",
+      f2_kicker: "属于你自己的键盘",
+      f2_title: "真正的<em>键盘</em>，不是模拟图。",
+      f2_body: "一个真实的 iOS 键盘扩展，按键排布就是你描绘的字母。这就是你在 Lingua 内快速书写自己语言的方式。",
+      f3_kicker: "任何人都能读懂",
+      f3_title: "你的文字<br>被<em>看见</em>的地方。",
+      f3_body: "你的键盘在 Lingua 内为你写下你的文字。时间线则是让其他任何人读到它们的地方——每一条帖子都带着作者亲手描绘的字形，即使读者没有那款字体或那套文字。",
+      final_title: "一门语言正在被创造。<em>来见证这一切。</em>",
+      final_cta: "关注",
+      final_appstore: "App Store — 即将上线",
+      footer_home: "首页",
+      footer_works: "作品"
+    },
+    ko: {
+      nav_follow: "개발 소식 팔로우",
+      hero_kicker: "언어를 만드는 도구",
+      hero_title: "언어에 고유한 소리와 고유한 <em>문자</em>를.",
+      hero_lead: "Lingua는 당신이 만든 단어로부터 IPA, 읽기, 문자 체계를 도출합니다. 모든 글자를 직접 그리고, 자신만의 문자를 위해 만들어진 진짜 키보드로 입력하세요.",
+      hero_cta: "팔로우",
+      hero_fine: "iOS용으로 개발 중 · 현재 TestFlight 테스트 중 · 올가을 출시",
+      hero_appstore: "App Store — 출시 예정",
+      pitch_title: "제대로 <em>만든</em> 인공어.",
+      pitch_body: "음운론, 계속 늘어나는 사전, 하나씩 직접 정의하는 문법. Lingua는 언어학자처럼 체계적으로 언어를 설계하는 공간입니다 — 무작위 이름 생성기가 아닙니다.",
+      f1_kicker: "당신만의 문자",
+      f1_title: "폰트가 아닙니다.<br>당신의 <em>손글씨</em>입니다.",
+      f1_body: "모든 무료 계정에는 28개의 글자 — a부터 z, 그리고 ! 와 ? — 가 주어지며, 이 모두를 직접 한 획씩 그립니다. 마지막 글자를 저장하는 순간, 당신의 사전은 라틴 문자가 아닌 당신의 손으로 쓰여집니다.",
+      f2_kicker: "나만의 키보드",
+      f2_title: "진짜 <em>키보드</em>, 목업이 아닙니다.",
+      f2_body: "당신이 그린 글자로 배열된 진짜 iOS 키보드 확장 프로그램입니다. Lingua 안에서 빠르게 자신의 언어를 쓰는 방법입니다.",
+      f3_kicker: "누구나 읽을 수 있게",
+      f3_title: "당신의 문자가<br><em>읽히는</em> 곳.",
+      f3_body: "키보드는 Lingua 안에서 당신의 문자를 써줍니다. 타임라인은 다른 누군가가 그것을 읽을 수 있게 하는 곳입니다 — 모든 게시물에는 그 폰트나 문자가 없는 독자에게도, 작성자가 그린 그대로의 글자가 담겨 전달됩니다.",
+      final_title: "언어가 지금 만들어지고 있습니다.<em>그 과정을 지켜보세요.</em>",
+      final_cta: "팔로우",
+      final_appstore: "App Store — 출시 예정",
+      footer_home: "홈",
+      footer_works: "작품"
+    }
+  };
+
+  function applyLang(lang){
+    var d = L[lang] || L.en;
+    document.getElementById('html-root').setAttribute('data-lang', lang);
+    document.querySelectorAll('[data-key]').forEach(function(el){
+      var k = el.getAttribute('data-key');
+      if (d[k] != null) el.innerHTML = d[k];
     });
-    try { localStorage.setItem('lingua-lp-lang', l); } catch(e){}
+    var sel = document.getElementById('langsel');
+    if (sel) sel.value = lang;
+    try { localStorage.setItem('lingua-lp-lang', lang); } catch(e){}
   }
-  document.querySelectorAll('[data-set-lang]').forEach(function(b){
-    b.addEventListener('click', function(){ setLang(b.getAttribute('data-set-lang')); });
-  });
+  document.getElementById('langsel').addEventListener('change', function(){ applyLang(this.value); });
+
   (function(){
     var saved = null;
     try { saved = localStorage.getItem('lingua-lp-lang'); } catch(e){}
-    var nav = (navigator.language || 'en').toLowerCase();
-    var initial = saved || (nav.indexOf('ja') === 0 ? 'ja' : 'en');
-    setLang(initial);
+    /* Always defaults to English regardless of the visitor's browser
+       language — this is an overseas-facing page first. */
+    applyLang(saved || 'en');
   })();
 </script>
 
