@@ -90,13 +90,16 @@
   h1.htitle{ font-family:var(--serif); font-weight:500; font-size:clamp(34px,5vw,68px); line-height:1.15; letter-spacing:0.005em; max-width:15ch; color:#fff; }
   .htitle em, .feat-title em, .pitch-title em{ font-family:var(--ital); font-style:var(--em-style); font-weight:500; color:var(--pur); }
   .lead{ margin-top:28px; max-width:48ch; font-size:16px; line-height:1.9; color:var(--txs); font-weight:300; font-family:var(--body); }
-  .ctarow{ margin-top:42px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; }
-  .cta{ font-family:var(--serif); font-size:13px; letter-spacing:0.16em; color:var(--tx); text-decoration:none; padding-bottom:8px; border-bottom:1px solid var(--tx); transition:color 0.2s, border-color 0.2s; }
+  .ctarow{ margin-top:42px; display:flex; align-items:center; gap:34px; flex-wrap:wrap; }
+  .cta{ display:inline-flex; align-items:center; gap:10px; font-family:var(--serif); font-size:13px; letter-spacing:0.14em; color:var(--tx); text-decoration:none; padding-bottom:8px; border-bottom:1px solid var(--tx); transition:color 0.2s, border-color 0.2s; }
   .cta:hover{ color:var(--pur); border-color:var(--pur); }
-  .cta .arrow{ margin-left:9px; color:var(--pur); }
-  .fineprint{ font-family:var(--body); font-size:12px; color:var(--txm); letter-spacing:0.02em; }
-  .storenote{ display:flex; align-items:center; gap:8px; margin-top:14px; font-family:var(--body); font-size:12px; color:var(--txm); letter-spacing:0.02em; }
-  .storenote svg{ width:12px; height:14px; fill:var(--txm); flex-shrink:0; }
+  .cta .arrow{ margin-left:1px; color:var(--pur); }
+  .cta svg{ width:14px; height:14px; fill:currentColor; flex-shrink:0; }
+  /* the App Store isn't a link yet — same weight as the X link, but a
+     dashed rule instead of solid says "not clickable" without a chrome badge */
+  .cta.store{ color:var(--txs); border-bottom-style:dashed; cursor:default; }
+  .cta.store svg{ width:13px; height:15px; }
+  .fineprint{ margin-top:16px; font-family:var(--body); font-size:12px; color:var(--txm); letter-spacing:0.02em; }
 
   .panel{ position:relative; height:520px; }
   .glyphgrid{ position:absolute; inset:0; border:1px solid var(--line); background:var(--bg2); overflow:hidden; }
@@ -149,7 +152,6 @@
   .final-title{ font-family:var(--serif); font-weight:500; font-size:clamp(36px,7.5vw,96px); letter-spacing:0.005em; color:#fff; line-height:1.08; }
   .final-title em{ display:block; font-family:var(--ital); font-style:var(--em-style); font-weight:500; color:var(--pur); margin-top:8px; }
   .final .ctarow{ justify-content:flex-start; margin-top:48px; }
-  .final .storenote{ margin-top:16px; }
 
   footer{ padding:34px 56px; display:flex; align-items:center; justify-content:space-between; }
   .footer-logo{ font-family:'Cinzel',Georgia,serif; font-size:14px; letter-spacing:0.2em; color:#555; }
@@ -173,7 +175,7 @@
     .feat-break .feat-body{ margin:0 auto; }
     h1.htitle{ max-width:none; }
     .lead{ max-width:none; }
-    .storenote{ justify-content:center; }
+    .ctarow{ justify-content:center; }
   }
   @media (max-width:600px){
     nav{ padding:22px 20px; flex-wrap:wrap; gap:14px; }
@@ -211,14 +213,15 @@
     <p class="lead" data-key="hero_lead">Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw every letter yourself — then type it with a real keyboard built for your own alphabet.</p>
     <div class="ctarow">
       <a class="cta" href="https://x.com/Lingua_con" target="_blank" rel="noopener">
-        <span data-key="hero_cta">FOLLOW</span><span class="arrow">→</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.9L4.4 22H1.3l8.1-9.3L1 2h7.1l4.9 6.3L18.9 2zm-1.2 18h1.9L7.4 4H5.3l12.4 16z"/></svg>
+        <span data-key="hero_cta">Latest on X</span><span class="arrow">→</span>
       </a>
-      <p class="fineprint" data-key="hero_fine">Building for iOS · in TestFlight now · launching this fall</p>
+      <span class="cta store">
+        <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M11.6 8.5c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.7-.7-1.4 0-2.6.8-3.3 2-1.4 2.5-.4 6.1 1 8.2.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.3zM9.5 2.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg>
+        <span data-key="hero_appstore">App Store — coming soon</span>
+      </span>
     </div>
-    <div class="storenote">
-      <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M11.6 8.5c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.7-.7-1.4 0-2.6.8-3.3 2-1.4 2.5-.4 6.1 1 8.2.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.3zM9.5 2.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg>
-      <span data-key="hero_appstore">App Store — coming soon</span>
-    </div>
+    <p class="fineprint" data-key="hero_fine">Building for iOS · in TestFlight now · launching this fall</p>
   </div>
 
   <div class="panel reveal">
@@ -282,12 +285,13 @@
   <h2 class="final-title" data-key="final_title">A language is being built.<em>Watch it happen.</em></h2>
   <div class="ctarow">
     <a class="cta" href="https://x.com/Lingua_con" target="_blank" rel="noopener">
-      <span data-key="final_cta">FOLLOW</span><span class="arrow">→</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.9 2H22l-7.6 8.7L23 22h-6.9l-5.4-6.9L4.4 22H1.3l8.1-9.3L1 2h7.1l4.9 6.3L18.9 2zm-1.2 18h1.9L7.4 4H5.3l12.4 16z"/></svg>
+      <span data-key="final_cta">Latest on X</span><span class="arrow">→</span>
     </a>
-  </div>
-  <div class="storenote">
-    <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M11.6 8.5c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.7-.7-1.4 0-2.6.8-3.3 2-1.4 2.5-.4 6.1 1 8.2.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.3zM9.5 2.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg>
-    <span data-key="final_appstore">App Store — coming soon</span>
+    <span class="cta store">
+      <svg viewBox="0 0 14 16" aria-hidden="true"><path d="M11.6 8.5c0-2 1.6-3 1.7-3.1-1-1.4-2.4-1.6-2.9-1.6-1.2-.1-2.4.7-3 .7-.6 0-1.6-.7-2.7-.7-1.4 0-2.6.8-3.3 2-1.4 2.5-.4 6.1 1 8.2.7 1 1.5 2.1 2.6 2.1 1 0 1.4-.7 2.7-.7 1.2 0 1.6.7 2.7.7 1.1 0 1.8-1 2.5-2 .8-1.1 1.1-2.2 1.1-2.3-.1 0-2.1-.8-2.1-3.3zM9.5 2.2c.6-.7 1-1.7.9-2.7-.9 0-1.9.6-2.5 1.3-.5.6-1 1.6-.9 2.6 1 .1 2-.5 2.5-1.2z"/></svg>
+      <span data-key="final_appstore">App Store — coming soon</span>
+    </span>
   </div>
 </section>
 
@@ -311,11 +315,11 @@
 
   var L = {
     en: {
-      nav_follow: "Follow the build",
+      nav_follow: "Latest on X",
       hero_kicker: "A language-building tool",
       hero_title: "Give a language its own sounds, its own <em>alphabet</em>.",
       hero_lead: "Lingua derives the IPA, the readings, and the writing system from the words you invent. Draw every letter yourself — then type it with a real keyboard built for your own alphabet.",
-      hero_cta: "FOLLOW",
+      hero_cta: "Latest on X",
       hero_fine: "Building for iOS · in TestFlight now · launching this fall",
       hero_appstore: "App Store — coming soon",
       pitch_title: "A conlang, built <em>properly</em>.",
@@ -330,42 +334,42 @@
       f3_title: "Where your letters<br>get <em>seen</em>.",
       f3_body: "Your keyboard writes your letters for you, inside Lingua. The timeline is how anyone else reads them — every post carries the writer's own inked letters, even without that font or alphabet.",
       final_title: "A language is being built.<em>Watch it happen.</em>",
-      final_cta: "FOLLOW",
+      final_cta: "Latest on X",
       final_appstore: "App Store — coming soon",
       footer_home: "Home",
       footer_works: "Works"
     },
     ja: {
-      nav_follow: "開発をフォロー",
+      nav_follow: "Xで最新情報",
       hero_kicker: "言語をつくるツール",
-      hero_title: "言語に、その言語だけの音を。その言語だけの<em>文字</em>を。",
-      hero_lead: "Linguaは、あなたが作った単語からIPA・読み・文字体系を導き出します。文字はすべて自分の手で描き、その自作アルファベット専用の本物のキーボードで入力できます。",
-      hero_cta: "フォロー",
-      hero_fine: "iOS向けに開発中・TestFlightでテスト中・今秋ローンチ",
-      hero_appstore: "App Store — 準備中",
+      hero_title: "言語に、自分だけの音を。自分だけの<em>文字</em>を。",
+      hero_lead: "Linguaは、あなたが考えた単語から発音記号・読み方・文字体系までを組み立てていくアプリです。文字は一つひとつ自分の手で描き、そのための本物のキーボードでそのまま入力できます。",
+      hero_cta: "Xで最新情報",
+      hero_fine: "iOS向けに開発中・TestFlightでテスト中・今秋ローンチ予定",
+      hero_appstore: "App Store — 近日公開",
       pitch_title: "きちんと作る、<em>架空言語</em>。",
-      pitch_body: "音韻、育っていく辞書、ひとつずつ定義する文法。Linguaは、言語をきちんと体系立てて作る場所です。ランダムな名前生成ツールとは違います。",
+      pitch_body: "音韻、育っていく辞書、ひとつずつ自分で定義していく文法。Linguaは、言語学者のように言語を体系立てて作る場所です。ランダムな名前生成ツールとはわけが違います。",
       f1_kicker: "自分だけの文字",
       f1_title: "フォントじゃない。<br>自分の手で描いた<em>文字</em>。",
-      f1_body: "無料アカウントには a〜z と ！？ の28文字。そのすべてを自分の手でストロークから描きます。最後の1文字を保存した瞬間、あなたの辞書はラテン文字ではなく、あなたの手が刻んだ文字で表示されます。",
+      f1_body: "無料プランでも28文字—a〜zと！？—が使え、そのすべてを自分の手でストロークから描けます。最後の1文字を描き終えた瞬間、あなたの辞書はラテン文字ではなく、自分の文字で読めるようになります。",
       f2_kicker: "自分だけのキーボード",
       f2_title: "本物の<em>キーボード</em>。モックアップじゃない。",
-      f2_body: "正真正銘のiOSキーボード拡張で、レイアウトはあなたが描いた文字そのもの。Lingua内で自分の言語を素早く書くための道具です。",
-      f3_kicker: "誰でも読める形で",
+      f2_body: "本物のiOSキーボード拡張機能で、キーの配列はあなたが描いた文字そのもの。Lingua内で自分の言語をさっと書くための道具です。",
+      f3_kicker: "誰にでも届く形で",
       f3_title: "自分の文字が、<br><em>読まれる</em>場所。",
-      f3_body: "キーボードはLingua内であなたの文字を書くための道具。タイムラインは、それを他の人が読むための場所です。投稿にはその人が描いた文字の形そのものが刻まれていて、フォントもアルファベットも持っていない読者にも届きます。",
+      f3_body: "キーボードは、Lingua内で自分の文字を書くための道具。タイムラインは、それを他の誰かに読んでもらうための場所です。投稿には書いた人の文字の形がそのまま刻まれていて、同じフォントもアルファベットも持っていない読者にもちゃんと届きます。",
       final_title: "言語が、いま作られている。<em>その過程を見に来て。</em>",
-      final_cta: "フォロー",
-      final_appstore: "App Store — 準備中",
+      final_cta: "Xで最新情報",
+      final_appstore: "App Store — 近日公開",
       footer_home: "ホーム",
       footer_works: "作品"
     },
     es: {
-      nav_follow: "Seguir el desarrollo",
+      nav_follow: "Novedades en X",
       hero_kicker: "Una herramienta para crear idiomas",
       hero_title: "Dale a un idioma sus propios sonidos, su propio <em>alfabeto</em>.",
       hero_lead: "Lingua deriva el AFI, las lecturas y el sistema de escritura a partir de las palabras que inventas. Dibuja cada letra tú mismo y luego escríbela con un teclado real hecho para tu propio alfabeto.",
-      hero_cta: "SEGUIR",
+      hero_cta: "Novedades en X",
       hero_fine: "En desarrollo para iOS · ahora en TestFlight · lanzamiento este otoño",
       hero_appstore: "App Store — próximamente",
       pitch_title: "Un idioma inventado, hecho <em>como es debido</em>.",
@@ -380,17 +384,17 @@
       f3_title: "Donde tus letras<br>se <em>ven</em>.",
       f3_body: "Tu teclado escribe tus letras dentro de Lingua. La línea de tiempo es donde cualquiera más las lee — cada publicación lleva las letras tal como las dibujó su autor, incluso sin esa fuente o alfabeto.",
       final_title: "Se está construyendo un idioma.<em>Ven a verlo.</em>",
-      final_cta: "SEGUIR",
+      final_cta: "Novedades en X",
       final_appstore: "App Store — próximamente",
       footer_home: "Inicio",
       footer_works: "Proyectos"
     },
     pt: {
-      nav_follow: "Seguir o desenvolvimento",
+      nav_follow: "Novidades no X",
       hero_kicker: "Uma ferramenta para criar idiomas",
       hero_title: "Dê a um idioma os seus próprios sons, o seu próprio <em>alfabeto</em>.",
       hero_lead: "O Lingua deriva o AFI, as leituras e o sistema de escrita a partir das palavras que você inventa. Desenhe cada letra você mesmo — depois digite com um teclado real feito para o seu próprio alfabeto.",
-      hero_cta: "SEGUIR",
+      hero_cta: "Novidades no X",
       hero_fine: "Em desenvolvimento para iOS · agora no TestFlight · lançamento neste outono",
       hero_appstore: "App Store — em breve",
       pitch_title: "Uma língua construída <em>como deve ser</em>.",
@@ -405,17 +409,17 @@
       f3_title: "Onde as suas letras<br>são <em>vistas</em>.",
       f3_body: "O seu teclado escreve as suas letras dentro do Lingua. A linha do tempo é onde qualquer outra pessoa as lê — cada publicação carrega as letras exatamente como o autor as desenhou, mesmo sem essa fonte ou alfabeto.",
       final_title: "Um idioma está sendo construído.<em>Venha ver.</em>",
-      final_cta: "SEGUIR",
+      final_cta: "Novidades no X",
       final_appstore: "App Store — em breve",
       footer_home: "Início",
       footer_works: "Projetos"
     },
     fr: {
-      nav_follow: "Suivre le développement",
+      nav_follow: "Actus sur X",
       hero_kicker: "Un outil pour construire une langue",
       hero_title: "Donnez à une langue ses propres sons, son propre <em>alphabet</em>.",
       hero_lead: "Lingua déduit l'API, les lectures et le système d'écriture à partir des mots que vous inventez. Dessinez chaque lettre vous-même, puis tapez-la avec un vrai clavier conçu pour votre alphabet.",
-      hero_cta: "SUIVRE",
+      hero_cta: "Actus sur X",
       hero_fine: "En développement pour iOS · sur TestFlight actuellement · lancement cet automne",
       hero_appstore: "App Store — bientôt disponible",
       pitch_title: "Une langue construite <em>comme il faut</em>.",
@@ -430,17 +434,17 @@
       f3_title: "Là où vos lettres<br>sont <em>vues</em>.",
       f3_body: "Votre clavier écrit vos lettres pour vous, dans Lingua. Le fil d'actualité, c'est ce qui permet à n'importe qui d'autre de les lire — chaque publication porte les lettres telles que son auteur les a dessinées, même sans cette police ni cet alphabet.",
       final_title: "Une langue est en train de naître.<em>Venez voir.</em>",
-      final_cta: "SUIVRE",
+      final_cta: "Actus sur X",
       final_appstore: "App Store — bientôt disponible",
       footer_home: "Accueil",
       footer_works: "Projets"
     },
     de: {
-      nav_follow: "Entwicklung folgen",
+      nav_follow: "Neuigkeiten auf X",
       hero_kicker: "Ein Werkzeug, um eine Sprache zu erschaffen",
       hero_title: "Geben Sie einer Sprache ihre eigenen Laute, ihr eigenes <em>Alphabet</em>.",
       hero_lead: "Lingua leitet die Lautschrift, die Lesungen und das Schriftsystem aus den Wörtern ab, die Sie erfinden. Zeichnen Sie jeden Buchstaben selbst — und tippen Sie ihn dann mit einer echten Tastatur, die für Ihr eigenes Alphabet gebaut ist.",
-      hero_cta: "FOLGEN",
+      hero_cta: "Neuigkeiten auf X",
       hero_fine: "In Entwicklung für iOS · derzeit in TestFlight · Start in diesem Herbst",
       hero_appstore: "App Store — demnächst",
       pitch_title: "Eine Plansprache, <em>richtig</em> gebaut.",
@@ -455,17 +459,17 @@
       f3_title: "Wo Ihre Buchstaben<br><em>gesehen</em> werden.",
       f3_body: "Ihre Tastatur schreibt Ihre Buchstaben für Sie, innerhalb von Lingua. Die Zeitleiste ist der Ort, an dem sie jeder andere lesen kann — jeder Beitrag trägt die Buchstaben genau so, wie sie der Autor gezeichnet hat, auch ohne diese Schriftart oder dieses Alphabet.",
       final_title: "Eine Sprache entsteht gerade.<em>Sehen Sie zu.</em>",
-      final_cta: "FOLGEN",
+      final_cta: "Neuigkeiten auf X",
       final_appstore: "App Store — demnächst",
       footer_home: "Start",
       footer_works: "Projekte"
     },
     it: {
-      nav_follow: "Segui lo sviluppo",
+      nav_follow: "Novità su X",
       hero_kicker: "Uno strumento per costruire una lingua",
       hero_title: "Dai a una lingua i suoi suoni, il suo <em>alfabeto</em>.",
       hero_lead: "Lingua ricava l'IPA, le letture e il sistema di scrittura dalle parole che inventi. Disegna ogni lettera con le tue mani — poi scrivila con una tastiera vera, costruita per il tuo alfabeto.",
-      hero_cta: "SEGUI",
+      hero_cta: "Novità su X",
       hero_fine: "In sviluppo per iOS · ora su TestFlight · lancio in autunno",
       hero_appstore: "App Store — in arrivo",
       pitch_title: "Una lingua inventata, costruita <em>a regola d'arte</em>.",
@@ -480,17 +484,17 @@
       f3_title: "Dove le tue lettere<br>vengono <em>viste</em>.",
       f3_body: "La tua tastiera scrive le tue lettere per te, dentro Lingua. La timeline è il posto dove chiunque altro le legge — ogni post porta le lettere disegnate proprio come le ha fatte chi scrive, anche senza quel font o quell'alfabeto.",
       final_title: "Una lingua si sta costruendo.<em>Vieni a vederla.</em>",
-      final_cta: "SEGUI",
+      final_cta: "Novità su X",
       final_appstore: "App Store — in arrivo",
       footer_home: "Home",
       footer_works: "Progetti"
     },
     ru: {
-      nav_follow: "Следить за разработкой",
+      nav_follow: "Новости в X",
       hero_kicker: "Инструмент для создания языка",
       hero_title: "Дайте языку собственные звуки и собственный <em>алфавит</em>.",
       hero_lead: "Lingua выводит МФА, чтения и систему письма из придуманных вами слов. Нарисуйте каждую букву сами — а затем печатайте её на настоящей клавиатуре, созданной для вашего алфавита.",
-      hero_cta: "ПОДПИСАТЬСЯ",
+      hero_cta: "Новости в X",
       hero_fine: "В разработке для iOS · сейчас в TestFlight · запуск этой осенью",
       hero_appstore: "App Store — скоро",
       pitch_title: "Придуманный язык, сделанный <em>как надо</em>.",
@@ -505,17 +509,17 @@
       f3_title: "Там, где ваши буквы<br><em>видят</em>.",
       f3_body: "Ваша клавиатура пишет ваши буквы для вас внутри Lingua. Лента — это то место, где их читают все остальные: каждый пост несёт буквы именно такими, какими их нарисовал автор, даже без этого шрифта или алфавита.",
       final_title: "Язык создаётся прямо сейчас.<em>Приходите посмотреть.</em>",
-      final_cta: "ПОДПИСАТЬСЯ",
+      final_cta: "Новости в X",
       final_appstore: "App Store — скоро",
       footer_home: "Главная",
       footer_works: "Проекты"
     },
     zh: {
-      nav_follow: "关注开发进展",
+      nav_follow: "X 最新动态",
       hero_kicker: "一个用来构建语言的工具",
       hero_title: "让一门语言拥有自己的读音，自己的<em>文字</em>。",
       hero_lead: "Lingua 会从你创造的词语中推导出国际音标、读音和文字系统。每一个字母都由你亲手描绘——然后用专为你自己的文字打造的真实键盘输入它。",
-      hero_cta: "关注",
+      hero_cta: "X 最新动态",
       hero_fine: "iOS 开发中 · 目前在 TestFlight 测试 · 今年秋季发布",
       hero_appstore: "App Store — 即将上线",
       pitch_title: "认真打造的<em>人造语言</em>。",
@@ -530,17 +534,17 @@
       f3_title: "你的文字<br>被<em>看见</em>的地方。",
       f3_body: "你的键盘在 Lingua 内为你写下你的文字。时间线则是让其他任何人读到它们的地方——每一条帖子都带着作者亲手描绘的字形，即使读者没有那款字体或那套文字。",
       final_title: "一门语言正在被创造。<em>来见证这一切。</em>",
-      final_cta: "关注",
+      final_cta: "X 最新动态",
       final_appstore: "App Store — 即将上线",
       footer_home: "首页",
       footer_works: "作品"
     },
     ko: {
-      nav_follow: "개발 소식 팔로우",
+      nav_follow: "X에서 최신 소식",
       hero_kicker: "언어를 만드는 도구",
       hero_title: "언어에 고유한 소리와 고유한 <em>문자</em>를.",
       hero_lead: "Lingua는 당신이 만든 단어로부터 IPA, 읽기, 문자 체계를 도출합니다. 모든 글자를 직접 그리고, 자신만의 문자를 위해 만들어진 진짜 키보드로 입력하세요.",
-      hero_cta: "팔로우",
+      hero_cta: "X에서 최신 소식",
       hero_fine: "iOS용으로 개발 중 · 현재 TestFlight 테스트 중 · 올가을 출시",
       hero_appstore: "App Store — 출시 예정",
       pitch_title: "제대로 <em>만든</em> 인공어.",
@@ -555,7 +559,7 @@
       f3_title: "당신의 문자가<br><em>읽히는</em> 곳.",
       f3_body: "키보드는 Lingua 안에서 당신의 문자를 써줍니다. 타임라인은 다른 누군가가 그것을 읽을 수 있게 하는 곳입니다 — 모든 게시물에는 그 폰트나 문자가 없는 독자에게도, 작성자가 그린 그대로의 글자가 담겨 전달됩니다.",
       final_title: "언어가 지금 만들어지고 있습니다.<em>그 과정을 지켜보세요.</em>",
-      final_cta: "팔로우",
+      final_cta: "X에서 최신 소식",
       final_appstore: "App Store — 출시 예정",
       footer_home: "홈",
       footer_works: "작품"
