@@ -17,7 +17,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@500;600&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@500;600&family=Noto+Serif:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Cormorant+Garamond:ital,wght@0,500;1,500;1,600&family=Inter:wght@300;400;500;600&family=Noto+Sans+JP:wght@300;400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700&family=Noto+Sans+SC:wght@300;400;500;700&family=Noto+Serif+SC:wght@500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Serif+KR:wght@500;600&family=Noto+Serif:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -33,7 +33,7 @@
   }
   /* Fonts swap per language so a headline never falls back to a generic
      system serif — Cinzel/Cormorant have no CJK or Cyrillic glyphs. */
-  html[data-lang="ja"]{ --body:'Noto Sans JP', sans-serif; --serif:'Noto Serif JP', serif; --ital:'Noto Serif JP', serif; --em-style:normal; }
+  html[data-lang="ja"]{ --body:'Noto Sans JP', sans-serif; --serif:'Zen Kaku Gothic New', sans-serif; --ital:'Zen Kaku Gothic New', sans-serif; --em-style:normal; }
   html[data-lang="zh"]{ --body:'Noto Sans SC', sans-serif; --serif:'Noto Serif SC', serif; --ital:'Noto Serif SC', serif; --em-style:normal; }
   html[data-lang="ko"]{ --body:'Noto Sans KR', sans-serif; --serif:'Noto Serif KR', serif; --ital:'Noto Serif KR', serif; --em-style:normal; }
   html[data-lang="ru"]{ --serif:'Noto Serif', serif; --ital:'Noto Serif', serif; }
@@ -88,6 +88,9 @@
   .kicker{ font-family:var(--body); font-size:11px; letter-spacing:0.42em; text-transform:uppercase; color:var(--pur); margin-bottom:24px; }
   .kicker::before{ content:'—— '; color:var(--purln); }
   h1.htitle{ font-family:var(--serif); font-weight:500; font-size:clamp(34px,5vw,68px); line-height:1.15; letter-spacing:0.005em; max-width:15ch; color:#fff; }
+  /* the "ch" unit assumes Latin-width glyphs and mis-wraps CJK text —
+     these languages get manual <br> tags in the copy instead */
+  html[data-lang="ja"] h1.htitle, html[data-lang="zh"] h1.htitle, html[data-lang="ko"] h1.htitle{ max-width:none; }
   .htitle em, .feat-title em, .pitch-title em{ font-family:var(--ital); font-style:var(--em-style); font-weight:500; color:var(--pur); }
   .lead{ margin-top:28px; max-width:48ch; font-size:16px; line-height:1.9; color:var(--txs); font-weight:300; font-family:var(--body); }
   .ctarow{ margin-top:42px; display:flex; align-items:center; gap:34px; flex-wrap:wrap; }
@@ -254,7 +257,7 @@
   <div class="feat-text">
     <p class="kicker" data-key="f1_kicker">Your own alphabet</p>
     <h3 class="feat-title" data-key="f1_title">Not a font.<br>Your <em>handwriting</em>.</h3>
-    <p class="feat-body" data-key="f1_body">Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.</p>
+    <p class="feat-body" data-key="f1_body">28 letters — a to z, plus ! and ? — and every one is drawn by you, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.</p>
   </div>
   <div class="feat-media">
     <div class="shot"><img src="/images/lingua/shot-lexicon.jpg" alt="A dictionary entry in Lingua, spelled with a hand-drawn alphabet, with its IPA reading and meaning"></div>
@@ -326,7 +329,7 @@
       pitch_body: "Phonology, a growing dictionary, grammar you define rule by rule. Lingua is a place to design a language the way a linguist would — not a random name generator.",
       f1_kicker: "Your own alphabet",
       f1_title: "Not a font.<br>Your <em>handwriting</em>.",
-      f1_body: "Every free account gets 28 letters — a to z, plus ! and ? — and you draw every one of them yourself, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.",
+      f1_body: "28 letters — a to z, plus ! and ? — and every one is drawn by you, stroke by stroke. The moment you save the last letter, your dictionary reads in your hand, not in Latin.",
       f2_kicker: "A keyboard of your own",
       f2_title: "A real <em>keyboard</em>, not a mockup.",
       f2_body: "An actual iOS keyboard extension, laid out with the letters you drew. It's how you write your language, fast, right inside Lingua.",
@@ -342,23 +345,23 @@
     ja: {
       nav_follow: "Xで最新情報",
       hero_kicker: "言語をつくるツール",
-      hero_title: "言語に、自分だけの音を。自分だけの<em>文字</em>を。",
-      hero_lead: "Linguaは、あなたが考えた単語から発音記号・読み方・文字体系までを組み立てていくアプリです。文字は一つひとつ自分の手で描き、そのための本物のキーボードでそのまま入力できます。",
+      hero_title: "言葉も、<em>文字</em>も、<br>自分でつくる。",
+      hero_lead: "自分で考えた単語から、発音記号も読み方も文字体系も、そのぶんできあがっていく。文字は一文字ずつ、自分の手で描く。描いた文字は、専用のキーボードでそのまま打てます。",
       hero_cta: "Xで最新情報",
       hero_fine: "iOS向けに開発中・TestFlightでテスト中・今秋ローンチ予定",
       hero_appstore: "App Store — 近日公開",
-      pitch_title: "きちんと作る、<em>架空言語</em>。",
-      pitch_body: "音韻、育っていく辞書、ひとつずつ自分で定義していく文法。Linguaは、言語学者のように言語を体系立てて作る場所です。ランダムな名前生成ツールとはわけが違います。",
+      pitch_title: "人工言語を、<em>ちゃんと</em>作る。",
+      pitch_body: "音韻、育っていく辞書、自分で決めていく文法——言語学者のように、腰を据えて言語を作っていく場所です。名前をランダムに並べるだけの生成ツールとは、そもそも別物です。",
       f1_kicker: "自分だけの文字",
       f1_title: "フォントじゃない。<br>自分の手で描いた<em>文字</em>。",
-      f1_body: "無料プランでも28文字—a〜zと！？—が使え、そのすべてを自分の手でストロークから描けます。最後の1文字を描き終えた瞬間、あなたの辞書はラテン文字ではなく、自分の文字で読めるようになります。",
+      f1_body: "a〜z、それに！と？。ぜんぶで28文字を、自分の手で一画ずつ描いていきます。最後の文字を描き終えると、辞書の表示はもうラテン文字じゃありません。あなたの筆跡そのものです。",
       f2_kicker: "自分だけのキーボード",
       f2_title: "本物の<em>キーボード</em>。モックアップじゃない。",
-      f2_body: "本物のiOSキーボード拡張機能で、キーの配列はあなたが描いた文字そのもの。Lingua内で自分の言語をさっと書くための道具です。",
+      f2_body: "キーを見れば分かります。並んでいるのは、あなたが描いた文字そのもの。作りもののモックアップではなく、実際に動くiOSのキーボード拡張機能です。Lingua内で、自分の言語をそのまま指で書けます。",
       f3_kicker: "誰にでも届く形で",
       f3_title: "自分の文字が、<br><em>読まれる</em>場所。",
-      f3_body: "キーボードは、Lingua内で自分の文字を書くための道具。タイムラインは、それを他の誰かに読んでもらうための場所です。投稿には書いた人の文字の形がそのまま刻まれていて、同じフォントもアルファベットも持っていない読者にもちゃんと届きます。",
-      final_title: "言語が、いま作られている。<em>その過程を見に来て。</em>",
+      f3_body: "自分の文字を書けるのは、Linguaの中だけ——それで終わりではありません。書いた投稿がタイムラインに並ぶと、読む側にその文字がそのまま届きます。フォントを持っていなくても、そのアルファベットを知らなくても関係ありません。書いた通りの形で、ちゃんと読まれます。",
+      final_title: "言語が、いま作られている。<em>その過程を、<br>見に行きませんか？</em>",
       final_cta: "Xで最新情報",
       final_appstore: "App Store — 近日公開",
       footer_home: "ホーム",
@@ -376,7 +379,7 @@
       pitch_body: "Fonología, un diccionario que crece, gramática que defines regla por regla. Lingua es un lugar para diseñar un idioma como lo haría un lingüista, no un generador aleatorio de nombres.",
       f1_kicker: "Tu propio alfabeto",
       f1_title: "No es una fuente.<br>Es tu <em>letra</em>.",
-      f1_body: "Toda cuenta gratuita recibe 28 letras — de la a a la z, más ! y ? — y las dibujas tú mismo, trazo a trazo. En cuanto guardas la última letra, tu diccionario se lee con tu propia mano, no en latín.",
+      f1_body: "28 letras — de la a a la z, más ! y ? — y las dibujas tú mismo, trazo a trazo. En cuanto guardas la última letra, tu diccionario se lee con tu propia mano, no en latín.",
       f2_kicker: "Un teclado propio",
       f2_title: "Un <em>teclado</em> real, no una simulación.",
       f2_body: "Una extensión de teclado real para iOS, con las letras que dibujaste. Así escribes tu idioma, rápido, dentro de Lingua.",
@@ -401,7 +404,7 @@
       pitch_body: "Fonologia, um dicionário que cresce, gramática que você define regra por regra. O Lingua é um lugar para projetar um idioma como um linguista faria — não um gerador aleatório de nomes.",
       f1_kicker: "O seu próprio alfabeto",
       f1_title: "Não é uma fonte.<br>É a sua <em>caligrafia</em>.",
-      f1_body: "Toda conta gratuita recebe 28 letras — de a a z, mais ! e ? — e você desenha cada uma delas, traço a traço. No momento em que salva a última letra, o seu dicionário passa a ser lido na sua própria mão, não em latim.",
+      f1_body: "28 letras — de a a z, mais ! e ? — e você desenha cada uma delas, traço a traço. No momento em que salva a última letra, o seu dicionário passa a ser lido na sua própria mão, não em latim.",
       f2_kicker: "Um teclado só seu",
       f2_title: "Um <em>teclado</em> real, não uma simulação.",
       f2_body: "Uma extensão de teclado real para iOS, com o layout das letras que você desenhou. É assim que você escreve o seu idioma, rápido, dentro do Lingua.",
@@ -426,7 +429,7 @@
       pitch_body: "Phonologie, un dictionnaire qui grandit, une grammaire que vous définissez règle par règle. Lingua est un endroit pour concevoir une langue comme le ferait un linguiste — pas un générateur de noms aléatoires.",
       f1_kicker: "Votre propre alphabet",
       f1_title: "Pas une police.<br>Votre <em>écriture</em>.",
-      f1_body: "Chaque compte gratuit reçoit 28 lettres — de a à z, plus ! et ? — et vous les dessinez vous-même, trait par trait. Dès que vous enregistrez la dernière lettre, votre dictionnaire se lit dans votre propre main, pas en latin.",
+      f1_body: "28 lettres — de a à z, plus ! et ? — et vous les dessinez vous-même, trait par trait. Dès que vous enregistrez la dernière lettre, votre dictionnaire se lit dans votre propre main, pas en latin.",
       f2_kicker: "Un clavier bien à vous",
       f2_title: "Un vrai <em>clavier</em>, pas une maquette.",
       f2_body: "Une véritable extension clavier iOS, avec les lettres que vous avez dessinées. C'est comme ça que vous écrivez votre langue, vite, directement dans Lingua.",
@@ -451,7 +454,7 @@
       pitch_body: "Phonologie, ein wachsendes Wörterbuch, eine Grammatik, die Sie Regel für Regel festlegen. Lingua ist ein Ort, um eine Sprache so zu entwerfen, wie es ein Linguist tun würde — kein zufälliger Namensgenerator.",
       f1_kicker: "Ihr eigenes Alphabet",
       f1_title: "Keine Schriftart.<br>Ihre <em>Handschrift</em>.",
-      f1_body: "Jedes kostenlose Konto erhält 28 Buchstaben — a bis z, plus ! und ? — und Sie zeichnen jeden einzelnen selbst, Strich für Strich. Sobald Sie den letzten Buchstaben speichern, liest sich Ihr Wörterbuch in Ihrer eigenen Handschrift, nicht in lateinischer Schrift.",
+      f1_body: "28 Buchstaben — a bis z, plus ! und ? — und Sie zeichnen jeden einzelnen selbst, Strich für Strich. Sobald Sie den letzten Buchstaben speichern, liest sich Ihr Wörterbuch in Ihrer eigenen Handschrift, nicht in lateinischer Schrift.",
       f2_kicker: "Eine eigene Tastatur",
       f2_title: "Eine echte <em>Tastatur</em>, kein Mockup.",
       f2_body: "Eine echte iOS-Tastaturerweiterung, angeordnet mit den Buchstaben, die Sie gezeichnet haben. So schreiben Sie Ihre Sprache — schnell, direkt in Lingua.",
@@ -476,7 +479,7 @@
       pitch_body: "Fonologia, un dizionario in crescita, una grammatica che definisci regola per regola. Lingua è un posto per progettare una lingua come farebbe un linguista — non un generatore casuale di nomi.",
       f1_kicker: "Il tuo alfabeto",
       f1_title: "Non un font.<br>La tua <em>scrittura</em>.",
-      f1_body: "Ogni account gratuito riceve 28 lettere — dalla a alla z, più ! e ? — e le disegni tu stesso, tratto dopo tratto. Nel momento in cui salvi l'ultima lettera, il tuo dizionario si legge con la tua mano, non in latino.",
+      f1_body: "28 lettere — dalla a alla z, più ! e ? — e le disegni tu stesso, tratto dopo tratto. Nel momento in cui salvi l'ultima lettera, il tuo dizionario si legge con la tua mano, non in latino.",
       f2_kicker: "Una tastiera tutta tua",
       f2_title: "Una <em>tastiera</em> vera, non un mockup.",
       f2_body: "Un'estensione tastiera reale per iOS, con le lettere che hai disegnato. È così che scrivi la tua lingua, veloce, dentro Lingua.",
@@ -501,7 +504,7 @@
       pitch_body: "Фонология, растущий словарь, грамматика, которую вы задаёте правило за правилом. Lingua — это место, чтобы проектировать язык так, как это сделал бы лингвист, а не генератор случайных имён.",
       f1_kicker: "Ваш собственный алфавит",
       f1_title: "Это не шрифт.<br>Это ваш <em>почерк</em>.",
-      f1_body: "Каждый бесплатный аккаунт получает 28 букв — от a до z, плюс ! и ? — и вы рисуете каждую из них сами, штрих за штрихом. В момент сохранения последней буквы ваш словарь начинает читаться вашей рукой, а не латиницей.",
+      f1_body: "28 букв — от a до z, плюс ! и ? — и вы рисуете каждую из них сами, штрих за штрихом. В момент сохранения последней буквы ваш словарь начинает читаться вашей рукой, а не латиницей.",
       f2_kicker: "Собственная клавиатура",
       f2_title: "Настоящая <em>клавиатура</em>, а не макет.",
       f2_body: "Настоящее расширение клавиатуры для iOS с буквами, которые вы нарисовали. Так вы быстро пишете на своём языке прямо внутри Lingua.",
@@ -526,7 +529,7 @@
       pitch_body: "音系、不断增长的词典、由你逐条定义的语法。Lingua 是一个像语言学家那样系统地构建语言的地方——而不是一个随机取名工具。",
       f1_kicker: "属于你自己的文字",
       f1_title: "不是字体。<br>是你的<em>笔迹</em>。",
-      f1_body: "每个免费账户都有 28 个字母——a 到 z，加上 ! 和 ?——全部由你亲手一笔一划描绘。保存最后一个字母的那一刻，你的词典就会以你自己的字迹呈现，而不是拉丁字母。",
+      f1_body: "28 个字母——a 到 z，加上 ! 和 ?——全部由你亲手一笔一划描绘。保存最后一个字母的那一刻，你的词典就会以你自己的字迹呈现，而不是拉丁字母。",
       f2_kicker: "属于你自己的键盘",
       f2_title: "真正的<em>键盘</em>，不是模拟图。",
       f2_body: "一个真实的 iOS 键盘扩展，按键排布就是你描绘的字母。这就是你在 Lingua 内快速书写自己语言的方式。",
@@ -551,7 +554,7 @@
       pitch_body: "음운론, 계속 늘어나는 사전, 하나씩 직접 정의하는 문법. Lingua는 언어학자처럼 체계적으로 언어를 설계하는 공간입니다 — 무작위 이름 생성기가 아닙니다.",
       f1_kicker: "당신만의 문자",
       f1_title: "폰트가 아닙니다.<br>당신의 <em>손글씨</em>입니다.",
-      f1_body: "모든 무료 계정에는 28개의 글자 — a부터 z, 그리고 ! 와 ? — 가 주어지며, 이 모두를 직접 한 획씩 그립니다. 마지막 글자를 저장하는 순간, 당신의 사전은 라틴 문자가 아닌 당신의 손으로 쓰여집니다.",
+      f1_body: "총 28개의 글자 — a부터 z, 그리고 ! 와 ? — 를 직접 한 획씩 그립니다. 마지막 글자를 저장하는 순간, 당신의 사전은 라틴 문자가 아닌 당신의 손으로 쓰여집니다.",
       f2_kicker: "나만의 키보드",
       f2_title: "진짜 <em>키보드</em>, 목업이 아닙니다.",
       f2_body: "당신이 그린 글자로 배열된 진짜 iOS 키보드 확장 프로그램입니다. Lingua 안에서 빠르게 자신의 언어를 쓰는 방법입니다.",
