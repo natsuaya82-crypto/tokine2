@@ -425,3 +425,166 @@ footer { background: #050505; padding: 32px 40px; display: flex; align-items: ce
   .footer-links { flex-direction: column; align-items: center; gap: 16px; }
 }
 @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+
+/* ============================================================
+   業務システム開発事業（福岡・中小企業向け）用コンポーネント
+   ============================================================ */
+
+/* 汎用アイブロウ（page-header 以外のセクション見出し用） */
+.section > .eyebrow,
+.section-inner > .eyebrow {
+  font-family: var(--en); font-size: 11px; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--gold);
+  text-align: center; margin: 0 0 14px;
+}
+.section-caption {
+  text-align: center; font-weight: 300; font-size: 15px; line-height: 2.1;
+  letter-spacing: 0.08em; color: var(--text-dim);
+  max-width: 640px; margin: 0 auto 56px;
+}
+
+/* お困りごと（共感パート） */
+.pain-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 18px; max-width: 900px; margin: 0 auto;
+}
+.pain-item {
+  position: relative; background: var(--bg-2); border: 1px solid var(--line-soft);
+  border-radius: 4px; padding: 28px 30px 28px 62px;
+}
+.pain-item::before {
+  content: "”"; position: absolute; left: 24px; top: 20px;
+  font-family: var(--serif); font-size: 34px; line-height: 1;
+  color: var(--gold); opacity: 0.5;
+}
+.pain-item p {
+  margin: 0; font-weight: 300; font-size: 14.5px; line-height: 1.95;
+  letter-spacing: 0.05em; color: var(--text);
+}
+
+/* なぜ今できるのか */
+.whynow {
+  max-width: 820px; margin: 0 auto; text-align: center;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  padding: 54px 30px;
+}
+.whynow-strike {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(20px, 3.2vw, 30px); letter-spacing: 0.1em;
+  color: var(--text-mute); text-decoration: line-through;
+  text-decoration-thickness: 1px; margin: 0;
+}
+.whynow-lead {
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(24px, 4vw, 40px); line-height: 1.7; letter-spacing: 0.1em;
+  color: #fff; margin: 18px 0 0;
+}
+.whynow-lead strong { color: var(--gold-bright); font-weight: 400; }
+.whynow-body {
+  margin: 26px auto 0; max-width: 620px; font-weight: 300;
+  font-size: 14.5px; line-height: 2.1; letter-spacing: 0.07em; color: var(--text-dim);
+}
+
+/* 比較表 */
+.cmp-wrap { max-width: 900px; margin: 0 auto; overflow-x: auto; }
+.cmp {
+  width: 100%; min-width: 620px; border-collapse: collapse;
+  font-weight: 300; font-size: 14px; letter-spacing: 0.04em;
+}
+.cmp th, .cmp td {
+  padding: 20px 22px; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--line-soft); line-height: 1.85;
+}
+.cmp thead th {
+  font-family: var(--en); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--text-mute);
+  border-bottom: 1px solid var(--line); padding-bottom: 14px;
+}
+.cmp thead th.is-ours { color: var(--gold); }
+.cmp tbody th {
+  font-weight: 400; font-size: 13px; color: var(--text-mute);
+  width: 26%; white-space: nowrap;
+}
+.cmp td.is-ours {
+  color: #fff; background: rgba(216, 180, 106, 0.05);
+  border-left: 1px solid rgba(216, 180, 106, 0.22);
+  border-right: 1px solid rgba(216, 180, 106, 0.22);
+}
+.cmp tbody tr:first-child td.is-ours { border-top: 1px solid rgba(216, 180, 106, 0.22); }
+.cmp tbody tr:last-child td.is-ours { border-bottom: 1px solid rgba(216, 180, 106, 0.22); }
+.cmp td.is-theirs { color: var(--text-dim); }
+
+/* 地域（福岡）セクション */
+.local-inner {
+  max-width: 780px; margin: 0 auto; text-align: center;
+}
+.local-mark {
+  font-family: var(--serif); font-size: clamp(48px, 9vw, 96px);
+  font-weight: 200; letter-spacing: 0.16em; color: #fff; margin: 0;
+}
+.local-sub {
+  font-family: var(--en); font-size: 11px; letter-spacing: 0.4em;
+  text-transform: uppercase; color: var(--gold); margin: 10px 0 0;
+}
+.local-body {
+  margin: 30px auto 0; max-width: 600px; font-weight: 300;
+  font-size: 15px; line-height: 2.15; letter-spacing: 0.07em; color: var(--text-dim);
+}
+
+/* 料金の考え方（初期＋月額） */
+.fee-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 20px; max-width: 820px; margin: 0 auto;
+}
+.fee-card {
+  background: var(--bg-2); border: 1px solid var(--line-soft);
+  border-radius: 4px; padding: 34px 32px;
+}
+.fee-card.is-recurring { border-color: rgba(216, 180, 106, 0.28); }
+.fee-en {
+  font-family: var(--en); font-size: 10px; letter-spacing: 0.3em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 10px;
+}
+.fee-card h3 {
+  font-family: var(--serif); font-weight: 300; font-size: 22px;
+  letter-spacing: 0.08em; color: #fff; margin: 0 0 14px;
+}
+.fee-card p {
+  margin: 0; font-weight: 300; font-size: 14px; line-height: 2;
+  letter-spacing: 0.05em; color: var(--text-dim);
+}
+.fee-note {
+  max-width: 820px; margin: 24px auto 0; text-align: center;
+  font-weight: 300; font-size: 13px; line-height: 2; letter-spacing: 0.06em;
+  color: var(--text-mute);
+}
+
+/* FAQ */
+.faq-list { max-width: 820px; margin: 0 auto; }
+.faq-item { border-bottom: 1px solid var(--line-soft); padding: 26px 0; }
+.faq-q {
+  display: flex; gap: 14px; font-weight: 400; font-size: 15px;
+  letter-spacing: 0.06em; color: #fff; margin: 0;
+}
+.faq-q::before {
+  content: "Q"; font-family: var(--en); font-size: 13px;
+  color: var(--gold); flex: none; line-height: 1.7;
+}
+.faq-a {
+  display: flex; gap: 14px; margin: 12px 0 0; font-weight: 300;
+  font-size: 14px; line-height: 2; letter-spacing: 0.05em; color: var(--text-dim);
+}
+.faq-a::before {
+  content: "A"; font-family: var(--en); font-size: 13px;
+  color: var(--text-mute); flex: none; line-height: 2;
+}
+
+@media (max-width: 768px) {
+  .pain-grid, .fee-grid { grid-template-columns: 1fr; }
+  .pain-item { padding: 24px 24px 24px 56px; }
+  .whynow { padding: 40px 20px; }
+  .cmp-wrap { margin: 0 -24px; padding: 0 24px; }
+}
+
+/* gateway セクションの eyebrow は従来の余白を維持（汎用 .eyebrow と同詳細度のため明示） */
+.gateway > .eyebrow { margin-bottom: 48px; }

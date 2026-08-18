@@ -4,12 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact | 刻音 -Tokine-</title>
-  <meta name="description" content="刻音(Tokine)へのお問い合わせ。AIチャットボット組み込み・LP/ホームページ制作・Webアプリ開発のご相談、お見積もりを承ります。">
+  <meta name="description" content="刻音(Tokine)へのお問い合わせ。福岡の中小企業向け専用業務システムの開発・保守運用について、ご相談・お見積もりを無料で承ります。">
 
   <link rel="icon" type="image/png" href="/icon.png">
   <link rel="apple-touch-icon" href="/icon.png">
-  <meta property="og:title" content="刻音 -Tokine-｜AIを活用したWeb制作・AIチャット">
-  <meta property="og:description" content="実物デモ・制作サンプルあり。LP・ホームページ制作／AIチャットボット組み込み。">
+  <meta property="og:title" content="刻音 -Tokine-｜お問い合わせ">
+  <meta property="og:description" content="業務システムのご相談・お見積もりは無料です。要件が固まっていない段階でも構いません。">
   <meta property="og:image" content="https://tokinets.com/ogp.png">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -34,7 +34,7 @@
     <p class="eyebrow">— Contact —</p>
     <h1>お問い合わせ</h1>
     <div class="section-divider"></div>
-    <p class="lead">ご相談・お見積もりを承ります。要件が固まっていない段階でも構いません。<br>下記フォームよりお気軽にお問い合わせください。通常1営業日以内にご返信いたします。</p>
+    <p class="lead">「これはシステムにできるのだろうか」という段階でも構いません。<br>現在の業務のお話をお聞かせいただければ、まずは一緒に整理いたします。ご相談・お見積もりは無料です。<br>通常1営業日以内にご返信いたします。</p>
   </header>
 
   <!-- Form -->
@@ -51,21 +51,26 @@
         <input id="name" type="text" name="name" required placeholder="山田 太郎">
       </div>
       <div class="field">
+        <label for="company">会社名・屋号</label>
+        <input id="company" type="text" name="会社名" placeholder="株式会社○○">
+      </div>
+      <div class="field">
         <label for="email">メールアドレス <span class="req">*</span></label>
         <input id="email" type="email" name="email" required placeholder="example@mail.com">
       </div>
       <div class="field">
         <label for="topic">ご相談内容</label>
         <select id="topic" name="ご相談内容">
-          <option>AIチャットボット組み込み</option>
-          <option>LP・ホームページ制作</option>
-          <option>Webアプリ・業務ツール開発</option>
-          <option>その他・未定</option>
+          <option>まず業務の相談から（内容は未定）</option>
+          <option>専用業務システムの開発</option>
+          <option>保守・運用について</option>
+          <option>データ移行・既存システム連携</option>
+          <option>その他</option>
         </select>
       </div>
       <div class="field">
         <label for="message">メッセージ <span class="req">*</span></label>
-        <textarea id="message" name="message" required placeholder="ご相談内容、ご希望の納期やご予算などをご記入ください。"></textarea>
+        <textarea id="message" name="message" required placeholder="現在お困りの業務（例：受注をExcelで管理していて転記が大変、など）、ご希望の時期やご予算などをご記入ください。決まっていない項目は空欄で構いません。"></textarea>
       </div>
 
       <button type="submit" class="btn btn-fill">
