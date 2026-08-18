@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /hearing-sheet.html
+
+Sitemap: https://tokinets.com/sitemap.xml
