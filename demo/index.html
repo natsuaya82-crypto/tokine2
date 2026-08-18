@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>案件管理デモ | 刻音 -Tokine-</title>
+<meta name="description" content="刻音(Tokine)が制作する業務システムのデモです。受注から入金までを一つの画面で管理する案件管理システム。スマートフォンでもそのままお使いいただけます。">
+<link rel="canonical" href="https://tokinets.com/demo">
+<link rel="icon" type="image/png" href="/icon.png">
+<meta property="og:title" content="案件管理デモ｜刻音 -Tokine-">
+<meta property="og:description" content="受注から入金までを一つの画面で。実際に触れる業務システムのデモです。">
+<meta property="og:image" content="https://tokinets.com/ogp.png">
+<meta name="theme-color" content="#1b2b45">
+<style>
+  :root{
+    --navy:#1b2b45; --navy-2:#24395c; --ink:#1a1d23; --body:#42474f;
+    --mute:#767c86; --line:#dfe2e8; --line-2:#eceef2;
+    --bg:#f4f6f9; --card:#fff;
+    --accent:#c9922f; --blue:#2f6fd0;
+    --ok:#1f9268; --ok-bg:#e6f5ef;
+    --warn:#c26a12; --warn-bg:#fdf1e3;
+    --late:#c33b3b; --late-bg:#fdecec;
+    --done:#6b7280; --done-bg:#f0f1f4;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--bg); color:var(--ink);
+    font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",system-ui,sans-serif;
+    font-size:15px; line-height:1.6; padding-bottom:78px;
+  }
+  button,input,select,textarea{font-family:inherit;font-size:inherit}
+
+  /* ---- デモ告知バー ---- */
+  .demobar{
+    background:var(--accent); color:#2a1e05; font-size:12.5px; line-height:1.5;
+    padding:8px 14px; text-align:center; font-weight:600;
+  }
+  .demobar span{font-weight:400;opacity:.85}
+  @media(max-width:560px){ .demobar span{display:none} }
+
+  /* ---- ヘッダー ---- */
+  header{
+    background:var(--navy); color:#fff; padding:13px 16px;
+    display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:30;
+  }
+  header .biz{font-size:15px;font-weight:700;letter-spacing:.02em}
+  header .biz small{display:block;font-size:10.5px;font-weight:400;opacity:.6;letter-spacing:.1em}
+  header .spacer{flex:1}
+  header .who{font-size:11.5px;opacity:.75;text-align:right;line-height:1.4}
+
+  main{max-width:900px;margin:0 auto;padding:16px 14px 20px}
+  .view{display:none}
+  .view.on{display:block}
+
+  h2.title{font-size:17px;font-weight:700;margin:0 0 3px;letter-spacing:.01em}
+  p.sub{margin:0 0 15px;font-size:12.5px;color:var(--mute)}
+
+  /* ---- サマリー ---- */
+  .kpis{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:18px}
+  .kpi{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+  .kpi .lb{font-size:11.5px;color:var(--mute);margin-bottom:3px}
+  .kpi .v{font-size:23px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+  .kpi .v small{font-size:12px;font-weight:500;color:var(--body);margin-left:2px}
+  .kpi.alert .v{color:var(--late)}
+  .kpi.money .v{color:var(--navy)}
+
+  .sechead{display:flex;align-items:baseline;justify-content:space-between;margin:20px 0 9px}
+  .sechead h3{font-size:14px;font-weight:700;margin:0}
+  .sechead a{font-size:12.5px;color:var(--blue);text-decoration:none;cursor:pointer}
+
+  /* ---- 案件カード ---- */
+  .job{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:13px 14px;margin-bottom:9px;cursor:pointer;display:block;width:100%;
+    text-align:left;border-left:4px solid var(--line);
+  }
+  .job:active{background:#fafbfc}
+  .job.s-uke{border-left-color:var(--blue)}
+  .job.s-saku{border-left-color:var(--warn)}
+  .job.s-sei{border-left-color:var(--accent)}
+  .job.s-nyu{border-left-color:var(--ok)}
+  .job .r1{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+  .job .nm{font-weight:700;font-size:14.5px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .job .r2{display:flex;align-items:center;gap:10px;font-size:12.5px;color:var(--body);flex-wrap:wrap}
+  .job .cust{color:var(--mute)}
+  .job .amt{margin-left:auto;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
+  .job .due.late{color:var(--late);font-weight:700}
+
+  .badge{
+    font-size:11px;font-weight:700;padding:2.5px 8px;border-radius:99px;flex:none;letter-spacing:.02em;
+  }
+  .b-uke{background:#e8f0fc;color:var(--blue)}
+  .b-saku{background:var(--warn-bg);color:var(--warn)}
+  .b-sei{background:#fbf2df;color:#96690f}
+  .b-nyu{background:var(--ok-bg);color:var(--ok)}
+
+  /* ---- 検索・絞り込み ---- */
+  .filter{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 12px;margin-bottom:13px}
+  .filter input[type=search]{
+    width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+    background:#fbfcfd;margin-bottom:9px;-webkit-appearance:none
+  }
+  .chips{display:flex;gap:6px;flex-wrap:wrap}
+  .chip{
+    padding:6px 13px;border-radius:99px;border:1px solid var(--line);background:#fff;
+    font-size:12.5px;color:var(--body);cursor:pointer
+  }
+  .chip.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:600}
+  .count{font-size:12px;color:var(--mute);margin:0 0 9px}
+
+  /* ---- 詳細 ---- */
+  .back{background:none;border:0;color:var(--blue);cursor:pointer;padding:0;margin-bottom:12px;font-size:13.5px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:15px;margin-bottom:12px}
+  .card h3{margin:0 0 11px;font-size:13px;font-weight:700;color:var(--navy);letter-spacing:.03em}
+  dl.kv{margin:0;display:grid;grid-template-columns:88px 1fr;gap:9px 10px;font-size:14px}
+  dl.kv dt{color:var(--mute);font-size:12.5px;padding-top:1px}
+  dl.kv dd{margin:0;font-weight:500}
+  dl.kv dd.big{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+
+  .steps{display:flex;gap:5px}
+  .steps button{
+    flex:1;padding:11px 3px;border:1px solid var(--line);background:#fff;border-radius:8px;
+    font-size:12px;color:var(--body);cursor:pointer;line-height:1.35
+  }
+  .steps button.on{background:var(--navy);border-color:var(--navy);color:#fff;font-weight:700}
+  .hint{font-size:11.5px;color:var(--mute);margin:9px 0 0}
+
+  .logs{list-style:none;margin:0;padding:0}
+  .logs li{padding:9px 0;border-bottom:1px solid var(--line-2);font-size:13.5px}
+  .logs li:last-child{border-bottom:0}
+  .logs .t{font-size:11.5px;color:var(--mute);display:block;margin-bottom:2px}
+  .addlog{display:flex;gap:7px;margin-top:11px}
+  .addlog input{flex:1;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:#fbfcfd;min-width:0}
+
+  .photos{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
+  .photo{
+    aspect-ratio:4/3;border:1px dashed var(--line);border-radius:8px;background:#fafbfc;
+    display:flex;align-items:center;justify-content:center;color:var(--mute);font-size:11px;text-align:center;padding:4px
+  }
+
+  /* ---- フォーム ---- */
+  .field{margin-bottom:13px}
+  .field label{display:block;font-size:12.5px;color:var(--body);margin-bottom:5px;font-weight:600}
+  .field label .req{color:var(--late);font-weight:700}
+  .field input,.field select,.field textarea{
+    width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;background:#fbfcfd;-webkit-appearance:none
+  }
+  .field select{background-image:none}
+  .field textarea{min-height:74px;resize:vertical}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+  .btn{
+    width:100%;padding:14px;border:0;border-radius:9px;background:var(--navy);color:#fff;
+    font-weight:700;font-size:15px;cursor:pointer
+  }
+  .btn.sub{background:#fff;color:var(--navy);border:1px solid var(--line);font-weight:600;margin-top:9px}
+
+  .empty{text-align:center;color:var(--mute);font-size:13.5px;padding:34px 10px}
+
+  /* ---- 下部ナビ ---- */
+  nav.tabs{
+    position:fixed;left:0;right:0;bottom:0;z-index:40;background:#fff;
+    border-top:1px solid var(--line);display:flex;
+    padding-bottom:env(safe-area-inset-bottom)
+  }
+  nav.tabs button{
+    flex:1;background:none;border:0;padding:9px 2px 8px;cursor:pointer;
+    color:var(--mute);font-size:10.5px;display:flex;flex-direction:column;align-items:center;gap:3px
+  }
+  nav.tabs button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  nav.tabs button.on{color:var(--navy);font-weight:700}
+
+  /* ---- 差し込み帯（営業導線） ---- */
+  .pitch{
+    margin:22px 0 0;background:var(--navy);color:#dfe5ef;border-radius:11px;padding:19px 18px;
+  }
+  .pitch b{color:#fff;display:block;font-size:15px;margin-bottom:7px}
+  .pitch p{margin:0 0 13px;font-size:13px;line-height:1.85}
+  .pitch a{
+    display:inline-block;background:var(--accent);color:#2a1e05;text-decoration:none;
+    padding:11px 20px;border-radius:8px;font-weight:700;font-size:13.5px
+  }
+  .pitch .sm{display:block;margin-top:11px;font-size:11.5px;opacity:.65}
+
+  @media(min-width:700px){
+    .kpis{grid-template-columns:repeat(4,1fr)}
+    body{padding-bottom:20px}
+    nav.tabs{position:static;border-top:0;border-bottom:1px solid var(--line);max-width:900px;margin:0 auto}
+    nav.tabs button{flex-direction:row;gap:7px;font-size:13px;padding:13px 6px}
+  }
+</style>
+</head>
+<body>
+
+<div class="demobar">
+  刻音の制作イメージをご覧いただくデモです
+  <span>／ 自由に触れます（再読み込みで元に戻ります）</span>
+</div>
+
+<header>
+  <div class="biz">サンプル工房<small>案件管理</small></div>
+  <div class="spacer"></div>
+  <div class="who">田中<br><span id="hd-cnt">作業中 0件</span></div>
+</header>
+
+<nav class="tabs">
+  <button data-v="home" class="on">
+    <svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/></svg>ホーム</button>
+  <button data-v="list">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg>案件</button>
+  <button data-v="new">
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>新規</button>
+  <button data-v="money">
+    <svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/></svg>請求・入金</button>
+</nav>
+
+<main>
+
+  <!-- ============ ホーム ============ -->
+  <section class="view on" id="v-home">
+    <h2 class="title">今月のようす</h2>
+    <p class="sub" id="today"></p>
+
+    <div class="kpis">
+      <div class="kpi"><div class="lb">進行中の案件</div><div class="v" id="k-active">0<small>件</small></div></div>
+      <div class="kpi alert"><div class="lb">期日が過ぎている</div><div class="v" id="k-late">0<small>件</small></div></div>
+      <div class="kpi money"><div class="lb">まだ請求していない</div><div class="v" id="k-sum"></div></div>
+      <div class="kpi money"><div class="lb">入金待ち</div><div class="v" id="k-unpaid"></div></div>
+    </div>
+
+    <div class="sechead"><h3>期日が近い案件</h3><a data-go="list">すべて見る</a></div>
+    <div id="near"></div>
+
+    <div class="pitch">
+      <b>こうした画面を、御社の仕事のやり方に合わせて作ります。</b>
+      <p>
+        画面の並びも、呼び方も、進み方も、この通りである必要はありません。
+        「案件」ではなく「工事」でも「ご注文」でも、御社で普段使っている言葉のままにいたします。
+        必要のない項目は、はじめから作りません。
+      </p>
+      <a href="/contact">業務の相談をする（無料）</a>
+      <span class="sm">初期費用 10万円〜30万円／保守・運用 月額 2万円〜10万円　刻音 -Tokine-</span>
+    </div>
+  </section>
+
+  <!-- ============ 案件一覧 ============ -->
+  <section class="view" id="v-list">
+    <h2 class="title">案件一覧</h2>
+    <p class="sub">お客様名・案件名で探せます</p>
+
+    <div class="filter">
+      <input type="search" id="q" placeholder="お客様名や案件名で検索" autocomplete="off">
+      <div class="chips" id="chips">
+        <button class="chip on" data-f="all">すべて</button>
+        <button class="chip" data-f="受注">受注</button>
+        <button class="chip" data-f="作業中">作業中</button>
+        <button class="chip" data-f="請求済">請求済</button>
+        <button class="chip" data-f="入金済">入金済</button>
+      </div>
+    </div>
+    <p class="count" id="count"></p>
+    <div id="list"></div>
+  </section>
+
+  <!-- ============ 案件詳細 ============ -->
+  <section class="view" id="v-detail">
+    <button class="back" id="back">← 一覧にもどる</button>
+    <div id="detail"></div>
+  </section>
+
+  <!-- ============ 新規登録 ============ -->
+  <section class="view" id="v-new">
+    <h2 class="title">案件を登録</h2>
+    <p class="sub">現場からでも、その場で登録できます</p>
+    <div class="card">
+      <form id="form">
+        <div class="field">
+          <label>お客様名 <span class="req">*</span></label>
+          <input name="cust" required placeholder="株式会社○○">
+        </div>
+        <div class="field">
+          <label>案件名 <span class="req">*</span></label>
+          <input name="name" required placeholder="事務所 空調入替">
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label>金額（円）</label>
+            <input name="amt" type="number" inputmode="numeric" placeholder="180000">
+          </div>
+          <div class="field">
+            <label>期日</label>
+            <input name="due" type="date">
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label>担当</label>
+            <select name="staff"><option>田中</option><option>佐藤</option><option>山口</option></select>
+          </div>
+          <div class="field">
+            <label>状態</label>
+            <select name="st"><option>受注</option><option>作業中</option><option>請求済</option><option>入金済</option></select>
+          </div>
+        </div>
+        <div class="field">
+          <label>メモ</label>
+          <textarea name="memo" placeholder="現地の状況、お客様のご希望など"></textarea>
+        </div>
+        <button type="submit" class="btn">登録する</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ 請求・入金 ============ -->
+  <section class="view" id="v-money">
+    <h2 class="title">請求・入金</h2>
+    <p class="sub">出しそびれと、もらいそびれを防ぎます</p>
+
+    <div class="kpis" style="grid-template-columns:repeat(2,1fr)">
+      <div class="kpi"><div class="lb">これから請求</div><div class="v" id="m-todo"></div></div>
+      <div class="kpi alert"><div class="lb">入金待ち</div><div class="v" id="m-wait"></div></div>
+    </div>
+
+    <div class="sechead"><h3>作業が終わり、まだ請求していないもの</h3></div>
+    <div id="m-list1"></div>
+    <div class="sechead"><h3>請求済みで、まだ入金のないもの</h3></div>
+    <div id="m-list2"></div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  "use strict";
+
+  var STATES = ["受注","作業中","請求済","入金済"];
+  var CLS = {"受注":"uke","作業中":"saku","請求済":"sei","入金済":"nyu"};
+
+  // ---- 期日は「今日」を基準に生成する（いつ見ても自然に見えるように）----
+  var today = new Date(); today.setHours(0,0,0,0);
+  function shift(d){ var x = new Date(today.getTime()); x.setDate(x.getDate()+d); return x; }
+  function iso(d){
+    return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+  }
+  function jp(s){
+    var p = s.split("-"); return Number(p[1])+"月"+Number(p[2])+"日";
+  }
+  function yen(n){ return "¥"+Number(n).toLocaleString("ja-JP"); }
+
+  var seed = [
+    {cust:"松本商店",       name:"店舗 照明のLED入替",     amt:240000, due:shift(-3), st:"作業中", staff:"田中",
+     memo:"脚立が入らないため小型のものを持参。日曜は営業のため作業不可。",
+     logs:[["3日前","現地確認。器具は12点。"],["1日前","部材が入荷。"]]},
+    {cust:"よしだ内装",     name:"倉庫 棚の増設",          amt:180000, due:shift(1),  st:"作業中", staff:"佐藤",
+     memo:"床の耐荷重を先方が確認中。",
+     logs:[["2日前","図面を受領。"]]},
+    {cust:"株式会社ミナミ", name:"事務所 空調入替（2階）", amt:520000, due:shift(4),  st:"受注",   staff:"田中",
+     memo:"7月中に完了希望。既存機の撤去込み。", logs:[["昨日","見積承認の連絡あり。"]]},
+    {cust:"カフェ とまり木", name:"厨房 換気扇の交換",      amt:96000,  due:shift(6),  st:"受注",   staff:"山口",
+     memo:"定休日の火曜に作業。", logs:[]},
+    {cust:"藤井建材",       name:"看板 取付",              amt:145000, due:shift(-9), st:"請求済", staff:"佐藤",
+     memo:"月末締めの翌月末払い。", logs:[["9日前","作業完了。"],["8日前","請求書を送付。"]]},
+    {cust:"松本商店",       name:"レジ裏 コンセント増設",  amt:38000,  due:shift(-16),st:"請求済", staff:"田中",
+     memo:"", logs:[["16日前","完了。"]]},
+    {cust:"ハシモト自動車", name:"整備場 配線点検",        amt:72000,  due:shift(-24),st:"入金済", staff:"山口",
+     memo:"", logs:[["24日前","完了・入金確認。"]]},
+    {cust:"よしだ内装",     name:"事務所 パーテーション",  amt:310000, due:shift(-31),st:"入金済", staff:"佐藤",
+     memo:"", logs:[]}
+  ];
+
+  var jobs = seed.map(function(j,i){
+    return {id:i+1, cust:j.cust, name:j.name, amt:j.amt, due:iso(j.due), st:j.st,
+            staff:j.staff, memo:j.memo, logs:j.logs.slice()};
+  });
+  var nextId = jobs.length+1;
+  var curId = null, filter = "all", query = "";
+
+  function isLate(j){ return j.st!=="入金済" && j.due && new Date(j.due) < today; }
+
+  // ---------- 描画 ----------
+  function jobCard(j){
+    var late = isLate(j);
+    return '<button class="job s-'+CLS[j.st]+'" data-id="'+j.id+'">'
+      + '<div class="r1"><span class="nm">'+esc(j.name)+'</span>'
+      + '<span class="badge b-'+CLS[j.st]+'">'+j.st+'</span></div>'
+      + '<div class="r2"><span class="cust">'+esc(j.cust)+'</span>'
+      + '<span class="due'+(late?' late':'')+'">'+(j.due?jp(j.due)+(late?' 期日超過':''):'期日なし')+'</span>'
+      + '<span class="amt">'+yen(j.amt)+'</span></div></button>';
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g,function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  function renderHome(){
+    var act = jobs.filter(function(j){return j.st==="受注"||j.st==="作業中";});
+    var late = jobs.filter(isLate);
+    var unpaid = jobs.filter(function(j){return j.st==="請求済";});
+    var yet = act.reduce(function(a,j){return a+j.amt;},0);
+
+    document.getElementById("today").textContent =
+      (today.getMonth()+1)+"月"+today.getDate()+"日 現在";
+    document.getElementById("hd-cnt").textContent =
+      "作業中 "+jobs.filter(function(j){return j.st==="作業中";}).length+"件";
+    document.getElementById("k-active").innerHTML = act.length+'<small>件</small>';
+    document.getElementById("k-late").innerHTML   = late.length+'<small>件</small>';
+    document.getElementById("k-sum").textContent    = yen(yet);
+    document.getElementById("k-unpaid").textContent = yen(unpaid.reduce(function(a,j){return a+j.amt;},0));
+
+    var near = act.slice().sort(function(a,b){ return (a.due||"9").localeCompare(b.due||"9"); }).slice(0,4);
+    document.getElementById("near").innerHTML =
+      near.length ? near.map(jobCard).join("") : '<p class="empty">進行中の案件はありません</p>';
+  }
+
+  function renderList(){
+    var r = jobs.filter(function(j){
+      if(filter!=="all" && j.st!==filter) return false;
+      if(!query) return true;
+      return (j.cust+" "+j.name).toLowerCase().indexOf(query.toLowerCase())>=0;
+    }).sort(function(a,b){ return (a.due||"9").localeCompare(b.due||"9"); });
+
+    document.getElementById("count").textContent = r.length+"件";
+    document.getElementById("list").innerHTML =
+      r.length ? r.map(jobCard).join("") : '<p class="empty">あてはまる案件がありません</p>';
+  }
+
+  function renderDetail(){
+    var j = jobs.filter(function(x){return x.id===curId;})[0];
+    if(!j) return;
+    var late = isLate(j);
+    document.getElementById("detail").innerHTML =
+      '<div class="card">'
+      +  '<dl class="kv">'
+      +    '<dt>お客様</dt><dd>'+esc(j.cust)+'</dd>'
+      +    '<dt>案件名</dt><dd>'+esc(j.name)+'</dd>'
+      +    '<dt>金額</dt><dd class="big">'+yen(j.amt)+'</dd>'
+      +    '<dt>期日</dt><dd'+(late?' style="color:var(--late);font-weight:700"':'')+'>'
+      +      (j.due?jp(j.due)+(late?"（過ぎています）":""):"—")+'</dd>'
+      +    '<dt>担当</dt><dd>'+esc(j.staff)+'</dd>'
+      +  '</dl>'
+      +'</div>'
+      +'<div class="card"><h3>いまの状態</h3>'
+      +  '<div class="steps">'+STATES.map(function(s){
+             return '<button data-st="'+s+'"'+(s===j.st?' class="on"':'')+'>'+s+'</button>';
+           }).join("")+'</div>'
+      +  '<p class="hint">その場で押すだけ。事務所に戻ってから入力し直す必要はありません。</p>'
+      +'</div>'
+      +'<div class="card"><h3>メモ・作業の記録</h3>'
+      +  (j.logs.length
+          ? '<ul class="logs">'+j.logs.map(function(l){
+              return '<li><span class="t">'+esc(l[0])+'</span>'+esc(l[1])+'</li>'; }).join("")+'</ul>'
+          : '<p class="empty" style="padding:14px 0">まだ記録はありません</p>')
+      +  '<div class="addlog"><input id="logtext" placeholder="記録を追加" autocomplete="off">'
+      +  '<button class="btn" style="width:auto;padding:10px 17px" id="logadd">追加</button></div>'
+      +  (j.memo?'<p class="hint" style="margin-top:13px">'+esc(j.memo)+'</p>':'')
+      +'</div>'
+      +'<div class="card"><h3>現場の写真</h3>'
+      +  '<div class="photos"><div class="photo">写真を撮る</div><div class="photo">写真を選ぶ</div><div class="photo">—</div></div>'
+      +  '<p class="hint">スマートフォンで撮った写真を、その案件に紐づけて残せます。</p>'
+      +'</div>';
+  }
+
+  function renderMoney(){
+    var todo = jobs.filter(function(j){return j.st==="作業中";});
+    var wait = jobs.filter(function(j){return j.st==="請求済";});
+    var s=function(a){return yen(a.reduce(function(x,j){return x+j.amt;},0));};
+    document.getElementById("m-todo").textContent = s(todo);
+    document.getElementById("m-wait").textContent = s(wait);
+    document.getElementById("m-list1").innerHTML = todo.length?todo.map(jobCard).join(""):'<p class="empty">ありません</p>';
+    document.getElementById("m-list2").innerHTML = wait.length?wait.map(jobCard).join(""):'<p class="empty">ありません</p>';
+  }
+
+  function renderAll(){ renderHome(); renderList(); renderMoney(); }
+
+  // ---------- 画面切り替え ----------
+  function show(v){
+    ["home","list","detail","new","money"].forEach(function(n){
+      document.getElementById("v-"+n).classList.toggle("on", n===v);
+    });
+    document.querySelectorAll("nav.tabs button").forEach(function(b){
+      b.classList.toggle("on", b.dataset.v===v);
+    });
+    window.scrollTo(0,0);
+  }
+
+  document.querySelectorAll("nav.tabs button").forEach(function(b){
+    b.addEventListener("click", function(){ show(b.dataset.v); });
+  });
+  document.getElementById("back").addEventListener("click", function(){ show("list"); });
+  document.body.addEventListener("click", function(e){
+    var go = e.target.closest("[data-go]");
+    if(go){ show(go.dataset.go); return; }
+    var card = e.target.closest(".job");
+    if(card){ curId = Number(card.dataset.id); renderDetail(); show("detail"); }
+  });
+
+  // ---------- 操作 ----------
+  document.getElementById("q").addEventListener("input", function(e){
+    query = e.target.value; renderList();
+  });
+  document.getElementById("chips").addEventListener("click", function(e){
+    var c = e.target.closest(".chip"); if(!c) return;
+    document.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on");});
+    c.classList.add("on"); filter = c.dataset.f; renderList();
+  });
+
+  document.getElementById("v-detail").addEventListener("click", function(e){
+    var j = jobs.filter(function(x){return x.id===curId;})[0]; if(!j) return;
+    var st = e.target.closest("[data-st]");
+    if(st){ j.st = st.dataset.st; j.logs.unshift(["たった今","状態を「"+j.st+"」に変更"]); renderDetail(); renderAll(); return; }
+    if(e.target.id==="logadd"){
+      var t = document.getElementById("logtext").value.trim();
+      if(t){ j.logs.unshift(["たった今", t]); renderDetail(); }
+    }
+  });
+
+  document.getElementById("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    var f = new FormData(e.target);
+    jobs.push({
+      id: nextId++, cust:f.get("cust"), name:f.get("name"),
+      amt: Number(f.get("amt"))||0, due:f.get("due")||"", st:f.get("st"),
+      staff:f.get("staff"), memo:f.get("memo")||"", logs:[["たった今","登録しました"]]
+    });
+    e.target.reset();
+    renderAll(); filter="all"; query="";
+    document.getElementById("q").value="";
+    document.querySelectorAll(".chip").forEach(function(x,i){ x.classList.toggle("on", i===0); });
+    renderList(); show("list");
+  });
+
+  renderAll();
+})();
+</script>
+
+</body>
+</html>
