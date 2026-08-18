@@ -10,81 +10,67 @@
 
   * { box-sizing: border-box; }
   body {
-    margin: 0; padding: 28px 20px 60px;
+    margin: 0; padding: 26px 20px 60px;
     background: #e9e9ec;
     font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
     color: #16161a; line-height: 1.6;
   }
 
-  /* ===== 画面のみ：聞き方のコツ ===== */
-  .tips {
-    max-width: 210mm; margin: 0 auto 26px;
-    background: #16161a; color: #e8e8ec;
-    border-radius: 6px; padding: 26px 30px;
+  /* ===== 切り替え（画面のみ） ===== */
+  .switch { max-width: 210mm; margin: 0 auto 18px; display: flex; gap: 8px; }
+  .switch button {
+    flex: 1; padding: 13px 14px; border: 1px solid #b8b8c0; background: #fff;
+    border-radius: 5px; cursor: pointer; text-align: left;
+    font-family: inherit; font-size: 13px; color: #45454e; line-height: 1.5;
   }
-  .tips h2 {
-    margin: 0 0 4px; font-size: 17px; font-weight: 600; letter-spacing: .04em; color: #f5c842;
-  }
-  .tips .sub { margin: 0 0 18px; font-size: 12px; color: #9a9aa4; }
-  .tips ul { margin: 0; padding-left: 0; list-style: none; }
-  .tips li {
-    position: relative; padding-left: 20px; margin-bottom: 11px;
-    font-size: 13.5px; line-height: 1.75;
-  }
-  .tips li::before {
-    content: ""; position: absolute; left: 4px; top: 9px;
-    width: 5px; height: 5px; border-radius: 50%; background: #f5c842;
-  }
-  .tips li b { color: #fff; font-weight: 600; }
-  .tips li .ng { color: #ff8b8b; font-weight: 600; }
-  .tips li .ok { color: #7ee0c2; font-weight: 600; }
-  .tips .after {
-    margin: 20px 0 0; padding-top: 16px; border-top: 1px solid rgba(255,255,255,.14);
-    font-size: 13px; color: #c9c9d2;
-  }
-  .tips .after b { color: #f5c842; }
-  .printhint {
-    max-width: 210mm; margin: 0 auto 26px; font-size: 12.5px; color: #55555e;
-    text-align: center;
-  }
+  .switch button b { display: block; font-size: 14px; color: #16161a; margin-bottom: 2px; }
+  .switch button.on { background: #16161a; border-color: #16161a; color: #b9b9c4; }
+  .switch button.on b { color: #f5c842; }
 
-  /* ===== 用紙 ===== */
+  /* ===== 聞き方のコツ（画面のみ・自分用のときだけ） ===== */
+  .tips {
+    max-width: 210mm; margin: 0 auto 22px;
+    background: #16161a; color: #e8e8ec; border-radius: 6px; padding: 24px 28px;
+  }
+  .tips h2 { margin: 0 0 14px; font-size: 16px; font-weight: 600; color: #f5c842; letter-spacing: .04em; }
+  .tips ul { margin: 0; padding: 0; list-style: none; }
+  .tips li { position: relative; padding-left: 19px; margin-bottom: 10px; font-size: 13.5px; line-height: 1.75; }
+  .tips li::before { content: ""; position: absolute; left: 4px; top: 9px; width: 5px; height: 5px; border-radius: 50%; background: #f5c842; }
+  .tips li b { color: #fff; font-weight: 600; }
+  .tips .ng { color: #ff8b8b; font-weight: 600; }
+  .tips .ok { color: #7ee0c2; font-weight: 600; }
+  .tips .after { margin: 18px 0 0; padding-top: 15px; border-top: 1px solid rgba(255,255,255,.14); font-size: 13px; color: #c9c9d2; }
+  .tips .after b { color: #f5c842; }
+  .printhint { max-width: 210mm; margin: 0 auto 22px; font-size: 12.5px; color: #55555e; text-align: center; }
+
+  /* ===== 用紙共通 ===== */
   .sheet {
     width: 210mm; min-height: 297mm; margin: 0 auto;
-    background: #fff; padding: 13mm 13mm 11mm;
-    box-shadow: 0 2px 18px rgba(0,0,0,.16);
+    background: #fff; padding: 13mm; box-shadow: 0 2px 18px rgba(0,0,0,.16);
   }
-
   .head { display: flex; align-items: flex-end; justify-content: space-between; border-bottom: 2px solid #16161a; padding-bottom: 7px; }
-  .head h1 { margin: 0; font-size: 19px; font-weight: 700; letter-spacing: .06em; }
+  .head h1 { margin: 0; font-size: 19px; font-weight: 700; letter-spacing: .05em; }
   .head .brand { font-size: 11px; color: #6a6a74; letter-spacing: .14em; }
+  .intro { margin: 9px 0 0; font-size: 11.5px; color: #45454e; line-height: 1.75; }
 
-  .meta { display: flex; gap: 0; margin-top: 9px; border: 1px solid #b8b8c0; }
+  .meta { display: flex; margin-top: 10px; border: 1px solid #b8b8c0; }
   .meta div { flex: 1; border-right: 1px solid #b8b8c0; padding: 5px 8px 12px; }
   .meta div:last-child { border-right: 0; }
-  .meta .lb { font-size: 9.5px; color: #6a6a74; letter-spacing: .06em; }
+  .meta .lb { font-size: 9.5px; color: #6a6a74; letter-spacing: .05em; }
 
-  h2.q {
-    margin: 15px 0 7px; font-size: 13px; font-weight: 700; letter-spacing: .03em;
-    display: flex; align-items: baseline; gap: 8px;
-  }
-  h2.q .n {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 18px; height: 18px; flex: none; border-radius: 50%;
-    background: #16161a; color: #fff; font-size: 10.5px; font-weight: 700;
-  }
+  h2.q { margin: 15px 0 7px; font-size: 13px; font-weight: 700; letter-spacing: .02em; display: flex; align-items: baseline; gap: 8px; }
+  h2.q .n { display: inline-flex; align-items: center; justify-content: center; width: 18px; height: 18px; flex: none; border-radius: 50%; background: #16161a; color: #fff; font-size: 10.5px; font-weight: 700; }
   h2.q .hint { font-size: 10.5px; font-weight: 400; color: #6a6a74; letter-spacing: 0; }
 
   .lines { border: 1px solid #b8b8c0; }
   .lines .ln { height: 8.5mm; border-bottom: 1px dashed #cfcfd6; }
   .lines .ln:last-child { border-bottom: 0; }
-  .lines.tall .ln { height: 10mm; }
 
   .flow { border: 1px solid #b8b8c0; padding: 7px 9px; }
   .flow .steps { display: flex; align-items: center; gap: 6px; font-size: 10px; color: #6a6a74; margin-bottom: 5px; }
   .flow .steps span { flex: 1; text-align: center; }
   .flow .steps i { font-style: normal; color: #b0b0b8; }
-  .flow .box { height: 26mm; border: 1px dashed #cfcfd6; }
+  .flow .box { border: 1px dashed #cfcfd6; }
 
   .tools { border: 1px solid #b8b8c0; padding: 8px 10px; font-size: 11.5px; }
   .tools .row { display: flex; flex-wrap: wrap; gap: 6px 16px; }
@@ -95,33 +81,35 @@
 
   table.pain { width: 100%; border-collapse: collapse; }
   table.pain th, table.pain td { border: 1px solid #b8b8c0; }
-  table.pain th { background: #f1f1f4; font-size: 10px; font-weight: 600; padding: 4px 6px; letter-spacing: .03em; }
+  table.pain th { background: #f1f1f4; font-size: 10px; font-weight: 600; padding: 4px 6px; }
   table.pain td { height: 9mm; }
-  table.pain .w-freq { width: 19mm; }
-  table.pain .w-time { width: 23mm; }
-  table.pain .w-who  { width: 26mm; }
+  table.pain .w-freq { width: 20mm; }
+  table.pain .w-time { width: 24mm; }
+  table.pain .w-who  { width: 27mm; }
 
   .two { display: flex; gap: 9px; }
   .two > * { flex: 1; }
 
   .yn { border: 1px solid #b8b8c0; padding: 7px 10px; font-size: 11.5px; }
-  .yn .opts { display: flex; gap: 14px; margin-bottom: 6px; }
+  .yn .opts { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 6px; }
   .yn label { display: inline-flex; align-items: center; gap: 5px; }
   .yn .fill { border-bottom: 1px dashed #cfcfd6; height: 15px; }
 
   .star { border: 2px solid #16161a; padding: 8px 11px 0; background: #fafafb; }
-  .star .cap { font-size: 11px; font-weight: 700; margin-bottom: 5px; }
+  .star .cap { font-size: 11.5px; font-weight: 700; margin-bottom: 5px; }
   .star .cap em { font-style: normal; color: #8a6d12; }
   .star .box { height: 15mm; border-bottom: 1px dashed #b0b0b8; }
-
-  .quote { border: 1px solid #b8b8c0; border-left: 3px solid #16161a; }
-  .quote .ln { height: 8.5mm; border-bottom: 1px dashed #cfcfd6; }
-  .quote .ln:last-child { border-bottom: 0; }
 
   .foot { margin-top: 13px; border-top: 1px solid #b8b8c0; padding-top: 7px; display: flex; gap: 9px; }
   .foot > div { flex: 1; }
   .foot .lb { font-size: 9.5px; color: #6a6a74; margin-bottom: 3px; }
   .foot .fill { border-bottom: 1px dashed #cfcfd6; height: 14px; }
+  .thanks { margin-top: 12px; font-size: 11px; color: #45454e; line-height: 1.8; border-top: 1px solid #b8b8c0; padding-top: 9px; }
+  .thanks b { color: #16161a; }
+
+  /* ===== 表示切り替え ===== */
+  body.mode-b .sheet-a, body.mode-b .tips { display: none; }
+  body.mode-a .sheet-b { display: none; }
 
   @media print {
     body { background: #fff; padding: 0; }
@@ -131,23 +119,29 @@
   @media (max-width: 820px) {
     .sheet { width: 100%; padding: 18px; }
     body { padding: 16px 12px 40px; }
+    .switch { flex-direction: column; }
   }
 </style>
 </head>
-<body>
+<body class="mode-a">
 
-<!-- ===================== 画面のみ：聞き方のコツ ===================== -->
+<!-- ===================== 切り替え（画面のみ） ===================== -->
+<div class="switch no-print">
+  <button type="button" data-mode="a" class="on"><b>① 自分用</b>話を聞きながら書き込むメモ。相手には渡さない</button>
+  <button type="button" data-mode="b"><b>② 相手に渡す用</b>先方にご記入いただく質問シート</button>
+</div>
+
+<!-- ===================== 聞き方のコツ（①のときだけ・画面のみ） ===================== -->
 <div class="tips no-print">
   <h2>聞き方のコツ</h2>
-  <p class="sub">この枠は画面だけに出ます。印刷するとシート本体だけが出ます。</p>
   <ul>
     <li><span class="ng">×「どんなシステムが欲しいですか」</span> → 欲しい物は出てこない。<span class="ok">○「昨日の午前中、何してました？」</span>と<b>過去の具体</b>で聞く。</li>
     <li><b>「それ、見せてもらえますか」</b>を必ず言う。説明を聞くより実物が早い。許可をもらって画面や帳票の写真を撮る。</li>
-    <li><b>必ず数字にする。</b>「月に何回くらい？」「1回どれくらいかかります？」ここを取らないと、あとで提案の根拠がなくなる。</li>
+    <li><b>必ず数字にする。</b>「月に何回くらい？」「1回どれくらい？」ここを取らないと、あとで提案の根拠がなくなる。</li>
     <li>「困ってない」と言われたら、<b>「面倒だなと思うことは？」</b>に言い換える。困りごとは自覚されていないことのほうが多い。</li>
-    <li><b>人の話が出たら、そこが本丸。</b>「あの人しか分からない」「前任者が作った」「その人が休むと止まる」——属人化は一番金になる痛み。</li>
+    <li><b>人の話が出たら、そこが本丸。</b>「あの人しか分からない」「前任者が作った」——属人化は一番金になる痛み。</li>
     <li><b>その場で解決策を言わない。「作れます」も言わない。</b>言った瞬間に相手が喋るのをやめる。今日は聞くだけ。</li>
-    <li>帰り際に必ずこれを聞く → <b>「その中で、明日から一つだけ楽になるとしたら、どれですか」</b></li>
+    <li>帰り際に必ず → <b>「その中で、明日から一つだけ楽になるとしたら、どれですか」</b>（シートの7番）</li>
   </ul>
   <p class="after">
     <b>帰ってから24時間以内に。</b>お礼と、聞いた内容の要約を送る。「こう理解しました、合ってますか」と確認する形にすると、
@@ -155,13 +149,17 @@
   </p>
 </div>
 
-<p class="printhint no-print">印刷（Ctrl / ⌘ + P）でA4縦1枚。上の枠は印刷されません。</p>
+<p class="printhint no-print">印刷（Ctrl / ⌘ + P）でA4縦1枚。選んでいるほうだけが印刷されます。</p>
 
-<!-- ===================== シート本体 ===================== -->
-<div class="sheet">
+
+<!-- ===================================================================
+     ① 自分用：聞き取りメモ
+     指示や心得は一切載せない（相手の目に入るため）
+     =================================================================== -->
+<div class="sheet sheet-a">
 
   <div class="head">
-    <h1>業務ヒアリングシート</h1>
+    <h1>聞き取りメモ</h1>
     <span class="brand">刻音 TOKINE</span>
   </div>
 
@@ -170,16 +168,16 @@
     <div><div class="lb">相手（会社・お名前）</div></div>
     <div><div class="lb">業種</div></div>
     <div><div class="lb">人数</div></div>
-    <div><div class="lb">その方の役割</div></div>
+    <div><div class="lb">役割</div></div>
   </div>
 
-  <h2 class="q"><span class="n">1</span>仕事の流れ<span class="hint">受けてから、お金をもらうまで。矢印でつないで書く</span></h2>
+  <h2 class="q"><span class="n">1</span>仕事の流れ</h2>
   <div class="flow">
     <div class="steps"><span>受ける</span><i>→</i><span>段取り</span><i>→</i><span>作業・納品</span><i>→</i><span>請求</span><i>→</i><span>入金</span></div>
-    <div class="box"></div>
+    <div class="box" style="height:26mm;"></div>
   </div>
 
-  <h2 class="q"><span class="n">2</span>いま使っている道具<span class="hint">実物を見せてもらう</span></h2>
+  <h2 class="q"><span class="n">2</span>使っているもの</h2>
   <div class="tools">
     <div class="row">
       <label><span class="cb"></span>紙・手書き</label>
@@ -190,20 +188,15 @@
       <label><span class="cb"></span>会計ソフト</label>
       <label><span class="cb"></span>販売・在庫ソフト</label>
       <label><span class="cb"></span>予約サービス</label>
-      <label><span class="cb"></span>その他のソフト</label>
+      <label><span class="cb"></span>その他</label>
     </div>
-    <div class="free"><span>具体名・誰が作ったか・いつから：</span><span class="fill"></span></div>
-    <div class="free"><span>そのうち、実際に使っているのは：</span><span class="fill"></span></div>
+    <div class="free"><span>具体名／誰が作ったか／いつから：</span><span class="fill"></span></div>
+    <div class="free"><span>そのうち実際に使っているもの：</span><span class="fill"></span></div>
   </div>
 
-  <h2 class="q"><span class="n">3</span>面倒だと言っていたこと<span class="hint">必ず回数と時間を数字で取る</span></h2>
+  <h2 class="q"><span class="n">3</span>手間のかかっている作業</h2>
   <table class="pain">
-    <tr>
-      <th>内容（相手の言葉のまま）</th>
-      <th class="w-freq">月に何回</th>
-      <th class="w-time">1回あたり</th>
-      <th class="w-who">誰がやっている</th>
-    </tr>
+    <tr><th>内容</th><th class="w-freq">月に何回</th><th class="w-time">1回あたり</th><th class="w-who">担当</th></tr>
     <tr><td></td><td></td><td></td><td></td></tr>
     <tr><td></td><td></td><td></td><td></td></tr>
     <tr><td></td><td></td><td></td><td></td></tr>
@@ -212,11 +205,11 @@
 
   <div class="two" style="margin-top:12px;">
     <div>
-      <h2 class="q" style="margin-top:0;"><span class="n">4</span>属人化<span class="hint">その人が休むと止まるもの</span></h2>
+      <h2 class="q" style="margin-top:0;"><span class="n">4</span>その人しかできない作業</h2>
       <div class="lines"><div class="ln"></div><div class="ln"></div></div>
     </div>
     <div>
-      <h2 class="q" style="margin-top:0;"><span class="n">5</span>外・現場から入力したい<span class="hint">アプリが要るかの判断</span></h2>
+      <h2 class="q" style="margin-top:0;"><span class="n">5</span>外・現場からの入力</h2>
       <div class="yn">
         <div class="opts">
           <label><span class="cb"></span>したい</label>
@@ -229,21 +222,132 @@
     </div>
   </div>
 
-  <h2 class="q"><span class="n">6</span>相手が言った言葉、そのまま<span class="hint">要約せずに書き写す。提案のときこの言葉を使う</span></h2>
-  <div class="quote"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
+  <h2 class="q"><span class="n">6</span>発言メモ</h2>
+  <div class="lines"><div class="ln"></div><div class="ln"></div><div class="ln"></div></div>
 
-  <h2 class="q"><span class="n">7</span>これだけは必ず聞く</h2>
+  <h2 class="q"><span class="n">7</span>一つだけ選ぶとしたら</h2>
   <div class="star">
-    <div class="cap">「その中で、明日から<em>一つだけ</em>楽になるとしたら、どれですか」</div>
+    <div class="cap">明日から<em>一つだけ</em>楽になるとしたら、どれか</div>
     <div class="box"></div>
   </div>
 
   <div class="foot">
-    <div><div class="lb">自分用メモ（作れそうか／規模感／気になった点）</div><div class="fill"></div><div class="fill"></div></div>
-    <div style="max-width:62mm;"><div class="lb">次にすること・次に会う約束</div><div class="fill"></div><div class="fill"></div></div>
+    <div><div class="lb">所感（作れそうか／規模感／気になった点）</div><div class="fill"></div><div class="fill"></div></div>
+    <div style="max-width:62mm;"><div class="lb">次にすること・次回の約束</div><div class="fill"></div><div class="fill"></div></div>
   </div>
 
 </div>
+
+
+<!-- ===================================================================
+     ② 相手に渡す用：ご記入シート
+     一人で読んで一人で書ける文面にする
+     =================================================================== -->
+<div class="sheet sheet-b">
+
+  <div class="head">
+    <h1>業務のご状況について</h1>
+    <span class="brand">刻音 TOKINE</span>
+  </div>
+  <p class="intro">
+    お手すきの際に、ご記入いただける範囲でお聞かせください。<b>空欄のままで構いません。</b>
+    正確さよりも、日ごろ感じておられることをそのままお書きいただけますと幸いです。
+  </p>
+
+  <div class="meta">
+    <div><div class="lb">ご記入日</div></div>
+    <div><div class="lb">会社名・屋号</div></div>
+    <div><div class="lb">業種</div></div>
+    <div><div class="lb">従業員数</div></div>
+    <div><div class="lb">ご記入者・お役割</div></div>
+  </div>
+
+  <h2 class="q"><span class="n">1</span>お仕事の流れ<span class="hint">ご依頼を受けてから、ご入金までの流れをおおまかに</span></h2>
+  <div class="flow">
+    <div class="steps"><span>受ける</span><i>→</i><span>段取り</span><i>→</i><span>作業・納品</span><i>→</i><span>請求</span><i>→</i><span>入金</span></div>
+    <div class="box" style="height:24mm;"></div>
+  </div>
+
+  <h2 class="q"><span class="n">2</span>いまお使いのもの<span class="hint">あてはまるものすべてに ✓ を</span></h2>
+  <div class="tools">
+    <div class="row">
+      <label><span class="cb"></span>紙・手書き</label>
+      <label><span class="cb"></span>Excel</label>
+      <label><span class="cb"></span>Googleスプレッドシート</label>
+      <label><span class="cb"></span>LINE</label>
+      <label><span class="cb"></span>メール</label>
+      <label><span class="cb"></span>会計ソフト</label>
+      <label><span class="cb"></span>販売・在庫ソフト</label>
+      <label><span class="cb"></span>予約サービス</label>
+      <label><span class="cb"></span>その他</label>
+    </div>
+    <div class="free"><span>差し支えなければ、具体的なサービス名を：</span><span class="fill"></span></div>
+  </div>
+
+  <h2 class="q"><span class="n">3</span>お手間だと感じておられる作業<span class="hint">おおよそで構いません</span></h2>
+  <table class="pain">
+    <tr><th>どのような作業か</th><th class="w-freq">月に何回ほど</th><th class="w-time">1回あたり</th><th class="w-who">どなたが</th></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+    <tr><td></td><td></td><td></td><td></td></tr>
+  </table>
+
+  <div class="two" style="margin-top:12px;">
+    <div>
+      <h2 class="q" style="margin-top:0;"><span class="n">4</span>特定の方しかできない作業</h2>
+      <div class="lines"><div class="ln"></div><div class="ln"></div></div>
+    </div>
+    <div>
+      <h2 class="q" style="margin-top:0;"><span class="n">5</span>外出先・現場からの入力</h2>
+      <div class="yn">
+        <div class="opts">
+          <label><span class="cb"></span>できると助かる</label>
+          <label><span class="cb"></span>必要ない</label>
+        </div>
+        <div class="opts">
+          <label><span class="cb"></span>スマートフォン</label>
+          <label><span class="cb"></span>タブレット</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h2 class="q"><span class="n">6</span>いちばんお困りのこと</h2>
+  <div class="star">
+    <div class="cap">もし<em>一つだけ</em>解消できるとしたら、どれをお選びになりますか</div>
+    <div class="box"></div>
+  </div>
+
+  <div class="two" style="margin-top:13px;">
+    <div>
+      <h2 class="q" style="margin-top:0;"><span class="n">7</span>ご予算・ご希望の時期<span class="hint">任意</span></h2>
+      <div class="lines"><div class="ln"></div></div>
+    </div>
+    <div>
+      <h2 class="q" style="margin-top:0;"><span class="n">8</span>その他、気になっていること</h2>
+      <div class="lines"><div class="ln"></div></div>
+    </div>
+  </div>
+
+  <p class="thanks">
+    ご記入ありがとうございました。<br>
+    内容を拝見したうえで、<b>システムにするまでもなく解決できそうな場合は、その旨を正直にお伝えいたします。</b>
+    無理におすすめすることはいたしません。<br>
+    <span style="color:#6a6a74;">刻音 TOKINE ／ official@tokinets.com ／ tokinets.com</span>
+  </p>
+
+</div>
+
+<script>
+  document.querySelectorAll('.switch button').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      document.querySelectorAll('.switch button').forEach(function (b) { b.classList.remove('on'); });
+      btn.classList.add('on');
+      document.body.className = 'mode-' + btn.dataset.mode;
+    });
+  });
+</script>
 
 </body>
 </html>
