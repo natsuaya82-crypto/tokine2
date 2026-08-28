@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy | Lingua</title>
+<meta name="description" content="What Lingua stores, where it is stored, and how to delete it.">
+
+<link rel="icon" type="image/png" href="/images/lingua/icon.png">
+<link rel="apple-touch-icon" href="/images/lingua/icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    color-scheme: dark;
+    --bg:#0a0a0e; --tx:#ece9e3; --txs:#a9a6b3; --txm:#6f6c7a;
+    --pur:#a78bfa; --purln:rgba(167,139,250,0.36);
+    --line:rgba(255,255,255,0.09);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    padding: 30px 20px 72px;
+    background: var(--bg); color: var(--tx);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300; font-size: 15px; line-height: 1.9;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; }
+  .wordmark {
+    display: inline-block; margin-bottom: 40px;
+    font-family: 'Cinzel', Georgia, serif; font-size: 15px;
+    letter-spacing: 0.4em; font-weight: 600; color: var(--tx); text-decoration: none;
+  }
+  .wordmark .g { color: var(--pur); }
+  h1 { font-family: 'Cinzel', Georgia, serif; font-size: 22px; font-weight: 500; letter-spacing: 0.02em; color: #fff; margin: 0 0 6px; }
+  .date { font-size: 12px; color: var(--txm); letter-spacing: 0.04em; margin: 0 0 30px; }
+  h2 { font-family: 'Cinzel', Georgia, serif; font-size: 15px; font-weight: 500; letter-spacing: 0.04em; color: var(--pur); margin: 34px 0 10px; }
+  p { margin: 0 0 12px; color: var(--txs); }
+  ul { margin: 0 0 12px; padding-left: 1.2em; color: var(--txs); }
+  li { margin-bottom: 6px; }
+  strong { color: var(--tx); font-weight: 500; }
+  .box {
+    border: 1px solid var(--purln); border-radius: 10px;
+    padding: 14px 18px; margin: 22px 0; background: rgba(167,139,250,0.05);
+  }
+  .box p:last-child { margin-bottom: 0; }
+  a { color: var(--pur); }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 12px; font-size: 14px; color: var(--txs); }
+  th, td { text-align: left; vertical-align: top; padding: 8px 12px 8px 0; border-bottom: 1px solid var(--line); }
+  th { color: var(--tx); font-weight: 500; white-space: nowrap; }
+  footer { margin-top: 46px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 12px; color: var(--txm); }
+  footer a { margin-right: 20px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<a href="/lingua" class="wordmark">LIN<span class="g">GU</span>A</a>
+
+<h1>Lingua Privacy Policy</h1>
+<p class="date">Last updated: 2026-08-28</p>
+
+<p>Lingua is an iOS app for building your own language &mdash; its letters, its words, its grammar &mdash; and writing to other people in it. The app is made by Tokine, in Tokyo. This page describes what Lingua stores, where it is stored, and how you can delete it.</p>
+
+<div class="box">
+  <p><strong>Lingua shows no ads, and contains no third-party analytics.</strong> We do not sell your information.</p>
+</div>
+
+<h2>1. Your account</h2>
+<p>You can create an account with an email address and a password, or by signing in with Apple or Google.</p>
+<p><strong>The app does not keep your password.</strong> It is sent to Supabase, our server provider, and what remains on your device is a sign-in token.</p>
+
+<h2>2. What is stored on the server</h2>
+<p>Lingua's server and database are provided by <strong>Supabase</strong>. These are the records Lingua keeps there:</p>
+<table>
+  <tr><th>Profile</th><td>Your account: identifier, handle (@name), display name, and the date it was created.</td></tr>
+  <tr><th>Languages</th><td>Each language you make: its name, the licence you choose for it, and its dates.</td></tr>
+  <tr><th>Language contents</th><td>What a language is made of: words, letters, writing systems, and the rest.</td></tr>
+  <tr><th>Posts</th><td>What you post: the text, photos and audio in it, and the prompt it answers, if any.</td></tr>
+  <tr><th>Drafts</th><td>Posts you have not sent. <strong>Only you can read your drafts.</strong></td></tr>
+  <tr><th>Saved searches</th><td>Search terms you have saved.</td></tr>
+  <tr><th>Reactions</th><td>Likes and reposts.</td></tr>
+  <tr><th>Follows</th><td>Who you follow.</td></tr>
+  <tr><th>Blocks</th><td>Who you have blocked.</td></tr>
+  <tr><th>Reports</th><td>Reports you send about a post or a person.</td></tr>
+  <tr><th>Prompts</th><td>The daily prompt everyone is invited to write to.</td></tr>
+</table>
+<p>Two further records, <strong>quotes</strong> and <strong>publications</strong>, exist in the database but are not in use yet.</p>
+
+<h2>3. What is stored on your device</h2>
+<ul>
+  <li><strong>Backup files of your languages</strong>, in the app's Documents folder. Because they are kept there, they are included in your iOS backup.</li>
+  <li><strong>Your app settings.</strong></li>
+</ul>
+
+<h2>4. What other people can see</h2>
+<p>Lingua is a place where people write to each other, so the things you publish &mdash; your handle and display name, your posts, the languages you share, and who you follow &mdash; are visible to other people using the app. Your drafts are not.</p>
+
+<h2>5. Deleting your account</h2>
+<div class="box">
+  <p><strong>You can delete your account from inside the app, and deleting it deletes everything.</strong> Your profile, your languages, your posts and drafts, your saved searches, reactions, follows, blocks and reports are removed. This cannot be undone.</p>
+</div>
+<p>The backup files on your device are yours; delete the app to remove them from your device.</p>
+
+<h2>6. Purchases</h2>
+<p>Lingua's paid plans are Apple in-app purchases. Apple handles the payment. We never receive or store your card or payment details.</p>
+
+<h2>7. Contact</h2>
+<p>
+  Tokine &mdash; Tokyo<br>
+  <a href="mailto:lingua@tokinets.com">lingua@tokinets.com</a>
+</p>
+
+<h2>8. Changes to this policy</h2>
+<p>If this policy changes, the new version is published on this page, with a new date at the top.</p>
+
+<footer>
+  <a href="/lingua">&larr; Lingua</a>
+  <a href="/lingua/terms.html">Terms of Use</a>
+</footer>
+
+</div>
+</body>
+</html>
