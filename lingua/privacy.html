@@ -62,7 +62,7 @@
 <a href="/lingua" class="wordmark">LIN<span class="g">GU</span>A</a>
 
 <h1>Lingua Privacy Policy</h1>
-<p class="date">Last updated: 2026-09-30</p>
+<p class="date">Last updated: 2026-09-29</p>
 
 <p>Lingua is an app for iPhone and Android for building your own language &mdash; its letters, its words, its grammar &mdash; and writing to other people in it. The app is made by Tokine, in Tokyo. This page describes what Lingua stores, where it is stored, and how you can delete it.</p>
 
@@ -72,39 +72,44 @@
 
 <h2>1. Your account</h2>
 <p>You can create an account with an email address and a password, or by signing in with Apple or Google.</p>
-<p><strong>The app does not keep your password.</strong> It is sent to Supabase, our server provider, and what remains on your device is a sign-in token.</p>
+<p><strong>The app does not keep your password.</strong> It is sent to Supabase, our server provider, and what remains on your device is a sign-in token. Supabase also keeps the email address you signed in with; if you sign in with Apple and choose to hide your address, that is the relay address Apple gives instead.</p>
 
 <h2>2. What is stored on the server</h2>
 <p>Lingua's server and database are provided by <strong>Supabase</strong>. These are the records Lingua keeps there:</p>
 <table>
-  <tr><th>Profile</th><td>Your account: identifier, handle (@name), display name, profile picture, and the date it was created. It also carries a mark saying whether the account answers reports, which we set and you cannot.</td></tr>
-  <tr><th>Languages</th><td>Each language you make: its name, the licence you choose for it, and its dates.</td></tr>
-  <tr><th>Language contents</th><td>What a language is made of: words, letters, writing systems, and the rest.</td></tr>
-  <tr><th>Posts</th><td>What you post: the text, photos and audio in it, and the prompt it answers, if any.</td></tr>
+  <tr><th>Profile</th><td>Your account: identifier, handle (@name) and when you last changed it, display name, profile picture, the line you write about yourself, your link, your location, the post you have pinned, your app settings (such as the theme, the language the app is shown in, and which notifications you want), and the date it was created. It also carries marks saying whether the account answers reports and whether it has been suspended and why, which we set and you cannot.</td></tr>
+  <tr><th>Languages</th><td>Each language you make: its name, how it is written, the licence you choose for it, whether its page is published, and its dates.</td></tr>
+  <tr><th>Language contents</th><td>What a language is made of: words, letters, writing systems, the keyboard, and the rest. The server also keeps the three versions of each part before the current one, so that a language can be put back if you write to us that it was lost. Only we can read those versions.</td></tr>
+<tr><th>Languages you took</th><td>Languages you have taken from somebody else&rsquo;s page.</td></tr>
+  <tr><th>Posts</th><td>What you post: the text, photos and audio in it, the post it replies to or quotes, and the prompt it answers, if any. If we hide a post, when and why is kept on it.</td></tr>
   <tr><th>Drafts</th><td>Posts you have not sent. <strong>Only you can read your drafts.</strong></td></tr>
   <tr><th>Saved searches</th><td>Search terms you have saved.</td></tr>
+<tr><th>Recent searches</th><td>Search terms you have used recently.</td></tr>
   <tr><th>Reactions</th><td>Likes and reposts.</td></tr>
   <tr><th>Follows</th><td>Who you follow.</td></tr>
   <tr><th>Blocks</th><td>Who you have blocked.</td></tr>
+<tr><th>Mutes</th><td>Who you have muted.</td></tr>
   <tr><th>Reports</th><td>Reports you send about a post or a person.</td></tr>
+<tr><th>Feedback</th><td>Opinions, requests and bug reports you send from the app.</td></tr>
+<tr><th>Devices</th><td>The address your phone gives for notifications, and whether it is an iPhone or an Android phone.</td></tr>
+<tr><th>Plan and purchases</th><td>Your plan, and for each purchase: the store&rsquo;s transaction identifier, the product, until when it runs, whether it was revoked, and whether it was a test purchase.</td></tr>
   <tr><th>Prompts</th><td>The daily prompt everyone is invited to write to.</td></tr>
 </table>
 <p>Two further records, <strong>quotes</strong> and <strong>publications</strong>, exist in the database but are not in use yet.</p>
 
 <h2>3. What is stored on your device</h2>
-<p>Lingua keeps its own copy of nearly everything on the phone, so that it works with no signal. The server is where these things live; the phone is where they are made and read.</p>
+<p>Your languages, posts and profile live on the server. The phone keeps a copy of what it last loaded, filed under the account it belongs to, so that with no signal there is still something to look at. That copy is only read: nothing is made or saved on it, and it is never sent back to the server.</p>
 <ul>
-  <li><strong>Your languages in full</strong> &mdash; the words, the letters, the writing system, the sounds, the keyboard, the notes, and the rest of what a language is made of.</li>
-  <li><strong>Your profile</strong>, including three parts of it that stay on the phone and never reach the server: the line you write about yourself, your link, and your location.</li>
-  <li><strong>Your posts and your drafts.</strong></li>
-  <li><strong>Your sign-in token</strong>, which is what keeps you signed in. Your password is not kept.</li>
-  <li><strong>Your app settings.</strong></li>
-  <li>In the app's Documents folder: <strong>backup files of your languages, the recordings you make, and the sheets Lingua writes.</strong> Because they are kept there, they are included in your iOS backup.</li>
+<li><strong>A copy of your languages</strong> as they were last loaded.</li>
+<li><strong>A copy of the timeline, your profile and your app settings.</strong></li>
+<li><strong>Your sign-in token</strong>, which is what keeps you signed in. Your password is not kept.</li>
+<li>On iPhone, <strong>the letters and layout of your keyboard</strong>, in a folder shared with the Lingua keyboard and widget, so that they can draw your letters.</li>
 </ul>
+<p>Recordings go straight to the server and are not kept on the phone. A sheet Lingua writes is handed to the system&rsquo;s share screen and removed once that closes; where you save it is yours to choose.</p>
 
 <h2>4. What other people can see</h2>
-<p>Lingua is a place where people write to each other, so the things you publish &mdash; your handle and display name, your posts, the languages you share, and who you follow &mdash; are visible to other people using the app. Your drafts are not.</p>
-<p><strong>The photos and audio in a post are stored openly.</strong> Anyone holding the address of one can read it &mdash; including someone who is not using Lingua, and from outside the app. The text of a post is not stored this way; the photos and audio are.</p>
+<p>Lingua is a place where people write to each other, so the things you publish &mdash; your handle and display name, your profile picture, the line about yourself, your link and your location, your posts, the languages you share, and who you follow &mdash; are visible to other people using the app. Your drafts are not.</p>
+<p><strong>The photos and audio in a post are read the way the post is.</strong> Someone signed in to Lingua who can read the post can open them; someone who is not signed in cannot, even holding the address of one.</p>
 
 <h2 id="delete">5. Deleting your account</h2>
 <div class="box">
@@ -118,17 +123,21 @@
 
 <h2>7. Purchases</h2>
 <p>Lingua's paid plans are in-app purchases through Apple's App Store on iPhone and Google Play on Android. Apple or Google handles the payment. We never receive or store your card or payment details.</p>
+<p>On iPhone, buying and restoring go through <strong>RevenueCat</strong>, which handles in-app subscriptions for us. It receives your account identifier (a random string, not your name or email address) and the record of what you bought from the App Store. On Android the purchase goes to Google Play directly.</p>
 
-<h2>8. Children</h2>
+<h2>8. Notifications</h2>
+<p>If you allow notifications, the address your phone gives for them is sent to our server. A notification reaches you through <strong>Apple&rsquo;s push service</strong> on iPhone, or <strong>Google&rsquo;s Firebase Cloud Messaging</strong> on Android. What it carries is what happened and the @handle of the person who did it, or the day&rsquo;s prompt &mdash; not the text of posts.</p>
+
+<h2>9. Children</h2>
 <p>Lingua is for people aged 13 and over. We do not knowingly keep information about anyone under 13, and if we find that we do, we delete it together with the account. If you are a parent or guardian and believe a child under 13 has an account, write to us at the address below.</p>
 
-<h2>9. Contact</h2>
+<h2>10. Contact</h2>
 <p>
   Tokine &mdash; Tokyo<br>
   <a href="mailto:lingua@tokinets.com">lingua@tokinets.com</a>
 </p>
 
-<h2>10. Changes to this policy</h2>
+<h2>11. Changes to this policy</h2>
 <p>If this policy changes, the new version is published on this page, with a new date at the top.</p>
 
 <footer>
